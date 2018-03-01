@@ -2,13 +2,57 @@
 
 buildscript {
     
+    ext {
+        // Android Support
+        androidPluginVersion = '3.0.0'
+        androidSupportVersion = '27.0.2'
+        androidSupportTestVersion = '1.0.1'
+        multidexVersion = '1.0.3'
+
+        // Lombok 
+        lombokVersion = '1.16.16'
+        
+        // Dagger
+        daggerVersion = '2.8'
+
+        // ButterKnife
+        butterKnifeVersion = '8.4.0'
+
+        // ReactiveX
+        rxAndroidVersion = '1.2.1'
+        rxJavaVersion = '1.2.4'
+        rxKotlinVersion = '0.60.0'
+        rxProguardRulesVersion = '1.2.4.0'
+
+        // Retrofit
+        retrofitVersion = '2.1.0'
+        okHttpVersion = '3.5.0'
+
+        // Parceler
+        parcelerVersion = '1.1.6'
+
+        // Unit Test
+        jUnitVersion = '4.12'
+        mockitoVersion = '2.5.4'
+
+        // Instrumentation Test
+        espressoVersion = '3.0.1'
+
+        // JodaTime
+        jodaTimeVersion = '2.9.7'
+        
+        // One Signal
+        oneSignalVersion = '3.8.1'
+        googleGcmVersion = '11.8.0'
+    }
     repositories {
+        maven { url 'https://maven.fabric.io/public' }
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
         
+        classpath("com.android.tools.build:gradle:${androidPluginVersion}")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -17,6 +61,8 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
     }
