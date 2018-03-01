@@ -57,9 +57,12 @@ android {
 
     productFlavors {
         development {
+            //todo
+            buildConfigField 'String', 'HOST', '"https://blablabla"'
             buildConfigField 'String', 'ENDPOINT', '"https://blablabla"'
         }
         production {
+            buildConfigField 'String', 'HOST', '"https://blablabla"'
             buildConfigField 'String', 'ENDPOINT', '"https://blablabla"'
         }
 

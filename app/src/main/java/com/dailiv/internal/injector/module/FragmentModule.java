@@ -7,19 +7,17 @@ import com.dailiv.internal.injector.scope.ActivityContext;
 
 import dagger.Module;
 import dagger.Provides;
+import lombok.AllArgsConstructor;
 
 /**
  * Created by aldo on 3/1/18.
  */
 
 @Module
+@AllArgsConstructor
 public class FragmentModule {
 
     private final Fragment fragment;
-
-    public FragmentModule(Fragment fragment) {
-        this.fragment = fragment;
-    }
 
     @Provides
     public Fragment provideFragment() {
