@@ -8,6 +8,8 @@ import com.dailiv.internal.injector.module.ApplicationModule;
 import com.dailiv.internal.injector.module.NetworkModule;
 import com.dailiv.internal.injector.module.UtilityModule;
 import com.dailiv.internal.injector.scope.ApplicationContext;
+import com.dailiv.util.common.Common;
+import com.dailiv.util.common.Navigator;
 import com.dailiv.util.validator.ValidatorFactory;
 
 import javax.inject.Singleton;
@@ -36,5 +38,8 @@ public interface ApplicationComponent {
 
     ValidatorFactory getValidator();
 
+    Common getCommon();
+
+    Navigator getNavigator();
 
 }
