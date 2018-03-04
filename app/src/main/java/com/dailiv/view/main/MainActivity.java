@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 
 import com.dailiv.App;
 import com.dailiv.R;
-import com.dailiv.internal.injector.component.ActivityComponent;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
@@ -31,8 +30,6 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     @Inject
     Navigator navigator;
-
-    private ActivityComponent component;
 
     private ActionBar toolbar;
 
@@ -83,22 +80,12 @@ public class MainActivity extends AbstractActivity implements MainView{
     }
 
     @Override
-    protected Navigator getNavigator() {
-        return navigator;
-    }
-
-    @Override
-    protected Common getCommon() {
-        return common;
-    }
-
-    @Override
     public void inject() {
-        component = DaggerActivityComponent.builder()
+        DaggerActivityComponent.builder()
                 .applicationComponent(App.getComponent())
                 .activityModule(new ActivityModule(this))
-                .build();
-        getComponent().inject(this);
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -126,7 +113,4 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     }
 
-    public ActivityComponent getComponent() {
-        return component;
-    }
 }

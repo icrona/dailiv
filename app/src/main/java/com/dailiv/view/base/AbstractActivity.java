@@ -23,10 +23,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IDet
 
     protected abstract void initComponents(final Bundle savedInstanceState);
 
-    protected abstract Navigator getNavigator();
-
-    protected abstract Common getCommon();
-
     //todo
 
 

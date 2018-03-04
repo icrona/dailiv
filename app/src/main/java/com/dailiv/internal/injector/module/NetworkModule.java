@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -30,10 +31,24 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    //TODO
-    public IApi provideApi() {
+    @Named("public")
+    public IApi providePublicApi() {
 
-        return new Retrofit.Builder().client(getOkHttpClient())
+        return new Retrofit.Builder().client(getOkHttpClient(getInterceptor()))
+                .baseUrl(BuildConfig.ENDPOINT)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(getObjectMapper()))
+                .build()
+                .create(IApi.class);
+
+    }
+
+    @Provides
+    @Singleton
+    @Named("common")
+    public IApi provideCommonApi() {
+
+        return new Retrofit.Builder().client(getOkHttpClient(getInterceptorWithAuthorization()))
                 .baseUrl(BuildConfig.ENDPOINT)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(JacksonConverterFactory.create(getObjectMapper()))
@@ -52,7 +67,7 @@ public class NetworkModule {
         return objectMapper;
     }
 
-    private OkHttpClient getOkHttpClient() {
+    private OkHttpClient getOkHttpClient(Interceptor interceptor) {
 
         final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
 
@@ -63,7 +78,7 @@ public class NetworkModule {
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
-                .addInterceptor(getInterceptor())
+                .addInterceptor(interceptor)
                 .addInterceptor(httpLoggingInterceptor)
                 .build();
     }
@@ -71,13 +86,26 @@ public class NetworkModule {
     private Interceptor getInterceptor() {
 
         return chain -> {
-            //TODO
             final Request request = chain.request();
             final Request.Builder builder = request.newBuilder()
-                    .addHeader("Content-Type", "application/json");
+                    .addHeader("Accept", "application/json");
 
             return chain.proceed(builder.build());
         };
+    }
+
+    private Interceptor getInterceptorWithAuthorization() {
+
+        return chain -> {
+            final Request request = chain.request();
+            final Request.Builder builder = request.newBuilder()
+                    .addHeader("Accept", "application/json")
+                    //todo
+                    .addHeader("Authorization", "test");
+
+            return chain.proceed(builder.build());
+        };
+
     }
 
 }
