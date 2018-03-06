@@ -17,7 +17,6 @@ import static com.dailiv.util.network.NetworkHelper.checkConnection;
  * Created by aldo on 3/1/18.
  */
 
-@AllArgsConstructor
 public class NetworkView<T> {
 
     private Action0 onStart;
@@ -29,6 +28,13 @@ public class NetworkView<T> {
     private Action1<T> onResponse;
 
     private Subscription subscription;
+
+    public NetworkView(Action0 onStart, Action0 onComplete, Action1<String> onError, Action1<T> onResponse) {
+        this.onStart = onStart;
+        this.onComplete = onComplete;
+        this.onError = onError;
+        this.onResponse = onResponse;
+    }
 
     public void callApi(final Func0<Observable<Response<T>>> result) {
 

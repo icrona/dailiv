@@ -12,6 +12,7 @@ import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.util.validator.ValidatorFactory;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -33,8 +34,11 @@ public interface ApplicationComponent {
 
     void inject(Application application);
 
-    //TODO
-    IApi getApi();
+    @Named("common")
+    IApi getCommonApi();
+
+    @Named("public")
+    IApi getPublicApi();
 
     ValidatorFactory getValidator();
 

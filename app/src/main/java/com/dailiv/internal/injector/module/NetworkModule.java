@@ -101,7 +101,7 @@ public class NetworkModule {
             final Request.Builder builder = request.newBuilder()
                     .addHeader("Accept", "application/json")
                     //todo
-                    .addHeader("Authorization", "test");
+                    .addHeader("Authorization", "Bearer " + "token");
 
             return chain.proceed(builder.build());
         };

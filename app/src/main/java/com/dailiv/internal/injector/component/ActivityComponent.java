@@ -5,7 +5,9 @@ import android.content.Context;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.ActivityScope;
+import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
+import com.dailiv.view.register.RegisterActivity;
 import com.dailiv.view.splash.SplashActivity;
 
 import dagger.Component;
@@ -27,4 +29,8 @@ public interface ActivityComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject(LoginActivity loginActivity);
+
+    void inject(RegisterActivity registerActivity);
 }
