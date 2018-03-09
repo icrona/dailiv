@@ -48,6 +48,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.onboard.OnboardActivty"/>
+
         <activity
             android:name=".view.main.MainActivity"
             android:screenOrientation="portrait"

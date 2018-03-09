@@ -155,4 +155,7 @@ dependencies {
     //One Signal
     compile "com.onesignal:OneSignal:${oneSignalVersion}"
     compile "com.google.android.gms:play-services-gcm:${googleGcmVersion}"
+
+    //App Intro
+    compile "com.github.apl-devs:appintro:${appIntroVersion}"
 }

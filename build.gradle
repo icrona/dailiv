@@ -44,6 +44,9 @@ buildscript {
         // One Signal
         oneSignalVersion = '3.8.1'
         googleGcmVersion = '11.8.0'
+
+        // App Intro
+        appIntroVersion = 'v4.2.3'
     }
     repositories {
         maven { url 'https://maven.fabric.io/public' }

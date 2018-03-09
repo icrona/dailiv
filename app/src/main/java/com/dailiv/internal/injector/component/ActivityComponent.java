@@ -7,6 +7,7 @@ import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.ActivityScope;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
+import com.dailiv.view.onboard.OnboardActivty;
 import com.dailiv.view.register.RegisterActivity;
 import com.dailiv.view.splash.SplashActivity;
 
@@ -27,6 +28,8 @@ public interface ActivityComponent {
     Context getContext();
 
     void inject(SplashActivity splashActivity);
+
+    void inject(OnboardActivty onboardActivty);
 
     void inject(MainActivity mainActivity);
 

@@ -1,5 +1,6 @@
 package com.dailiv.view.splash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.view.onboard.OnboardActivty;
 
 import javax.inject.Inject;
 
@@ -32,6 +34,8 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         super.onCreate(savedInstanceState);
         inject();
         onAttach();
+        final Intent intent = new Intent(this, OnboardActivty.class);
+        this.startActivity(intent);
     }
 
     @Override
