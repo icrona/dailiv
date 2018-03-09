@@ -1,12 +1,17 @@
 package com.dailiv.view.login;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.databinding.ActivityLoginBinding;
+import com.dailiv.internal.data.local.binding.LoginBinding;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
+import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
+import com.dailiv.view.onboard.OnboardActivty;
 
 import javax.inject.Inject;
 
@@ -18,6 +23,9 @@ public class LoginActivity extends AbstractActivity implements LoginView{
 
     @Inject
     LoginPresenter presenter;
+
+    @Inject
+    Navigator navigator;
 
     @Override
     public void onDetach() {
@@ -50,7 +58,7 @@ public class LoginActivity extends AbstractActivity implements LoginView{
 
     @Override
     public void showResponse(Object response) {
-
+        System.out.println(response);
     }
 
     @Override
@@ -62,5 +70,14 @@ public class LoginActivity extends AbstractActivity implements LoginView{
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        bindingLogin();
+
+//        navigator.openActivity(this, OnboardActivty.class);
+    }
+
+    private void bindingLogin() {
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding.setLogin(new LoginBinding());
+        binding.setPresenter(presenter);
     }
 }

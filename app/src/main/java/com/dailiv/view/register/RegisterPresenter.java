@@ -1,5 +1,7 @@
 package com.dailiv.view.register;
 
+import android.util.Pair;
+
 import com.dailiv.internal.data.local.binding.RegisterBinding;
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.request.authentication.RegisterRequest;
@@ -33,11 +35,29 @@ public class RegisterPresenter extends AbstractSinglePresenter<RegisterView> {
         registerRequest.email = registerBinding.getEmail();
         registerRequest.password = registerBinding.getPassword();
         registerRequest.username = registerBinding.getEmail();
-        registerRequest.firstname = registerBinding.getFirstName();
-        registerRequest.lastname = registerBinding.getLastName();
+
+        Pair<String, String> namePair = splitName(registerBinding.getFullName());
+        registerRequest.firstname = namePair.first;
+        registerRequest.lastname = namePair.second;
         registerRequest.phone = registerBinding.getPhone();
 
         return registerRequest;
+    }
+
+    private Pair<String, String> splitName(String name) {
+
+        String lastName = "";
+        String firstName= "";
+        if(name.split("\\w+").length>1){
+
+            lastName = name.substring(name.lastIndexOf(" ")+1);
+            firstName = name.substring(0, name.lastIndexOf(' '));
+        }
+        else{
+            firstName = name;
+        }
+
+        return Pair.create(firstName, lastName);
     }
 
 }

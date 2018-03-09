@@ -5,6 +5,7 @@ import retrofit2.Response;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -45,7 +46,8 @@ public class NetworkView<T> {
         subscription = checkConnection()
                 .flatMapObservable(aVoid -> result.call())
                 .flatMap(mapResponse())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .subscribe(getSubscriber());
 
     }

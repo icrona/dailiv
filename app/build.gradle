@@ -60,15 +60,15 @@ android {
 
     productFlavors {
         development {
-            buildConfigField 'String', 'HOST', '"http://dev.dailiv.co/"'
-            buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1"'
+            buildConfigField 'String', 'HOST', '"dev.dailiv.co"'
+            buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
             buildConfigField 'String', 'CLIENT_SECRET', DEV_CLIENT_SECRET
         }
         production {
             //todo
-            buildConfigField 'String', 'HOST', '"http://dev.dailiv.co/"'
-            buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1"'
+            buildConfigField 'String', 'HOST', '"dev.dailiv.co"'
+            buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
             buildConfigField 'String', 'CLIENT_SECRET', DEV_CLIENT_SECRET
         }

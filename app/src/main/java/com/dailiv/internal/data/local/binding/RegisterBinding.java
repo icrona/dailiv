@@ -23,10 +23,7 @@ public class RegisterBinding extends BaseObservable{
     private String password;
 
     @Bindable
-    private String firstName;
-
-    @Bindable
-    private String lastName;
+    private String fullName;
 
     @Bindable
     private String phone;
