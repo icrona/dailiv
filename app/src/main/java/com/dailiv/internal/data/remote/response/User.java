@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserResponse {
-
-    public int id;
+public class User extends BaseResponse {
 
     @JsonProperty(value = "facebook_id")
     public Integer facebookId;
@@ -43,9 +41,4 @@ public class UserResponse {
     @JsonProperty(value = "last_activity")
     public String lastActivity;
 
-    @JsonProperty(value = "created_at")
-    public String createdAt;
-
-    @JsonProperty(value = "updated_at")
-    public String updatedAt;
 }

@@ -4,7 +4,7 @@ buildscript {
     
     ext {
         // Android Support
-        androidPluginVersion = '3.0.0'
+        androidPluginVersion = '3.0.1'
         androidSupportVersion = '27.0.2'
         androidSupportTestVersion = '1.0.1'
         multidexVersion = '1.0.3'

@@ -1,6 +1,6 @@
 package com.dailiv.internal.data.remote.response.authentication;
 
-import com.dailiv.internal.data.remote.response.UserResponse;
+import com.dailiv.internal.data.remote.response.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,6 +20,6 @@ public class AuthenticationResponse {
     @JsonProperty(value = "expires_in")
     public Long expiresIn;
 
-    public UserResponse user;
+    public User user;
 
 }
