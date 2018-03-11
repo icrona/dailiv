@@ -1,7 +1,6 @@
 package com.dailiv.view.main;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 
 import com.dailiv.App;
@@ -11,6 +10,7 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AbstractActivity implements MainView{
     private ActionBar toolbar;
 
     @BindView(R.id.bnv_main)
-    BottomNavigationView navigationMenu;
+    BottomNavigationViewEx navigationMenu;
 
     @Override
     protected int getContentView() {
@@ -55,6 +55,11 @@ public class MainActivity extends AbstractActivity implements MainView{
     }
 
     private void setNavigation() {
+
+        navigationMenu.enableAnimation(false);
+        navigationMenu.enableShiftingMode(false);
+        navigationMenu.enableItemShiftingMode(false);
+        navigationMenu.setTextVisibility(false);
 
         navigationMenu.setOnNavigationItemSelectedListener(item -> {
           switch (item.getItemId()) {

@@ -3,5 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="bgBottomNavigation">#fe485a</color>
+
+    <color name="red">#E63D53</color>
+    <color name="black">#403F41</color>
+    <color name="grey_dark">#666666</color>
+    <color name="grey">#808080</color>
+    <color name="grey_light">#CCCCCC</color>
 </resources>

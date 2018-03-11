@@ -47,6 +47,10 @@ buildscript {
 
         // App Intro
         appIntroVersion = 'v4.2.3'
+
+        // BNV
+        bottomNavigationViewVersion = '1.2.4'
+
     }
     repositories {
         maven { url 'https://maven.fabric.io/public' }

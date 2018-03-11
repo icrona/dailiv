@@ -9,4 +9,8 @@ public interface IApiConstant {
     String LOGIN = "login";
 
     String REGISTER = "register";
+
+    String ACCOUNT = "account/";
+
+    String LOCATION = ACCOUNT + "location";
 }
