@@ -6,6 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/red"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:id="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.Toolbar"
+                app:titleTextAppearance="@style/AppTheme.ToolbarTitle">
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
     <FrameLayout
         android:id="@+id/fl_main"
         android:layout_width="match_parent"

@@ -64,6 +64,11 @@ android {
             buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
             buildConfigField 'String', 'CLIENT_SECRET', DEV_CLIENT_SECRET
+
+            buildConfigField 'String', 'RECIPE_PREFIX', '"http://db87735e2befe2ffe714-b545d1efd8fef2da68fd5cadce12ed78.r96.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'USER_PREFIX', '"http://612bf8c6a31aec10a60e-5db0af4a41655be4ff08f3566deaa626.r82.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'ASSET_PREFIX', '"http://cc5c171378881f651c61-dd02e74e12681f05ce5526d5e27a0502.r62.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'DRIVER_PREFIX', '"http://39e48e344e47469ce4ea-460585f461c841d36b29019e69a65e71.r85.cf4.rackcdn.com/"'
         }
         production {
             //todo
@@ -71,6 +76,11 @@ android {
             buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
             buildConfigField 'String', 'CLIENT_SECRET', DEV_CLIENT_SECRET
+
+            buildConfigField 'String', 'RECIPE_PREFIX', '"https://abb4588ea5e3ba6d0d14-b545d1efd8fef2da68fd5cadce12ed78.ssl.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'USER_PREFIX', '"https://e7b6b182dc4cf276bf84-5db0af4a41655be4ff08f3566deaa626.ssl.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'ASSET_PREFIX', '"https://dd9d83850295b9a085e6-dd02e74e12681f05ce5526d5e27a0502.ssl.cf4.rackcdn.com/"'
+            buildConfigField 'String', 'DRIVER_PREFIX', '"https://acf9fe118b43e24906d3-460585f461c841d36b29019e69a65e71.ssl.cf4.rackcdn.com/"'
         }
 
     }

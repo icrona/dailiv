@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User extends BaseResponse {
 
     @JsonProperty(value = "facebook_id")
-    public Integer facebookId;
+    public String facebookId;
 
     @JsonProperty(value = "google_id")
-    public Integer googleId;
+    public String googleId;
 
     public String firstname;
 

@@ -10,7 +10,17 @@ public interface IApiConstant {
 
     String REGISTER = "register";
 
+    String HOME = "home";
+
+    String SEARCH = HOME + "/search";
+
     String ACCOUNT = "account/";
 
     String LOCATION = ACCOUNT + "location";
+
+    String RECIPE = "recipe/";
+
+    String COOK = RECIPE + "cook";
+
+    String UNCOOK = RECIPE + "cook";
 }

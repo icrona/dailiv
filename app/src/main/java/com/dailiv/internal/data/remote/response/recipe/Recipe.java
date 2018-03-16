@@ -1,9 +1,12 @@
 package com.dailiv.internal.data.remote.response.recipe;
 
 import com.dailiv.internal.data.remote.response.BaseResponse;
+import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 /**
  * Created by aldo on 3/10/18.
@@ -38,5 +41,7 @@ public class Recipe extends BaseResponse {
     public String fullPhoto;
 
     public User user;
+
+    public List<Category> category;
 
 }
