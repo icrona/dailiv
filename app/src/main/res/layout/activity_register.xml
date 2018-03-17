@@ -14,8 +14,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <android.support.design.widget.TextInputLayout
+            style="@style/AppTheme.WhiteTextInputLayoutHint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/tiet_name"
@@ -25,12 +27,17 @@
                 android:hint="@string/full_name"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
-                android:text="@={register.fullName}"/>
+                android:text="@={register.fullName}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_white_cursor"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/AppTheme.WhiteTextInputLayoutHint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/tiet_email"
@@ -40,13 +47,19 @@
                 android:hint="@string/email"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
-                android:text="@={register.email}"/>
+                android:text="@={register.email}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_white_cursor"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/AppTheme.WhiteTextInputLayoutHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/tiet_password"
@@ -56,12 +69,17 @@
                 android:hint="@string/password"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
-                android:text="@={register.password}"/>
+                android:text="@={register.password}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_white_cursor"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/AppTheme.WhiteTextInputLayoutHint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/tiet_phone"
@@ -71,7 +89,10 @@
                 android:hint="@string/phone"
                 android:imeOptions="actionDone"
                 android:inputType="phone"
-                android:text="@={register.phone}"/>
+                android:text="@={register.phone}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/bg_white_cursor"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -80,6 +101,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
             android:background="@drawable/btn_red"
+            android:textAllCaps="false"
             android:onClick="@{() -> presenter.doRegister(register)}"/>
     </LinearLayout>
 </layout>

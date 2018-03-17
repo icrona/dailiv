@@ -18,9 +18,18 @@
     <style name="AppTheme.Login" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/grey_dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
-
+    <style name="AppTheme.WhiteTextInputLayout" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/red</item>
+    </style>
+    
+    <style name="AppTheme.WhiteTextInputLayoutHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/white</item>
+    </style>
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/white</item>

@@ -59,11 +59,13 @@
 
         <activity android:name=".view.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:theme="@style/AppTheme.Login"/>
 
         <activity android:name=".view.register.RegisterActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:theme="@style/AppTheme.Login"/>
 
     </application>
 
