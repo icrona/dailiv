@@ -12,6 +12,8 @@ import com.dailiv.internal.data.remote.response.authentication.AuthenticationRes
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 
+import java.util.List;
+
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -33,7 +35,7 @@ public interface IApi {
     Observable<Response<HomeResponse>> home();
 
     @GET(SEARCH)
-    Observable<Response<SearchResponse>> search(@Query("search") String search);
+    Observable<Response<List<SearchResponse>>> search(@Query("search") String search);
 
     @POST(COOK)
     Observable<Response<Boolean>> cook(@Body RecipeBaseRequest recipeBaseRequest);

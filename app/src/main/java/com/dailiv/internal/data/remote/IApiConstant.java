@@ -23,4 +23,8 @@ public interface IApiConstant {
     String COOK = RECIPE + "cook";
 
     String UNCOOK = RECIPE + "cook";
+
+    String INGREDIENT = "ingredient";
+
+    String INGREDIENT_CATEGORIES = "/category";
 }

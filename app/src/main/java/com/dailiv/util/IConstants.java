@@ -7,4 +7,6 @@ package com.dailiv.util;
 public interface IConstants {
 
     int TIMEOUT = 60;
+    String FINIHS_ONBOARD = "finish_onboard";
+    String ACCESS_TOKEN = "access_token";
 }

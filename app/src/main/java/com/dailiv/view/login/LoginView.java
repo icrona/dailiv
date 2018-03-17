@@ -7,4 +7,6 @@ import com.dailiv.view.base.IView;
  */
 
 public interface LoginView extends IView{
+
+    void goToRegister();
 }

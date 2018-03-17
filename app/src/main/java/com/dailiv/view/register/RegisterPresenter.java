@@ -1,6 +1,6 @@
 package com.dailiv.view.register;
 
-import android.util.Pair;
+import android.support.v4.util.Pair;
 
 import com.dailiv.internal.data.local.binding.RegisterBinding;
 import com.dailiv.internal.data.remote.IApi;
@@ -9,6 +9,8 @@ import com.dailiv.view.base.AbstractSinglePresenter;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import static com.dailiv.util.common.NameUtil.splitName;
 
 /**
  * Created by aldo on 3/5/18.
@@ -44,20 +46,5 @@ public class RegisterPresenter extends AbstractSinglePresenter<RegisterView> {
         return registerRequest;
     }
 
-    private Pair<String, String> splitName(String name) {
-
-        String lastName = "";
-        String firstName= "";
-        if(name.split("\\w+").length>1){
-
-            lastName = name.substring(name.lastIndexOf(" ")+1);
-            firstName = name.substring(0, name.lastIndexOf(' '));
-        }
-        else{
-            firstName = name;
-        }
-
-        return Pair.create(firstName, lastName);
-    }
 
 }

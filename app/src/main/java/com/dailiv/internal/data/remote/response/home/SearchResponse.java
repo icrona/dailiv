@@ -1,8 +1,7 @@
 package com.dailiv.internal.data.remote.response.home;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by aldo on 3/14/18.
@@ -11,9 +10,27 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResponse {
 
-    public List<Search> recipe;
+    @JsonProperty(value = "_index")
+    public String index;
 
-    public List<Search> ingredient;
+    @JsonProperty(value = "_type")
+    public String type;
 
+    @JsonProperty(value = "_id")
+    public String id;
+
+    @JsonProperty(value = "_score")
+    public String score;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Source{
+
+        public String name;
+
+        public String slug;
+
+        public String photo;
+
+        public String unit;
+    }
 }
-

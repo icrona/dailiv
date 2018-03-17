@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:text="@={login.email}"/>
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:text="@={login.password}"/>
@@ -48,7 +48,33 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/login"
+            android:background="@drawable/btn_red"
             android:onClick="@{() -> presenter.doLogin(login)}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_account"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:text="@string/sign_up"
+                android:onClick="@{() -> presenter.goToRegister()}"
+                />
+        </LinearLayout>
     </LinearLayout>
 </layout>

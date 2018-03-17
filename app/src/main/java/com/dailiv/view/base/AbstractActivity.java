@@ -46,14 +46,19 @@ public abstract class AbstractActivity extends AppCompatActivity implements IDet
     }
 
     protected int getStatusBarHeight() {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return 0;
+        }
 
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return 0;
+        final int resourceId = getResources().getIdentifier("status_bar_height", "dimen",
+                "android");
 
-        final int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int result = 0;
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
 
-        if(resourceId <= 0) return 0;
-
-        return getResources().getDimensionPixelSize(resourceId);
+        return result;
     }
 
 }

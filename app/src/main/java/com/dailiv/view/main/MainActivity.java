@@ -1,7 +1,9 @@
 package com.dailiv.view.main;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -14,6 +16,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import javax.inject.Inject;
 
+import butterknife.BindArray;
+import butterknife.BindString;
 import butterknife.BindView;
 
 /**
@@ -31,7 +35,11 @@ public class MainActivity extends AbstractActivity implements MainView{
     @Inject
     Navigator navigator;
 
-    private ActionBar toolbar;
+    @BindView(R.id.toolbar_home)
+    Toolbar toolbar;
+
+    @BindArray(R.array.menu)
+    String[] menuText;
 
     @BindView(R.id.bnv_main)
     BottomNavigationViewEx navigationMenu;
@@ -49,11 +57,12 @@ public class MainActivity extends AbstractActivity implements MainView{
         setToolbar();
         setNavigation();
     }
-
     private void setToolbar() {
-        toolbar = getSupportActionBar();
+        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbar.setTitle(menuText[0]);
+        toolbar.hideOverflowMenu();
+        setSupportActionBar(toolbar);
     }
-
     private void setNavigation() {
 
         navigationMenu.enableAnimation(false);
@@ -63,20 +72,20 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         navigationMenu.setOnNavigationItemSelectedListener(item -> {
           switch (item.getItemId()) {
-              case R.id.nav_1:
-                  toolbar.setTitle("nav 1");
+              case R.id.nav_home:
+                  toolbar.setTitle(menuText[0]);
                   return true;
-              case R.id.nav_2:
-                  toolbar.setTitle("nav 2");
+              case R.id.nav_shop:
+                  toolbar.setTitle(menuText[1]);
                   return true;
-              case R.id.nav_3:
-                  toolbar.setTitle("nav 3");
+              case R.id.nav_recipe:
+                  toolbar.setTitle(menuText[2]);
                   return true;
-              case R.id.nav_4:
-                  toolbar.setTitle("nav 4");
+              case R.id.nav_notification:
+                  toolbar.setTitle(menuText[3]);
                   return true;
-              case R.id.nav_5:
-                  toolbar.setTitle("nav 5");
+              case R.id.nav_account:
+                  toolbar.setTitle(menuText[4]);
                   return true;
           }
           return false;

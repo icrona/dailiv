@@ -3,6 +3,7 @@ package com.dailiv.view.login;
 import com.dailiv.internal.data.local.binding.LoginBinding;
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
+import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.view.base.AbstractSinglePresenter;
 
 import javax.inject.Inject;
@@ -24,6 +25,22 @@ public class LoginPresenter extends AbstractSinglePresenter<LoginView> {
     public void doLogin(LoginBinding loginBinding) {
 
         networkView.callApi(() -> api.login(getLoginRequest(loginBinding)).map(mapResponseToObject()));
+
+////        networkView.callApi(() -> api.cook(recipeBaseRequest()).map(mapResponseToObject()));
+//
+////        networkView.callApi(() -> api.search(loginBinding.getEmail()).map(mapResponseToObject()));
+//
+//        networkView.callApi(() -> api.home().map(mapResponseToObject()));
+    }
+
+    public void goToRegister() {
+        view.goToRegister();
+    }
+
+    private RecipeBaseRequest recipeBaseRequest() {
+        RecipeBaseRequest recipeBaseRequest = new RecipeBaseRequest();
+        recipeBaseRequest.recipeId = 1;
+        return recipeBaseRequest;
     }
 
     private LoginRequest getLoginRequest(LoginBinding loginBinding) {

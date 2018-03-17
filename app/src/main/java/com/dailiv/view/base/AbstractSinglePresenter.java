@@ -14,7 +14,7 @@ import rx.functions.Func1;
 public abstract class AbstractSinglePresenter<T extends IView> implements IPresenter<T> {
 
     protected NetworkView<Object> networkView;
-    private T view;
+    protected T view;
 
     @Override
     public void onAttach(T view) {

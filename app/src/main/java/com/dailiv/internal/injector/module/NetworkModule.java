@@ -21,6 +21,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static com.dailiv.util.IConstants.TIMEOUT;
+import static com.dailiv.util.common.Preferences.getAccessToken;
 
 /**
  * Created by aldo on 3/1/18.
@@ -100,8 +101,7 @@ public class NetworkModule {
             final Request request = chain.request();
             final Request.Builder builder = request.newBuilder()
                     .addHeader("Accept", "application/json")
-                    //todo
-                    .addHeader("Authorization", "Bearer " + "token");
+                    .addHeader("Authorization", "Bearer " + getAccessToken());
 
             return chain.proceed(builder.build());
         };
