@@ -36,9 +36,6 @@ public class LoginActivity extends AbstractActivity implements LoginView{
     @Inject
     Navigator navigator;
 
-//    @BindView(R.id.tv_register)
-//    TextView tvRegister;
-//
     @Override
     public void onDetach() {
         presenter.onDetach();
