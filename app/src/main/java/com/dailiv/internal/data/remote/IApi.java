@@ -5,6 +5,8 @@ package com.dailiv.internal.data.remote;
  */
 
 
+import com.dailiv.internal.data.remote.request.authentication.FacebookAuthRequest;
+import com.dailiv.internal.data.remote.request.authentication.GoogleAuthRequest;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
 import com.dailiv.internal.data.remote.request.authentication.RegisterRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
@@ -30,6 +32,12 @@ public interface IApi {
 
     @POST(LOGIN)
     Observable<Response<AuthenticationResponse>> login (@Body LoginRequest loginRequest);
+
+    @POST(FB_AUTH)
+    Observable<Response<AuthenticationResponse>> fbAuth(@Body FacebookAuthRequest facebookAuthRequest);
+
+    @POST(GOOGLE_AUTh)
+    Observable<Response<AuthenticationResponse>> googleAuth(@Body GoogleAuthRequest googleAuthRequest);
 
     @GET(HOME)
     Observable<Response<HomeResponse>> home();

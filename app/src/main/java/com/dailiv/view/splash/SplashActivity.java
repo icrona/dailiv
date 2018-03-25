@@ -9,6 +9,8 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.view.location.LocationActivity;
+import com.dailiv.view.register.RegisterActivity;
 
 import javax.inject.Inject;
 
@@ -48,6 +50,8 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         else{
             navigator.openOnboardActivity(this);
         }
+
+//        navigator.openActivity(this, LocationActivity.class);
     }
 
     @Override

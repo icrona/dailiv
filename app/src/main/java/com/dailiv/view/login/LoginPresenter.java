@@ -2,6 +2,8 @@ package com.dailiv.view.login;
 
 import com.dailiv.internal.data.local.binding.LoginBinding;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.authentication.FacebookAuthRequest;
+import com.dailiv.internal.data.remote.request.authentication.GoogleAuthRequest;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.view.base.AbstractSinglePresenter;
@@ -33,6 +35,14 @@ public class LoginPresenter extends AbstractSinglePresenter<LoginView> {
 //        networkView.callApi(() -> api.home().map(mapResponseToObject()));
     }
 
+    public void doLoginFb() {
+        view.doLoginFb();
+    }
+
+    public void doLoginGoogle() {
+        view.doLoginGoogle();
+    }
+
     public void goToRegister() {
         view.goToRegister();
     }
@@ -51,6 +61,14 @@ public class LoginPresenter extends AbstractSinglePresenter<LoginView> {
         loginRequest.username = loginBinding.getEmail();
 
         return loginRequest;
+    }
+
+    public void doFacebookLogin(String accessToken) {
+        networkView.callApi(() -> api.fbAuth(new FacebookAuthRequest(accessToken)).map(mapResponseToObject()));
+    }
+
+    public void doGoogleLogin(String idToken) {
+        networkView.callApi(() -> api.googleAuth(new GoogleAuthRequest(idToken)).map(mapResponseToObject()));
     }
 
 

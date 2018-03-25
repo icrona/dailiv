@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Dailiv</string>
 
+    <string name="facebook_app_id">250311455330726</string>
+    <string name="fb_login_protocol_scheme">fb250311455330726</string>
+    <string name="google_client_id">819175390197-hikujcg6221kjoqv5sbi2fhdubdehs70.apps.googleusercontent.com</string>
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
@@ -31,4 +35,5 @@
 
     <string name="search">Search</string>
     <string name="cart">Cart</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

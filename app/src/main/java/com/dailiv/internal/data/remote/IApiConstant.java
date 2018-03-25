@@ -6,6 +6,10 @@ package com.dailiv.internal.data.remote;
 
 public interface IApiConstant {
 
+    String FB_AUTH = "auth/facebook/callback";
+
+    String GOOGLE_AUTh = "auth/google/callback";
+
     String LOGIN = "login";
 
     String REGISTER = "register";
