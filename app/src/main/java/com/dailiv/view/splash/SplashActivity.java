@@ -38,20 +38,20 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         inject();
         onAttach();
 
-        if(isFinishOnboard()){
-            if(isAccessTokenAvailable()) {
-                navigator.openMainActivity(this);
-            }
-            else{
-                navigator.openLoginActivity(this);
-            }
+//        if(isFinishOnboard()){
+//            if(isAccessTokenAvailable()) {
+//                navigator.openMainActivity(this);
+//            }
+//            else{
+//                navigator.openLoginActivity(this);
+//            }
+//
+//        }
+//        else{
+//            navigator.openOnboardActivity(this);
+//        }
 
-        }
-        else{
-            navigator.openOnboardActivity(this);
-        }
-
-//        navigator.openActivity(this, LocationActivity.class);
+        navigator.openActivity(this, LocationActivity.class);
     }
 
     @Override

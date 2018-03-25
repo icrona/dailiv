@@ -8,7 +8,7 @@ public interface IApiConstant {
 
     String FB_AUTH = "auth/facebook/callback";
 
-    String GOOGLE_AUTh = "auth/google/callback";
+    String GOOGLE_AUTH = "auth/google/callback";
 
     String LOGIN = "login";
 
@@ -20,7 +20,9 @@ public interface IApiConstant {
 
     String ACCOUNT = "account/";
 
-    String LOCATION = ACCOUNT + "location";
+    String LOCATION = ACCOUNT + "location/";
+
+    String CHOOSE_LOCATION = LOCATION + "choose";
 
     String RECIPE = "recipe/";
 

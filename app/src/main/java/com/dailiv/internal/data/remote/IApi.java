@@ -9,10 +9,13 @@ import com.dailiv.internal.data.remote.request.authentication.FacebookAuthReques
 import com.dailiv.internal.data.remote.request.authentication.GoogleAuthRequest;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
 import com.dailiv.internal.data.remote.request.authentication.RegisterRequest;
+import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
+import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
+import com.dailiv.internal.data.remote.response.location.LocationResponse;
 
 import java.util.List;
 
@@ -36,11 +39,20 @@ public interface IApi {
     @POST(FB_AUTH)
     Observable<Response<AuthenticationResponse>> fbAuth(@Body FacebookAuthRequest facebookAuthRequest);
 
-    @POST(GOOGLE_AUTh)
+    @POST(GOOGLE_AUTH)
     Observable<Response<AuthenticationResponse>> googleAuth(@Body GoogleAuthRequest googleAuthRequest);
 
     @GET(HOME)
     Observable<Response<HomeResponse>> home();
+
+    @POST(LOCATION)
+    Observable<Response<Boolean>> addLocation(@Body AddLocationRequest addLocationRequest);
+
+    @POST(CHOOSE_LOCATION)
+    Observable<Response<Boolean>> chooseLocation(@Body ChooseLocationRequest chooseLocationRequest);
+
+    @GET(LOCATION)
+    Observable<Response<List<LocationResponse>>> getLocationList();
 
     @GET(SEARCH)
     Observable<Response<List<SearchResponse>>> search(@Query("search") String search);

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by aldo on 3/11/18.
  */
 
-public class LocationRequest {
+public class AddLocationRequest {
 
     @JsonProperty(value = "formatted_address")
     public String formattedAddress;
@@ -14,7 +14,7 @@ public class LocationRequest {
     @JsonProperty(value = "place_id")
     public String placeId;
 
-    public String latitude;
+    public double latitude;
 
-    public String longitude;
+    public double longitude;
 }

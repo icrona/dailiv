@@ -17,11 +17,11 @@ public class LocationResponse extends BaseResponse {
     public String address;
 
     @JsonProperty(value = "place_id")
-    public int placeId;
+    public String placeId;
 
-    public String latitude;
+    public double latitude;
 
-    public String longitude;
+    public double longitude;
 
     public String note;
 

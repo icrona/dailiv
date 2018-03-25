@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
+import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.view.base.AbstractActivity;
@@ -35,6 +39,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 
 public class LocationActivity extends AbstractActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -54,17 +61,19 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
 
     Marker marker;
 
+    private AddLocationRequest addLocationRequest;
+
+    private LocationResponse suggestedLocation;
+
+    @BindView(R.id.rb_location)
+    RadioButton rbLocation;
+
     @Inject
     LocationPresenter presenter;
 
     @Override
     public void onDetach() {
         presenter.onDetach();
-    }
-
-    @Override
-    public void onShowProgressBar() {
-
     }
 
     @Override
@@ -82,16 +91,6 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
     }
 
     @Override
-    public void onHideProgressBar() {
-
-    }
-
-    @Override
-    public void showResponse(Object response) {
-
-    }
-
-    @Override
     protected int getContentView() {
         return R.layout.activity_location;
     }
@@ -101,6 +100,12 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
         inject();
         onAttach();
 
+        presenter.getLocation();
+
+        setupPlaceAutoComplete();
+    }
+
+    private void setupPlaceAutoComplete() {
         PlaceAutocompleteFragment placeAutocompleteFragment = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
         placeAutocompleteFragment.setFilter(new AutocompleteFilter.Builder().setCountry("ID").build());
@@ -115,6 +120,8 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
                 }
                 marker = mMap.addMarker(new MarkerOptions().position(latLngLoc).title(place.getName().toString()));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latLngLoc.latitude, latLngLoc.longitude), 15.0f));
+
+                selectCurrentPlace(place);
             }
 
             @Override
@@ -127,6 +134,25 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         setUpLocation();
+    }
+
+
+    public AddLocationRequest getAddLocationRequest() {
+        return addLocationRequest;
+    }
+
+    public void setAddLocationRequest(AddLocationRequest addLocationRequest) {
+        this.addLocationRequest = addLocationRequest;
+    }
+
+    private void selectCurrentPlace(Place place) {
+        AddLocationRequest addLocationRequest = new AddLocationRequest();
+        addLocationRequest.formattedAddress = place.getAddress().toString();
+        addLocationRequest.placeId = place.getId();
+        addLocationRequest.latitude = place.getLatLng().latitude;
+        addLocationRequest.longitude = place.getLatLng().longitude;
+        setAddLocationRequest(addLocationRequest);
+
     }
 
     private void setUpLocation() {
@@ -148,6 +174,7 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
             }
         }
     }
+
 
     private boolean checkPlayServices() {
 
@@ -247,5 +274,55 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
     public void onLocationChanged(Location location) {
         mLocation = location;
         displayLocation();
+    }
+
+    @OnClick(R.id.btn_choose_location)
+    public void chooseLocation() {
+        //todo check checkbox
+
+        if(rbLocation.isChecked() && getSuggestedLocation() != null) {
+            presenter.chooseLocation(getSuggestedLocation().id);
+        }
+        else{
+            presenter.addLocation(getAddLocationRequest());
+        }
+    }
+
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
+
+    @Override
+    public void onLocationChosen() {
+
+        //todo
+    }
+
+    public LocationResponse getSuggestedLocation() {
+        return suggestedLocation;
+    }
+
+    public void setSuggestedLocation(LocationResponse suggestedLocation) {
+        this.suggestedLocation = suggestedLocation;
+    }
+
+    @Override
+    public void onGetLocation(LocationResponse locationResponse) {
+
+        if(locationResponse == null) {
+            return;
+        }
+
+        setSuggestedLocation(locationResponse);
+        rbLocation.setVisibility(View.VISIBLE);
+        rbLocation.setText(locationResponse.address);
+
     }
 }
