@@ -1,33 +1,39 @@
 {
   "project_info": {
-    "project_number": "819175390197",
-    "project_id": "defaolt-demo-app-b492a"
+    "project_number": "1043756722761",
+    "firebase_url": "https://dailiv-170802.firebaseio.com",
+    "project_id": "dailiv-170802",
+    "storage_bucket": "dailiv-170802.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819175390197:android:27d689d63f1b7a06",
+        "mobilesdk_app_id": "1:1043756722761:android:9d79e16643877380",
         "android_client_info": {
-          "package_name": "com.google.samples.quickstart.signin"
+          "package_name": "com.dailiv"
         }
       },
       "oauth_client": [
         {
-          "client_id": "819175390197-vb8noo94569htcvcrl443jf1quqfctpt.apps.googleusercontent.com",
+          "client_id": "1043756722761-biuc63fu1tut6vop3m79sg7knorcjo1r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.google.samples.quickstart.signin",
+            "package_name": "com.dailiv",
             "certificate_hash": "1c0dbbc72b7f308f5b562cca6521f959a5dac688"
           }
         },
         {
-          "client_id": "819175390197-hikujcg6221kjoqv5sbi2fhdubdehs70.apps.googleusercontent.com",
+          "client_id": "1043756722761-gttnhh1rg9enbdbce028r3qduigf8aic.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1043756722761-o46a5ka5aqviddt9lr76gaubl7a3u7of.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBtFIqPu536_kKuh_AH5R8WjLXHm4ie-oM"
+          "current_key": "AIzaSyDNbqU9xTMcgaERzh4W6-Ls_V_jcH7FjGM"
         }
       ],
       "services": {
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043756722761-gttnhh1rg9enbdbce028r3qduigf8aic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -18,7 +18,7 @@
         />
     <item
         android:id="@+id/nav_notification"
-        android:icon="@mipmap/ic_notif"
+        android:icon="@drawable/ic_badgable_notif"
         android:title="@string/notification"
         />
     <item

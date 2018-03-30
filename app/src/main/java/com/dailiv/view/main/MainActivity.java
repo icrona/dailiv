@@ -1,12 +1,11 @@
 package com.dailiv.view.main;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -15,12 +14,12 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
+import com.dailiv.view.custom.BadgeDrawable;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import javax.inject.Inject;
 
 import butterknife.BindArray;
-import butterknife.BindString;
 import butterknife.BindView;
 
 /**
@@ -47,6 +46,10 @@ public class MainActivity extends AbstractActivity implements MainView{
     @BindView(R.id.bnv_main)
     BottomNavigationViewEx navigationMenu;
 
+    private LayerDrawable cartIcon;
+
+    private LayerDrawable notifIcon;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -64,6 +67,10 @@ public class MainActivity extends AbstractActivity implements MainView{
         MenuItem search = menu.findItem(R.id.search);
         MenuItem cart = menu.findItem(R.id.cart);
 
+        cartIcon = (LayerDrawable) cart.getIcon();
+
+        updateCartBadge();
+
         //todo
         search.setVisible(true);
         cart.setVisible(true);
@@ -72,16 +79,20 @@ public class MainActivity extends AbstractActivity implements MainView{
         return true;
     }
 
+
+
     @Override
     protected void initComponents(Bundle savedInstanceState) {
 
         inject();
         onAttach();
         setToolbar();
+
         setNavigation();
 
         //todo
         invalidateOptionsMenu();
+
     }
     private void setToolbar() {
         toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
@@ -90,6 +101,10 @@ public class MainActivity extends AbstractActivity implements MainView{
         setSupportActionBar(toolbar);
     }
     private void setNavigation() {
+        Menu menu = navigationMenu.getMenu();
+        notifIcon = (LayerDrawable) menu.findItem(R.id.nav_notification).getIcon();
+
+        updateNotifBadge();
 
         navigationMenu.enableAnimation(false);
         navigationMenu.enableShiftingMode(false);
@@ -117,6 +132,14 @@ public class MainActivity extends AbstractActivity implements MainView{
           return false;
         });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        invalidateOptionsMenu();
+        updateNotifBadge();
+        super.onResume();
     }
 
     @Override
@@ -151,6 +174,35 @@ public class MainActivity extends AbstractActivity implements MainView{
     @Override
     public void showResponse(Object response) {
 
+    }
+
+    private void setBadgeCount(LayerDrawable icon, int count) {
+
+        BadgeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(this);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
+    }
+
+    private void updateCartBadge() {
+
+        //todo
+        setBadgeCount(cartIcon, 1);
+    }
+
+    private void updateNotifBadge() {
+
+        //todo
+        setBadgeCount(notifIcon, 1);
     }
 
 }
