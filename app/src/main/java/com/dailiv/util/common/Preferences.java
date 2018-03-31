@@ -3,6 +3,8 @@ package com.dailiv.util.common;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.dailiv.internal.data.local.pojo.Location;
+import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.dailiv.util.IConstants;
 
 import static com.dailiv.App.getContext;
@@ -50,4 +52,26 @@ public class Preferences {
     public static boolean isFinishOnboard() {
         return getPrefs().getBoolean(IConstants.FINIHS_ONBOARD, false);
     }
+
+    public static void setLocation(LocationResponse location) {
+
+        SharedPreferences.Editor editor = getPrefsEditor();
+
+        editor.putInt(IConstants.LOCATION_ID, location.id);
+        editor.putString(IConstants.LOCATION_NAME, location.address);
+        editor.putInt(IConstants.STORE_ID, location.storeId);
+
+        editor.apply();
+    }
+
+    public static Location getLocation() {
+
+        return new Location(
+                getPrefs().getInt(IConstants.LOCATION_ID, 0),
+                getPrefs().getString(IConstants.LOCATION_NAME, null),
+                getPrefs().getInt(IConstants.STORE_ID, 0)
+        );
+    }
+
+
 }

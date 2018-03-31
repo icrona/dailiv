@@ -9,4 +9,9 @@ public interface IConstants {
     int TIMEOUT = 60;
     String FINIHS_ONBOARD = "finish_onboard";
     String ACCESS_TOKEN = "access_token";
+
+    String LOCATION_ID = "location_id";
+    String LOCATION_NAME = "location_name";
+    String STORE_ID = "store_id";
+
 }

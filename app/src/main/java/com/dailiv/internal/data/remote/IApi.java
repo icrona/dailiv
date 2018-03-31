@@ -46,10 +46,10 @@ public interface IApi {
     Observable<Response<HomeResponse>> home();
 
     @POST(LOCATION)
-    Observable<Response<Boolean>> addLocation(@Body AddLocationRequest addLocationRequest);
+    Observable<Response<LocationResponse>> addLocation(@Body AddLocationRequest addLocationRequest);
 
     @POST(CHOOSE_LOCATION)
-    Observable<Response<Boolean>> chooseLocation(@Body ChooseLocationRequest chooseLocationRequest);
+    Observable<Response<LocationResponse>> chooseLocation(@Body ChooseLocationRequest chooseLocationRequest);
 
     @GET(LOCATION)
     Observable<Response<List<LocationResponse>>> getLocationList();

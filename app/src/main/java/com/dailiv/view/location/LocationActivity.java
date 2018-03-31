@@ -42,6 +42,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.dailiv.util.common.Preferences.setLocation;
+
 
 public class LocationActivity extends AbstractActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -300,9 +302,9 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
     }
 
     @Override
-    public void onLocationChosen() {
-
-        //todo
+    public void onLocationChosen(LocationResponse locationResponse) {
+        setLocation(locationResponse);
+        finish();
     }
 
     public LocationResponse getSuggestedLocation() {

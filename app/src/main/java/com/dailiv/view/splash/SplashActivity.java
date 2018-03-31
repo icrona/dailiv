@@ -50,8 +50,6 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         else{
             navigator.openOnboardActivity(this);
         }
-
-//        navigator.openActivity(this, LocationActivity.class);
     }
 
     @Override

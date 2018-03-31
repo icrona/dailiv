@@ -9,18 +9,23 @@ import android.view.MenuItem;
 
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.BadgeDrawable;
+import com.dailiv.view.location.LocationActivity;
+import com.dailiv.view.search.SearchActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import javax.inject.Inject;
 
 import butterknife.BindArray;
 import butterknife.BindView;
+
+import static com.dailiv.util.common.Preferences.getLocation;
 
 /**
  * Created by aldo on 3/3/18.
@@ -79,7 +84,17 @@ public class MainActivity extends AbstractActivity implements MainView{
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()) {
+            case R.id.search:{
+                navigator.openActivity(this, SearchActivity.class);
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void initComponents(Bundle savedInstanceState) {
@@ -139,6 +154,7 @@ public class MainActivity extends AbstractActivity implements MainView{
     protected void onResume() {
         invalidateOptionsMenu();
         updateNotifBadge();
+        getChosenLocation();
         super.onResume();
     }
 
@@ -203,6 +219,18 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         //todo
         setBadgeCount(notifIcon, 1);
+    }
+
+    private void getChosenLocation() {
+
+        Location location = getLocation();
+        if(location.isAvailable()) {
+            //todo
+            System.out.println(location.getLocationName());
+        }
+        else {
+            navigator.openActivity(this, LocationActivity.class);
+        }
     }
 
 }

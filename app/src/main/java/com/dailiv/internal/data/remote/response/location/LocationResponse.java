@@ -27,4 +27,7 @@ public class LocationResponse extends BaseResponse {
 
     public String phone;
 
+    @JsonProperty(value = "store_id")
+    public int storeId;
+
 }

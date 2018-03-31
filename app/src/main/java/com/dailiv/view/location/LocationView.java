@@ -15,7 +15,7 @@ public interface LocationView extends IBaseView{
 
     void onShowError(final String message);
 
-    void onLocationChosen();
+    void onLocationChosen(LocationResponse locationResponse);
 
     void onGetLocation(LocationResponse locationResponse);
 

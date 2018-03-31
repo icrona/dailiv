@@ -29,9 +29,9 @@ public class LocationPresenter implements IPresenter<LocationView> {
     @Inject
     public LocationPresenter(){}
 
-    private NetworkView<Boolean> addLocationNetworkView;
+    private NetworkView<LocationResponse> addLocationNetworkView;
 
-    private NetworkView<Boolean> chooseLocationNetworkView;
+    private NetworkView<LocationResponse> chooseLocationNetworkView;
 
     private NetworkView<List<LocationResponse>> getLocationListNetworkView;
 
@@ -66,15 +66,16 @@ public class LocationPresenter implements IPresenter<LocationView> {
     public void onDetach() {
         addLocationNetworkView.safeUnsubscribe();
         chooseLocationNetworkView.safeUnsubscribe();
+        getLocationListNetworkView.safeUnsubscribe();
         view = null;
     }
 
-    private Action1<Boolean> getAddLocation() {
-        return aBoolean -> chooseLocation(4);
+    private Action1<LocationResponse> getAddLocation() {
+        return locationResponse -> chooseLocation(locationResponse.id);
     }
 
-    private Action1<Boolean> getChooseLocation() {
-        return aBoolean -> view.onLocationChosen();
+    private Action1<LocationResponse> getChooseLocation() {
+        return location -> view.onLocationChosen(location);
     }
 
     private Action1<List<LocationResponse>> getLocationList() {
