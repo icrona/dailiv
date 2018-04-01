@@ -3,6 +3,8 @@ package com.dailiv.view.main;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -12,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dailiv.App;
@@ -23,10 +24,15 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.view.account.AccountFragment;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.BadgeDrawable;
+import com.dailiv.view.home.HomeFragment;
 import com.dailiv.view.location.LocationActivity;
+import com.dailiv.view.notification.NotificationFragment;
+import com.dailiv.view.recipe.RecipeFragment;
 import com.dailiv.view.search.SearchAdapter;
+import com.dailiv.view.shop.ShopFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.List;
@@ -207,24 +213,42 @@ public class MainActivity extends AbstractActivity implements MainView{
           switch (item.getItemId()) {
               case R.id.nav_home:
                   toolbar.setTitle(menuText[0]);
+                  setFragment(new HomeFragment());
                   return true;
               case R.id.nav_shop:
                   toolbar.setTitle(menuText[1]);
+                  setFragment(new ShopFragment());
                   return true;
               case R.id.nav_recipe:
                   toolbar.setTitle(menuText[2]);
+                  setFragment(new RecipeFragment());
                   return true;
               case R.id.nav_notification:
                   toolbar.setTitle(menuText[3]);
+                  setFragment(new NotificationFragment());
                   return true;
               case R.id.nav_account:
                   toolbar.setTitle(menuText[4]);
+                  setFragment(new AccountFragment());
                   return true;
           }
           return false;
         });
 
+        setFragment(new HomeFragment());
+    }
 
+    private void setFragment(Fragment fragment) {
+        final String tag = fragment.getClass().getSimpleName();
+
+        if(getSupportFragmentManager().findFragmentByTag(tag) == null) {
+
+            final FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fl_main, fragment, tag);
+            fragmentTransaction.commit();
+
+        }
     }
 
     @Override

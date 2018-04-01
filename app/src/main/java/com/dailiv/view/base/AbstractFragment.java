@@ -28,9 +28,6 @@ public abstract class AbstractFragment extends Fragment implements IDetachView{
 
     protected abstract void initComponents(final Bundle savedInstanceState);
 
-    protected abstract Navigator getNavigator();
-
-    protected abstract Common getCommon();
 
     //todo
 
