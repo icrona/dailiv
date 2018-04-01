@@ -184,4 +184,6 @@ dependencies {
 
     //BNV
     compile "com.github.ittianyu:BottomNavigationViewEx:${bottomNavigationViewVersion}"
+
+    compile 'com.annimon:stream:1.1.9'
 }

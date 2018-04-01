@@ -3,13 +3,22 @@ package com.dailiv.view.main;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Location;
+import com.dailiv.internal.data.local.pojo.SearchResult;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
@@ -17,8 +26,10 @@ import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.BadgeDrawable;
 import com.dailiv.view.location.LocationActivity;
-import com.dailiv.view.search.SearchActivity;
+import com.dailiv.view.search.SearchAdapter;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -26,6 +37,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 
 import static com.dailiv.util.common.Preferences.getLocation;
+import static java.util.Collections.emptyList;
 
 /**
  * Created by aldo on 3/3/18.
@@ -51,9 +63,22 @@ public class MainActivity extends AbstractActivity implements MainView{
     @BindView(R.id.bnv_main)
     BottomNavigationViewEx navigationMenu;
 
+    @BindView(R.id.fl_main)
+    FrameLayout flMain;
+
+    @BindView(R.id.ll_search_results)
+    LinearLayout llSearchResults;
+
+    @BindView(R.id.rv_search_results)
+    RecyclerView rvSearchResults;
+
     private LayerDrawable cartIcon;
 
     private LayerDrawable notifIcon;
+
+    private SearchView searchView;
+
+    private SearchAdapter searchAdapter;
 
     @Override
     protected int getContentView() {
@@ -63,22 +88,73 @@ public class MainActivity extends AbstractActivity implements MainView{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
+
+        MenuItem cart = menu.findItem(R.id.cart);
+        MenuItem actionSearch = menu.findItem(R.id.search);
+
+        searchView = (SearchView) actionSearch.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                presenter.doSearch(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+
+
+        searchView.findViewById(R.id.search_close_btn).setOnClickListener(v -> {
+
+            //todo
+            EditText et = findViewById(R.id.search_src_text);
+
+            et.setText("");
+
+            searchView.setQuery("", false);
+            searchView.onActionViewCollapsed();
+            searchView.setFocusable(true);
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+
+            emptySearchResult();
+        });
+
+        actionSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                cart.setVisible(false);
+                flMain.setVisibility(View.GONE);
+                llSearchResults.setVisibility(View.VISIBLE);
+                emptySearchResult();
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                cart.setVisible(true);
+                flMain.setVisibility(View.VISIBLE);
+                llSearchResults.setVisibility(View.GONE);
+                emptySearchResult();
+                return true;
+            }
+        });
+
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        MenuItem search = menu.findItem(R.id.search);
         MenuItem cart = menu.findItem(R.id.cart);
 
         cartIcon = (LayerDrawable) cart.getIcon();
 
         updateCartBadge();
 
-        //todo
-        search.setVisible(true);
-        cart.setVisible(true);
         super.onPrepareOptionsMenu(menu);
 
         return true;
@@ -88,8 +164,7 @@ public class MainActivity extends AbstractActivity implements MainView{
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.search:{
-                navigator.openActivity(this, SearchActivity.class);
+            case R.id.cart:{
                 break;
             }
         }
@@ -107,6 +182,8 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         //todo
         invalidateOptionsMenu();
+
+        setSearchAdapter();
 
     }
     private void setToolbar() {
@@ -233,4 +310,22 @@ public class MainActivity extends AbstractActivity implements MainView{
         }
     }
 
+    @Override
+    public void onGetSearchResult(List<SearchResult> results) {
+
+        searchAdapter.setSearchResults(results);
+        searchAdapter.notifyDataSetChanged();
+
+    }
+
+    private void emptySearchResult() {
+        onGetSearchResult(emptyList());
+    }
+
+    private void setSearchAdapter() {
+        searchAdapter = new SearchAdapter();
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvSearchResults.setLayoutManager(linearLayoutManager);
+        rvSearchResults.setAdapter(searchAdapter);
+    }
 }

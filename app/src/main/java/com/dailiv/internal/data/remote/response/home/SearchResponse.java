@@ -22,6 +22,9 @@ public class SearchResponse {
     @JsonProperty(value = "_score")
     public String score;
 
+    @JsonProperty(value = "_source")
+    public Source source;
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Source{
 

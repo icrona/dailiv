@@ -71,10 +71,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Login"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity
-            android:name=".view.search.SearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+
         <activity
             android:name=".view.location.LocationActivity"
             android:screenOrientation="portrait"

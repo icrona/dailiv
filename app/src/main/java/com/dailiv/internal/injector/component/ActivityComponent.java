@@ -10,7 +10,6 @@ import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
 import com.dailiv.view.register.RegisterActivity;
-import com.dailiv.view.search.SearchActivity;
 import com.dailiv.view.splash.SplashActivity;
 
 import dagger.Component;
@@ -41,5 +40,4 @@ public interface ActivityComponent {
 
     void inject(LocationActivity locationActivity);
 
-    void inject(SearchActivity searchActivity);
 }
