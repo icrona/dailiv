@@ -5,7 +5,6 @@ import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.dailiv.util.network.NetworkView;
-import com.dailiv.view.base.AbstractSinglePresenter;
 import com.dailiv.view.base.IPresenter;
 
 import java.util.List;

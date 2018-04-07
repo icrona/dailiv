@@ -37,11 +37,13 @@
         android:layout_below="@+id/abl_home"
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bnv_main">
 
     </FrameLayout>
 
     <LinearLayout
+        android:layout_above="@id/bnv_main"
         android:layout_below="@+id/abl_home"
         android:id="@+id/ll_search_results"
         android:orientation="vertical"

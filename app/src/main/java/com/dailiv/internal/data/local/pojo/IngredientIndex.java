@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.local.pojo;
 
+import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +13,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class IngredientIndex {
+
+    private int id;
 
     private String image;
 
@@ -26,6 +29,7 @@ public class IngredientIndex {
     public IngredientIndex(Ingredient ingredient) {
 
         this(
+                ingredient.id,
                 ingredient.photo,
                 ingredient.name,
                 ingredient.storeIngredient.get(0).price,
@@ -33,5 +37,11 @@ public class IngredientIndex {
                 ingredient.unit
         );
     }
+
+    public String getImageUrl() {
+
+        return BuildConfig.ASSET_PREFIX + getImage();
+    }
+
 
 }

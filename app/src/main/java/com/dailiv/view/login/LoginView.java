@@ -1,12 +1,13 @@
 package com.dailiv.view.login;
 
+import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.view.base.IView;
 
 /**
  * Created by aldo on 3/5/18.
  */
 
-public interface LoginView extends IView{
+public interface LoginView extends IView<AuthenticationResponse>{
 
     void goToRegister();
 

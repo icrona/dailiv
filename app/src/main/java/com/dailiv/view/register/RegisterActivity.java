@@ -61,8 +61,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterView{
     }
 
     @Override
-    public void showResponse(Object response) {
-        AuthenticationResponse authResponse = (AuthenticationResponse) response;
+    public void showResponse(AuthenticationResponse authResponse) {
         setAccessToken(authResponse.accessToken);
         navigator.openMainActivity(this);
     }

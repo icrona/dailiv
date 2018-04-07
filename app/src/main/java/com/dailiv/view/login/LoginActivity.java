@@ -84,9 +84,9 @@ public class LoginActivity extends AbstractActivity implements LoginView{
     }
 
     @Override
-    public void showResponse(Object response) {
-        AuthenticationResponse authResponse = (AuthenticationResponse) response;
-        setAccessToken(authResponse.accessToken);
+    public void showResponse(AuthenticationResponse response) {
+
+        setAccessToken(response.accessToken);
         navigator.openMainActivity(this);
     }
 

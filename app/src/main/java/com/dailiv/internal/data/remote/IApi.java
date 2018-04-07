@@ -74,7 +74,8 @@ public interface IApi {
             @Query("limit") int limit,
             @Query("category[]") List<String> category,
             @Query("from_price") Integer fromPrice,
-            @Query("to_price") Integer toPrice);
+            @Query("to_price") Integer toPrice,
+            @Query("page") Integer page);
 
     @POST(COOK)
     Observable<Response<Boolean>> cook(@Body RecipeBaseRequest recipeBaseRequest);

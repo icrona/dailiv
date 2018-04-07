@@ -1,16 +1,20 @@
 package com.dailiv.view.shop;
 
+import com.dailiv.internal.data.local.pojo.IngredientFilter;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.view.base.AbstractSinglePresenter;
 import com.dailiv.view.base.IPresenter;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static com.dailiv.util.common.Preferences.getLocation;
+
 /**
  * Created by aldo on 4/1/18.
  */
 
-public class ShopPresenter implements IPresenter<ShopView>{
+public class ShopPresenter extends AbstractSinglePresenter<ShopView>{
 
     @Inject
     @Named("common")
@@ -20,15 +24,17 @@ public class ShopPresenter implements IPresenter<ShopView>{
     public ShopPresenter() {
     }
 
-    private ShopView view;
+    private static final int LIMIT = 15;
 
-    @Override
-    public void onAttach(ShopView view) {
-        this.view = view;
-    }
+    public void getIngredients(IngredientFilter filter) {
 
-    @Override
-    public void onDetach() {
-        this.view = null;
+        networkView.callApi(() -> api.ingredients(
+                getLocation().getStoreId(),
+                LIMIT,
+                filter.getCategory(),
+                filter.getFromPrice(),
+                filter.getToPrice(),
+                filter.getPage()
+        ).map(mapResponseToObject()));
     }
 }
