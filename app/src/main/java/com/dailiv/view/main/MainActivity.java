@@ -239,6 +239,7 @@ public class MainActivity extends AbstractActivity implements MainView{
     }
 
     private void setFragment(Fragment fragment) {
+        super.onPostResume();
         final String tag = fragment.getClass().getSimpleName();
 
         if(getSupportFragmentManager().findFragmentByTag(tag) == null) {
@@ -288,10 +289,6 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     }
 
-    @Override
-    public void showResponse(Object response) {
-
-    }
 
     private void setBadgeCount(LayerDrawable icon, int count) {
 

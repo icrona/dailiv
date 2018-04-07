@@ -26,6 +26,8 @@ public class Recipe extends BaseResponse {
 
     public String description;
 
+    public String difficulty;
+
     public String slug;
 
     @JsonProperty(value = "total_like")

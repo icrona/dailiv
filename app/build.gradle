@@ -185,5 +185,8 @@ dependencies {
     //BNV
     compile "com.github.ittianyu:BottomNavigationViewEx:${bottomNavigationViewVersion}"
 
+    // Glide
+    compile "com.github.bumptech.glide:glide:${glideVersion}"
+
     compile 'com.annimon:stream:1.1.9'
 }

@@ -2,7 +2,6 @@ package com.dailiv.internal.data.remote.response.recipe;
 
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.User;
-import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,7 +18,7 @@ public class RecipeResponse {
 
     public List<Instruction> instructions;
 
-    public List<Ingredient> ingridients;
+    public List<RecipeIngredient> ingridients;
 
     public User user;
 

@@ -9,4 +9,10 @@ public interface IBaseView extends IDetachView{
     void inject();
 
     void onAttach();
+
+    void onShowProgressBar();
+
+    void onHideProgressBar();
+
+    void onShowError(final String message);
 }

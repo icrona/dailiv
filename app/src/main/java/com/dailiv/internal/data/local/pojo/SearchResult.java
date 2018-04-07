@@ -1,6 +1,7 @@
 package com.dailiv.internal.data.local.pojo;
 
-import com.dailiv.internal.data.remote.response.home.SearchResponse;
+import com.dailiv.internal.data.remote.response.home.SearchRecipe;
+import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,11 +20,19 @@ public class SearchResult {
 
     private String identifier;
 
-    public SearchResult(SearchResponse response) {
+    public SearchResult(SearchRecipe recipe) {
         this(
-                response.type.equals("recipe") ? SearchType.RECIPE : SearchType.INGREDIENT,
-                response.source.name,
-                response.type.equals("recipe") ? response.source.slug : response.id
+                SearchType.RECIPE,
+                recipe.source.name,
+                recipe.source.slug
+        );
+    }
+
+    public SearchResult(Ingredient ingredient) {
+        this(
+                SearchType.INGREDIENT,
+                ingredient.name,
+                String.valueOf(ingredient.id)
         );
     }
 }

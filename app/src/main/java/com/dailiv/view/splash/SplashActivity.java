@@ -76,4 +76,19 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     public void onAttach() {
         presenter.onAttach(this);
     }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
+
+    @Override
+    public void onShowError(String message) {
+
+    }
 }

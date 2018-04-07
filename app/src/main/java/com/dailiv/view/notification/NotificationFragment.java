@@ -49,4 +49,14 @@ public class NotificationFragment extends AbstractFragment implements Notificati
         inject();
         onAttach();
     }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
 }

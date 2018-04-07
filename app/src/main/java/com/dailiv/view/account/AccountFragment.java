@@ -50,4 +50,14 @@ public class AccountFragment extends AbstractFragment implements AccountView{
         inject();
         onAttach();
     }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
 }

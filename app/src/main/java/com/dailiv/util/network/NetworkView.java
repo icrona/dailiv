@@ -54,7 +54,7 @@ public class NetworkView<T> {
 
     public void safeUnsubscribe() {
 
-        if (null != subscription && subscription.isUnsubscribed()) {
+        if (null != subscription && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
     }

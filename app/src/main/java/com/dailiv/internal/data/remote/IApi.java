@@ -15,6 +15,7 @@ import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
+import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
 
 import java.util.List;
@@ -26,7 +27,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
-import static com.dailiv.internal.data.remote.IApiConstant.*;
+import static com.dailiv.internal.data.remote.IApiConstant.CHOOSE_LOCATION;
+import static com.dailiv.internal.data.remote.IApiConstant.COOK;
+import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
+import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
+import static com.dailiv.internal.data.remote.IApiConstant.HOME;
+import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
+import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
+import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
+import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
+import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
+import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
 
 public interface IApi {
 
@@ -55,7 +66,15 @@ public interface IApi {
     Observable<Response<List<LocationResponse>>> getLocationList();
 
     @GET(SEARCH)
-    Observable<Response<List<SearchResponse>>> search(@Query("search") String search);
+    Observable<Response<SearchResponse>> search(@Query("search") String search, @Query("store_id") int storeId);
+
+    @GET(INGREDIENTS)
+    Observable<Response<IngredientsResponse>> ingredients(
+            @Query("store_id") int storeId,
+            @Query("limit") int limit,
+            @Query("category[]") List<String> category,
+            @Query("from_price") Integer fromPrice,
+            @Query("to_price") Integer toPrice);
 
     @POST(COOK)
     Observable<Response<Boolean>> cook(@Body RecipeBaseRequest recipeBaseRequest);

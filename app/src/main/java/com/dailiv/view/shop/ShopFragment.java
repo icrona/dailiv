@@ -50,4 +50,14 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         inject();
         onAttach();
     }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
 }

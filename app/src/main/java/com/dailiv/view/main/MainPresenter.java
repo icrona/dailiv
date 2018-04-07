@@ -1,12 +1,12 @@
 package com.dailiv.view.main;
 
-import com.annimon.stream.Stream;
 import com.dailiv.internal.data.local.pojo.SearchResult;
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,7 +15,8 @@ import javax.inject.Named;
 import rx.functions.Action0;
 import rx.functions.Action1;
 
-import static com.annimon.stream.Collectors.toList;
+import static com.dailiv.util.common.CollectionUtil.mapListToList;
+import static com.dailiv.util.common.Preferences.getLocation;
 
 /**
  * Created by aldo on 3/3/18.
@@ -32,7 +33,7 @@ public class MainPresenter implements IPresenter<MainView> {
 
     }
 
-    private NetworkView<List<SearchResponse>> searchNetworkView;
+    private NetworkView<SearchResponse> searchNetworkView;
 
     private MainView view;
 
@@ -50,11 +51,12 @@ public class MainPresenter implements IPresenter<MainView> {
 
     @Override
     public void onDetach() {
+        searchNetworkView.safeUnsubscribe();
         this.view = null;
     }
 
     public void doSearch(String query) {
-        searchNetworkView.callApi(() ->api.search(query));
+        searchNetworkView.callApi(() ->api.search(query, getLocation().getStoreId()));
     }
 
     private Action0 getOnStart() {
@@ -69,13 +71,17 @@ public class MainPresenter implements IPresenter<MainView> {
         return view::onShowError;
     }
 
-    private Action1<List<SearchResponse>> getSearchResult() {
+    private Action1<SearchResponse> getSearchResult() {
         return responses -> {
 
-            List<SearchResult> searchResults = Stream.of(responses)
-                    .map(SearchResult::new)
-                    .collect(toList());
+            List<SearchResult> searchResults = new ArrayList<>();
+            searchResults.addAll(mapListToList(responses.recipe, SearchResult::new));
+            searchResults.addAll(mapListToList(responses.ingredient, SearchResult::new));
+
             view.onGetSearchResult(searchResults);
+
         };
     }
+
+
 }

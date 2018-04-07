@@ -57,5 +57,6 @@ public abstract class AbstractFragment extends Fragment implements IDetachView{
 
     public void onShowError(final String message) {
         //TODO
+        System.out.println(message);
     }
 }

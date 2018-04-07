@@ -9,12 +9,6 @@ import com.dailiv.view.base.IBaseView;
 
 public interface LocationView extends IBaseView{
 
-    void onShowProgressBar();
-
-    void onHideProgressBar();
-
-    void onShowError(final String message);
-
     void onLocationChosen(LocationResponse locationResponse);
 
     void onGetLocation(LocationResponse locationResponse);

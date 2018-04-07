@@ -48,11 +48,23 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        presenter.getHome();
+        presenter.getIngredient();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         presenter.onDetach();
+    }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
     }
 }

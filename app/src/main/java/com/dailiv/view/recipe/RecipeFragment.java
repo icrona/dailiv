@@ -50,4 +50,14 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         inject();
         onAttach();
     }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
+
+    @Override
+    public void onHideProgressBar() {
+
+    }
 }
