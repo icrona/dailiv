@@ -7,4 +7,10 @@
         <item>@string/notification</item>
         <item>@string/account</item>
     </string-array>
+
+    <string-array name="shop_filter">
+        <item>@string/filter</item>
+        <item>@string/category</item>
+        <item>@string/price_range</item>
+    </string-array>
 </resources>

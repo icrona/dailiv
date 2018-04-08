@@ -36,4 +36,15 @@
     <string name="search">Search</string>
     <string name="cart">Cart</string>
     <string name="title_activity_maps">Map</string>
+
+    <!--home-->
+    <string name="delivery_address">Delivery Address</string>
+    <string name="change">Change</string>
+
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="filter_by">Filter by</string>
+    <string name="sort_by">Sort by</string>
+    <string name="category">Category</string>
+    <string name="price_range">Price Range</string>
 </resources>

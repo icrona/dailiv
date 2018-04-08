@@ -40,5 +40,9 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+    </style>
+
 
 </resources>

@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_location"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/home">
+        android:layout_height="wrap_content">
 
-    </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delivery_address">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_current_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+        <Button
+            android:id="@+id/btn_change_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change">
+        </Button>
+
+    </LinearLayout>
 
 </LinearLayout>

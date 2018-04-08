@@ -62,6 +62,7 @@ public class HomePresenter implements IPresenter<HomeView> {
     @Override
     public void onDetach() {
         homeNetworkView.safeUnsubscribe();
+        ingredientsNetworkView.safeUnsubscribe();
         this.view = null;
 
     }
