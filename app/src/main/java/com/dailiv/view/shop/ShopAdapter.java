@@ -52,15 +52,11 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
     }
 
     private int getBackgroundId(int position) {
-        position +=3;
-        if(position % 3 == 0) {
+        if(position % 2 == 0) {
             return R.drawable.bg_ingredient_left;
         }
-        if(position % 3 == 2) {
-            return R.drawable.bg_ingredient_right;
-        }
 
-        return R.drawable.bg_ingredient;
+        return R.drawable.bg_ingredient_right;
     }
 
     @Override

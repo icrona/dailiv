@@ -96,7 +96,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
         shopAdapter = new ShopAdapter();
 
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rvShop.setLayoutManager(gridLayoutManager);
 
         rvShop.setAdapter(shopAdapter);
