@@ -9,10 +9,14 @@ import com.dailiv.internal.data.remote.request.authentication.FacebookAuthReques
 import com.dailiv.internal.data.remote.request.authentication.GoogleAuthRequest;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
 import com.dailiv.internal.data.remote.request.authentication.RegisterRequest;
+import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
+import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
+import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
+import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
@@ -24,12 +28,17 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
+import static com.dailiv.internal.data.remote.IApiConstant.ADD_TO_CART;
+import static com.dailiv.internal.data.remote.IApiConstant.CART;
 import static com.dailiv.internal.data.remote.IApiConstant.CHOOSE_LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.COOK;
+import static com.dailiv.internal.data.remote.IApiConstant.DELETE_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
+import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.HOME;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
@@ -38,6 +47,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
+import static com.dailiv.internal.data.remote.IApiConstant.UPDATE_CART;
 
 public interface IApi {
 
@@ -83,5 +93,16 @@ public interface IApi {
     @POST(UNCOOK)
     Observable<Response<Boolean>> uncook(@Body RecipeBaseRequest recipeBaseRequest);
 
+    @GET(GET_CART)
+    Observable<Response<List<CartResponse>>> getCart(@Path("location_id") int locationId);
+
+    @POST(UPDATE_CART)
+    Observable<Response<Boolean>> updateCart(@Body UpdateCartRequest updateCartRequest);
+
+    @POST(DELETE_CART)
+    Observable<Response<Boolean>> deleteCart(@Body DeleteCartRequest deleteCartRequest);
+
+    @POST(ADD_TO_CART)
+    Observable<Response<Boolean>> addToCart(@Body AddToCartRequest addToCartRequest);
 
 }

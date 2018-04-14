@@ -28,7 +28,8 @@
         android:layout_below="@id/rl_shop_filter"
         android:id="@+id/rv_shop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:padding="16dp"/>
 
 
 </RelativeLayout>

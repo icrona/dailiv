@@ -1,6 +1,7 @@
 package com.dailiv.internal.data.remote.response.ingredient;
 
 import com.dailiv.internal.data.remote.response.BaseResponse;
+import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,4 +21,7 @@ public class StoreIngredient extends BaseResponse{
     public int price;
 
     public int min;
+
+    public LocationResponse store;
+
 }

@@ -189,4 +189,6 @@ dependencies {
     compile "com.github.bumptech.glide:glide:${glideVersion}"
 
     compile 'com.annimon:stream:1.1.9'
+
+    compile 'me.himanshusoni.quantityview:quantity-view:1.2.0'
 }

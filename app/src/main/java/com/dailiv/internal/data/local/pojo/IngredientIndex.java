@@ -26,6 +26,8 @@ public class IngredientIndex {
 
     private String unit;
 
+    private Integer cartId;
+
     public IngredientIndex(Ingredient ingredient) {
 
         this(
@@ -34,7 +36,8 @@ public class IngredientIndex {
                 ingredient.name,
                 ingredient.storeIngredient.get(0).price,
                 ingredient.storeIngredient.get(0).min,
-                ingredient.unit
+                ingredient.unit,
+                null
         );
     }
 

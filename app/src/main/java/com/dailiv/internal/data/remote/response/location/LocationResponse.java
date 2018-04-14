@@ -30,4 +30,10 @@ public class LocationResponse extends BaseResponse {
     @JsonProperty(value = "store_id")
     public int storeId;
 
+    @JsonProperty(value = "open_at")
+    public String openAt;
+
+    @JsonProperty(value = "close_at")
+    public String closeAt;
+
 }

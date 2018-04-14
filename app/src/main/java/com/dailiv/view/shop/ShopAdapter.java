@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import me.himanshusoni.quantityview.QuantityView;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Action2;
 
 /**
  * Created by aldo on 4/7/18.
@@ -24,6 +28,15 @@ import lombok.AllArgsConstructor;
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
 
     private List<IngredientIndex> ingredients;
+
+//    private Action0 addToCart;
+
+    private Action1<Integer> addToCartDummy;
+
+    private Action1<Integer> deleteCart;
+
+    private Action2<Integer, Integer> updateCart;
+
 
     @Override
     public ShopAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,6 +62,39 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
                 .dontAnimate()
                 .into(holder.getImage());
 
+        holder.getAddToCartLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setVisibility(View.GONE);
+                holder.getQuantityLayout().setVisibility(View.VISIBLE);
+                holder.getQuantityView().setQuantity(1);
+                //add to cart
+
+                addToCartDummy.call(position);
+            }
+        });
+
+        holder.getQuantityView().setOnQuantityChangeListener(new QuantityView.OnQuantityChangeListener() {
+            @Override
+            public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
+
+                int cartId = ingredients.get(position).getCartId();
+                if(newQuantity == 0) {
+                    holder.getQuantityLayout().setVisibility(View.GONE);
+                    holder.getAddToCartLayout().setVisibility(View.VISIBLE);
+                    deleteCart.call(cartId);
+                }
+                else{
+                    updateCart.call(cartId, newQuantity);
+                }
+            }
+
+            @Override
+            public void onLimitReached() {
+
+            }
+        });
+
     }
 
     private int getBackgroundId(int position) {
@@ -64,12 +110,14 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
         return ingredients.size();
     }
 
-    public ShopAdapter() {
-        this.ingredients = new ArrayList<>();
-    }
 
     public void setIngredients(List<IngredientIndex> ingredients) {
         this.ingredients.addAll(ingredients);
+    }
+
+    public void updateIngredients(int position, IngredientIndex ingredient) {
+
+        this.ingredients.set(position, ingredient);
     }
 
 }

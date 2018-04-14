@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:id="@+id/ll_ingredient">
+    android:id="@+id/rl_ingredient"
+    android:padding="1dp">
 
     <ImageView
         android:id="@+id/iv_ingredient"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"/>
 
     <TextView
         android:id="@+id/tv_ingredient_name"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_ingredient"/>
+
+    <LinearLayout
+        android:id="@+id/ll_qty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="@color/red">
+
+        <me.himanshusoni.quantityview.QuantityView
+
+            android:gravity="center_horizontal"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/qv_shop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:qv_maxQuantity="20"
+            app:qv_minQuantity="0"
+            app:qv_quantity="1"
+            app:qv_quantityPadding="48dp"
+            app:qv_addButtonBackground="@android:color/transparent"
+            app:qv_addButtonTextColor="@color/white"
+            app:qv_removeButtonBackground="@android:color/transparent"
+            app:qv_removeButtonTextColor="@color/white"
+            app:qv_quantityBackground="@android:color/transparent"
+            app:qv_quantityTextColor="@color/white"
+            >
+        </me.himanshusoni.quantityview.QuantityView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_add_to_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to cart"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

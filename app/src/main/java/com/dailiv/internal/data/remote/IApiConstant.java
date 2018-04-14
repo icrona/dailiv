@@ -35,4 +35,14 @@ public interface IApiConstant {
     String INGREDIENT = "ingredient";
 
     String INGREDIENT_CATEGORIES = "/category";
+
+    String CART = ACCOUNT + "cart/";
+
+    String GET_CART = CART + "{location_id}";
+
+    String UPDATE_CART = CART + "update";
+
+    String DELETE_CART = CART + "delete";
+
+    String ADD_TO_CART = CART + "add-to-cart";
 }

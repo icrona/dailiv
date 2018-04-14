@@ -14,6 +14,7 @@ import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.FilterBy;
 import com.dailiv.internal.data.local.pojo.IngredientFilter;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
+import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
@@ -23,6 +24,7 @@ import com.dailiv.view.custom.IngredientGridDecorator;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SpinnerAdapter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,6 +62,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     private List<FilterBy> filterList;
 
     private SpinnerAdapter spinnerArrayAdapter;
+
+    private List<IngredientIndex> ingredients = new ArrayList<>();
 
     @Override
     public void inject() {
@@ -107,9 +111,11 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     }
 
     @Override
-    public void showResponse(IngredientsResponse response) {
+    public void showIngredients(IngredientsResponse response) {
 
         List<IngredientIndex> ingredientIndices = mapListToList(response.data, IngredientIndex::new);
+
+        ingredients.addAll(ingredientIndices);
 
         shopAdapter.setIngredients(ingredientIndices);
         shopAdapter.notifyDataSetChanged();
@@ -117,7 +123,13 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     private void setAdapter() {
 
-        shopAdapter = new ShopAdapter();
+        shopAdapter = new ShopAdapter(
+                new ArrayList<>(),
+                this::addToCartDummy,
+//                this::addToCart,
+                this::deleteCart,
+                this::updateCart
+        );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rvShop.setLayoutManager(gridLayoutManager);
@@ -223,6 +235,34 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         dialog.setCanceledOnTouchOutside(false);
 
         return dialog;
+    }
+
+    //todo
+    public void addToCart() {
+
+        System.out.println("adding to cart");
+    }
+
+    //dummy
+    public void addToCartDummy(int position) {
+
+        IngredientIndex ingredientIndex = ingredients.get(position);
+        ingredientIndex.setCartId(position);
+        shopAdapter.updateIngredients(position, ingredientIndex);
+        shopAdapter.notifyItemChanged(position);
+
+        System.out.println("add to cart with cart id " + position);
+    }
+
+    public void deleteCart(int cartId) {
+
+        System.out.println("delete cart with cart id " + cartId);
+    }
+
+    public void updateCart(int cartId, int quantity) {
+
+        System.out.println("update cart with cart id " + cartId + " and quantity " + quantity);
+
     }
 
 }
