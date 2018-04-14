@@ -191,4 +191,6 @@ dependencies {
     compile 'com.annimon:stream:1.1.9'
 
     compile 'me.himanshusoni.quantityview:quantity-view:1.2.0'
+
+    compile 'com.appyvet:materialrangebar:1.4.1'
 }

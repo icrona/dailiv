@@ -17,9 +17,9 @@ public class IngredientFilter {
 
     private List<String> category;
 
-    private Integer fromPrice;
+    private Integer fromPrice = 500;
 
-    private Integer toPrice;
+    private Integer toPrice = 200000;
 
     private Integer page;
 

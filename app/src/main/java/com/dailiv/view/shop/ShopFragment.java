@@ -21,6 +21,7 @@ import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.EndlessScrollListener;
 import com.dailiv.view.custom.IngredientGridDecorator;
+import com.dailiv.view.custom.RangeAlertDialog;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SpinnerAdapter;
 
@@ -34,6 +35,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Action2;
 
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 
@@ -64,6 +66,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     private SpinnerAdapter spinnerArrayAdapter;
 
     private List<IngredientIndex> ingredients = new ArrayList<>();
+
+    private RangeAlertDialog rangeAlertDialog;
 
     @Override
     public void inject() {
@@ -97,6 +101,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         onAttach();
         setAdapter();
         presenter.getIngredients(ingredientFilter);
+        setRangeAlertDialog();
         setSpinner();
     }
 
@@ -165,8 +170,9 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                     return;
                 }
 
-                initYesNoDialog(getContext(), "asd", "asd", () -> asd()).show();
+//                initYesNoDialog(getContext(), "asd", "asd", () -> asd()).show();
 
+                rangeAlertDialog.show();
 
             }
 
@@ -177,6 +183,51 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
         });
     }
+
+    public void setRangeAlertDialog() {
+        rangeAlertDialog = new RangeAlertDialog(getContext(), getLayoutInflater()) {
+            @Override
+            public float tickStart() {
+                return 500f;
+            }
+
+            @Override
+            public float tickEnd() {
+                return 200000f;
+            }
+
+            @Override
+            public float fromValue() {
+                return ingredientFilter.getFromPrice();
+            }
+
+            @Override
+            public float toValue() {
+                return ingredientFilter.getToPrice();
+            }
+
+            @Override
+            public String title() {
+                return "Filter by price";
+            }
+
+            @Override
+            public Action2<Integer, Integer> submitAction() {
+                return onFilterPrice();
+            }
+        };
+
+    }
+
+    public Action2<Integer, Integer> onFilterPrice() {
+        return (from, to) -> {
+            System.out.println(from);
+            System.out.println(to);
+            ingredientFilter.setFromPrice(from);
+            ingredientFilter.setToPrice(to);
+        };
+    }
+
 
     public void asd() {
         FilterBy filterBy = filterList.get(1);
