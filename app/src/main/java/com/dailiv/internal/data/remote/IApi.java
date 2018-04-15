@@ -15,6 +15,7 @@ import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
+import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
@@ -42,6 +43,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.HOME;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
+import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_CATEGORIES;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
@@ -86,6 +88,9 @@ public interface IApi {
             @Query("from_price") Integer fromPrice,
             @Query("to_price") Integer toPrice,
             @Query("page") Integer page);
+
+    @GET(INGREDIENT_CATEGORIES)
+    Observable<Response<List<Category>>> ingredientCategory();
 
     @POST(COOK)
     Observable<Response<Boolean>> cook(@Body RecipeBaseRequest recipeBaseRequest);

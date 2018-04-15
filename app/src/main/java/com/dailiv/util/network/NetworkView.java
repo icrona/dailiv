@@ -1,6 +1,5 @@
 package com.dailiv.util.network;
 
-import lombok.AllArgsConstructor;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Subscriber;

@@ -21,6 +21,9 @@ public class FilterBy {
     }
 
     public String getSpinnerView() {
-        return getText() + " " +getInfo();
+        if(getInfo().equals("")){
+            return getText();
+        }
+        return getText() + " (" +getInfo() + ")";
     }
 }

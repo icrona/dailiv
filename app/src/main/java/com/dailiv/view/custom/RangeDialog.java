@@ -11,7 +11,6 @@ import com.appyvet.materialrangebar.RangeBar;
 import com.dailiv.R;
 
 import lombok.AllArgsConstructor;
-import rx.functions.Action0;
 import rx.functions.Action2;
 
 /**
@@ -19,7 +18,7 @@ import rx.functions.Action2;
  */
 
 @AllArgsConstructor
-public abstract class RangeAlertDialog{
+public abstract class RangeDialog{
 
     private Context context;
 

@@ -6,18 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.annimon.stream.Stream;
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.local.pojo.CheckboxItem;
 import com.dailiv.internal.data.local.pojo.FilterBy;
 import com.dailiv.internal.data.local.pojo.IngredientFilter;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
+import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.view.base.AbstractFragment;
+import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
 import com.dailiv.view.custom.IngredientGridDecorator;
-import com.dailiv.view.custom.RangeAlertDialog;
+import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SpinnerAdapter;
 
@@ -29,10 +33,10 @@ import javax.inject.Inject;
 
 import butterknife.BindArray;
 import butterknife.BindView;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Action2;
 
+import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 
 /**
@@ -63,7 +67,11 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     private List<IngredientIndex> ingredients = new ArrayList<>();
 
-    private RangeAlertDialog rangeAlertDialog;
+    private List<CheckboxItem> checkboxItems = new ArrayList<>();
+
+    private RangeDialog rangeDialog;
+
+    private CheckboxDialog checkboxDialog;
 
     @Override
     public void inject() {
@@ -95,9 +103,10 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        presenter.getCategories();
         setAdapter();
         presenter.getIngredients(ingredientFilter);
-        setRangeAlertDialog();
+        setRangeDialog();
         setSpinner();
     }
 
@@ -167,12 +176,13 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                 }
 
                 if(position == 1){
-                    //todo
-                    return;
+                    if(checkboxDialog != null){
+                        checkboxDialog.show();
+                    }
                 }
 
                 if(position == 2) {
-                    rangeAlertDialog.show();
+                    rangeDialog.show();
                 }
 
             }
@@ -185,8 +195,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         });
     }
 
-    public void setRangeAlertDialog() {
-        rangeAlertDialog = new RangeAlertDialog(getContext(), getLayoutInflater()) {
+    public void setRangeDialog() {
+        rangeDialog = new RangeDialog(getContext(), getLayoutInflater()) {
             @Override
             public float tickStart() {
                 return 500f;
@@ -221,6 +231,21 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     }
 
+    public void setCheckboxDialog() {
+
+        checkboxDialog = new CheckboxDialog(getContext(), getLayoutInflater(), checkboxItems) {
+            @Override
+            public String title() {
+                return "Filter by category";
+            }
+
+            @Override
+            public Action1<List<CheckboxItem>> submitAction() {
+                return onFilterCategory();
+            }
+        };
+    }
+
     public Action2<Integer, Integer> onFilterPrice() {
         return (from, to) -> {
 
@@ -234,6 +259,24 @@ public class ShopFragment extends AbstractFragment implements ShopView{
             setSpinnerSelected(2, from + " - " + to);
 
         };
+    }
+
+    public Action1<List<CheckboxItem>> onFilterCategory() {
+
+        return (checkboxItems -> {
+            List<String> selectedCategory = getSelectedCheckboxes(checkboxItems);
+            ingredientFilter.setCategory(selectedCategory);
+            filterIngredient();
+
+            setSpinnerSelected(1, String.valueOf(selectedCategory.size()));
+        });
+    }
+
+    private List<String> getSelectedCheckboxes(List<CheckboxItem> checkboxItems) {
+        return Stream.of(checkboxItems)
+                .filter(CheckboxItem::isSelected)
+                .map(CheckboxItem::getName)
+                .collect(toList());
     }
 
     private void filterIngredient(){
@@ -273,15 +316,15 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     public Action1<Integer> resetFilter() {
         return position -> {
             if(position == 1) {
-                //todo
+                ingredientFilter.resetCategory();
             }
 
             if(position == 2) {
                 ingredientFilter.resetPrice();
-                filterIngredient();
             }
 
-            resetSpinnerSelected(2);
+            filterIngredient();
+            resetSpinnerSelected(position);
 
         };
 
@@ -316,4 +359,11 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     }
 
+    @Override
+    public void getCategories(List<Category> categories) {
+
+        checkboxItems = mapListToList(categories, CheckboxItem::new);
+        setCheckboxDialog();
+
+    }
 }

@@ -34,7 +34,7 @@ public interface IApiConstant {
 
     String INGREDIENT = "ingredient";
 
-    String INGREDIENT_CATEGORIES = "/category";
+    String INGREDIENT_CATEGORIES = INGREDIENT + "/category";
 
     String CART = ACCOUNT + "cart/";
 

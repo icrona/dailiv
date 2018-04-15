@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.local.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class IngredientFilter {
 
-    private List<String> category;
+    private List<String> category = new ArrayList<>();
 
     private Integer fromPrice = 500;
 
@@ -27,6 +28,11 @@ public class IngredientFilter {
 
         setFromPrice(500);
         setToPrice(200000);
+    }
+
+    public void resetCategory() {
+
+        category.clear();
     }
 
 }

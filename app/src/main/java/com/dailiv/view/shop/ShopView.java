@@ -1,8 +1,11 @@
 package com.dailiv.view.shop;
 
+import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.view.base.IBaseView;
 import com.dailiv.view.base.IView;
+
+import java.util.List;
 
 /**
  * Created by aldo on 4/1/18.
@@ -11,4 +14,6 @@ import com.dailiv.view.base.IView;
 public interface ShopView extends IBaseView {
 
     void showIngredients(IngredientsResponse response);
+
+    void getCategories(List<Category> categories);
 }

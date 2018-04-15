@@ -5,10 +5,13 @@ import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
 import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
+import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.AbstractSinglePresenter;
 import com.dailiv.view.base.IPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -42,6 +45,8 @@ public class ShopPresenter implements IPresenter<ShopView>{
 
     private NetworkView<Boolean> deleteCartNetworkView;
 
+    private NetworkView<List<Category>> categoryNetworkView;
+
     private static final int LIMIT = 15;
 
     @Override
@@ -74,6 +79,13 @@ public class ShopPresenter implements IPresenter<ShopView>{
                 getOnShowError(),
                 getOnCartResponse()
         );
+
+        categoryNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getCategoryResponse()
+        );
     }
 
     @Override
@@ -83,6 +95,7 @@ public class ShopPresenter implements IPresenter<ShopView>{
         addToCartNetworkView.safeUnsubscribe();
         updateCartNetworkView.safeUnsubscribe();
         deleteCartNetworkView.safeUnsubscribe();
+        categoryNetworkView.safeUnsubscribe();
 
         this.view = null;
     }
@@ -107,6 +120,11 @@ public class ShopPresenter implements IPresenter<ShopView>{
         return System.out::println;
     }
 
+    private Action1<List<Category>> getCategoryResponse() {
+
+        return view::getCategories;
+    }
+
     public void getIngredients(IngredientFilter filter) {
 
         ingredientsResponseNetworkView.callApi(() -> api.ingredients(
@@ -117,6 +135,11 @@ public class ShopPresenter implements IPresenter<ShopView>{
                 filter.getToPrice(),
                 filter.getPage()
         ));
+    }
+
+    public void getCategories() {
+
+        categoryNetworkView.callApi(() -> api.ingredientCategory());
     }
 
     public void addToCart() {
