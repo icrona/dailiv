@@ -1,20 +1,16 @@
 package com.dailiv.view.shop;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.FilterBy;
 import com.dailiv.internal.data.local.pojo.IngredientFilter;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
-import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
@@ -170,9 +166,14 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                     return;
                 }
 
-//                initYesNoDialog(getContext(), "asd", "asd", () -> asd()).show();
+                if(position == 1){
+                    //todo
+                    return;
+                }
 
-                rangeAlertDialog.show();
+                if(position == 2) {
+                    rangeAlertDialog.show();
+                }
 
             }
 
@@ -215,78 +216,77 @@ public class ShopFragment extends AbstractFragment implements ShopView{
             public Action2<Integer, Integer> submitAction() {
                 return onFilterPrice();
             }
+
         };
 
     }
 
     public Action2<Integer, Integer> onFilterPrice() {
         return (from, to) -> {
+
             System.out.println(from);
             System.out.println(to);
             ingredientFilter.setFromPrice(from);
             ingredientFilter.setToPrice(to);
+
+            filterIngredient();
+
+            setSpinnerSelected(2, from + " - " + to);
+
         };
     }
 
+    private void filterIngredient(){
 
-    public void asd() {
-        FilterBy filterBy = filterList.get(1);
+        ingredients.clear();
+        shopAdapter.clearIngredients();
+        shopAdapter.notifyDataSetChanged();
+        ingredientFilter.setPage(1);
+
+        presenter.getIngredients(ingredientFilter);
+    }
+
+    private void setSpinnerSelected(int position, String info) {
+
+        FilterBy filterBy = filterList.get(position);
         filterBy.setSelected(true);
-        filterBy.setInfo("aaa");
-        filterList.set(1, filterBy);
+        filterBy.setInfo(info);
+
+        updateSpinnerItem(position, filterBy);
+    }
+
+    private void resetSpinnerSelected(int position) {
+        FilterBy filterBy = filterList.get(position);
+        filterBy.setSelected(false);
+        filterBy.setInfo("");
+
+        updateSpinnerItem(position, filterBy);
+    }
+
+    private void updateSpinnerItem(int position, FilterBy filterBy) {
+
+        filterList.set(position, filterBy);
         spinnerArrayAdapter.setItems(filterList);
         spinnerArrayAdapter.notifyDataSetChanged();
-
     }
 
     public Action1<Integer> resetFilter() {
-        return integer -> {
-            System.out.println(integer);
-            FilterBy filterBy = filterList.get(1);
-            filterBy.setSelected(false);
-            filterBy.setInfo("");
-            filterList.set(1, filterBy);
-            spinnerArrayAdapter.setItems(filterList);
-            spinnerArrayAdapter.notifyDataSetChanged();
-        };
-    }
-
-    public android.support.v7.app.AlertDialog initYesNoDialog(final Context context, final String title, final String message, final Action0 onYes) {
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppTheme_Dialog)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("yes", null)
-                .setNegativeButton("no", null)
-                .create();
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(final DialogInterface dialog) {
-                Button yes = ((android.support.v7.app.AlertDialog) dialog).getButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE);
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        onYes.call();
-                    }
-                });
-
-                Button no = ((android.support.v7.app.AlertDialog) dialog).getButton(android.support.v7.app.AlertDialog.BUTTON_NEGATIVE);
-                no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+        return position -> {
+            if(position == 1) {
+                //todo
             }
-        });
 
+            if(position == 2) {
+                ingredientFilter.resetPrice();
+                filterIngredient();
+            }
 
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+            resetSpinnerSelected(2);
 
-        return dialog;
+        };
+
     }
+    
 
     //todo
     public void addToCart() {

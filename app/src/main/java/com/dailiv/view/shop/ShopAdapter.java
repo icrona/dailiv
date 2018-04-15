@@ -11,12 +11,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import me.himanshusoni.quantityview.QuantityView;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Action2;
 
@@ -48,14 +46,14 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
     @Override
     public void onBindViewHolder(ShopAdapterViewHolder holder, int position) {
 
-        holder.getIngredientName().setText(ingredients.get(position).getName());
+        holder.getIngredientName().setText(ingredients.get(holder.getAdapterPosition()).getName());
 
-        holder.getLayout().setBackgroundResource(getBackgroundId(position));
+        holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
 
         Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
         Glide.with(holder.getImage().getContext())
-                .load(ingredients.get(position).getImageUrl())
+                .load(ingredients.get(holder.getAdapterPosition()).getImageUrl())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_home)
                 .error(R.mipmap.ic_home)
@@ -70,7 +68,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
                 holder.getQuantityView().setQuantity(1);
                 //add to cart
 
-                addToCartDummy.call(position);
+                addToCartDummy.call(holder.getAdapterPosition());
             }
         });
 
@@ -78,7 +76,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
             @Override
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
 
-                int cartId = ingredients.get(position).getCartId();
+                int cartId = ingredients.get(holder.getAdapterPosition()).getCartId();
                 if(newQuantity == 0) {
                     holder.getQuantityLayout().setVisibility(View.GONE);
                     holder.getAddToCartLayout().setVisibility(View.VISIBLE);
@@ -118,6 +116,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
     public void updateIngredients(int position, IngredientIndex ingredient) {
 
         this.ingredients.set(position, ingredient);
+    }
+
+    public void clearIngredients() {
+        this.ingredients.clear();
     }
 
 }

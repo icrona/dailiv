@@ -23,4 +23,10 @@ public class IngredientFilter {
 
     private Integer page;
 
+    public void resetPrice(){
+
+        setFromPrice(500);
+        setToPrice(200000);
+    }
+
 }

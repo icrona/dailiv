@@ -60,24 +60,22 @@ public class SpinnerAdapter extends ArrayAdapter<FilterBy> {
     }
 
     private View createDropDownView(int position, View convertView, ViewGroup parent) {
-        View view = mInflater.inflate(mResource, parent, false);
+        View mView = mInflater.inflate(mResource, parent, false);
 
-        TextView textView = view.findViewById(R.id.tv_spinner_text);
+        TextView textView = mView.findViewById(R.id.tv_spinner_text);
 
         textView.setText(items.get(position).getText());
 
-        TextView reset = view.findViewById(R.id.tv_reset);
+        TextView reset = mView.findViewById(R.id.tv_reset);
 
         reset.setVisibility(items.get(position).isSelected() ? View.VISIBLE : View.INVISIBLE);
 
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        reset.setOnClickListener(view -> {
                 System.out.println(view);
 
                 resetAction.call(position);
             }
-        });
+        );
 
         if(position == 0){
 
@@ -85,7 +83,7 @@ public class SpinnerAdapter extends ArrayAdapter<FilterBy> {
             reset.setVisibility(View.GONE);
         }
 
-        return view;
+        return mView;
     }
 
     private View createView(int position, View convertView, ViewGroup parent) {

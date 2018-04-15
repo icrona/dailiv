@@ -11,6 +11,7 @@ import com.appyvet.materialrangebar.RangeBar;
 import com.dailiv.R;
 
 import lombok.AllArgsConstructor;
+import rx.functions.Action0;
 import rx.functions.Action2;
 
 /**
@@ -31,6 +32,7 @@ public abstract class RangeAlertDialog{
         TextView tvTitle = mView.findViewById(R.id.tv_dialog_title);
         TextView tvPriceFrom = mView.findViewById(R.id.tv_price_from);
         TextView tvPriceTo = mView.findViewById(R.id.tv_price_to);
+        TextView tvReset = mView.findViewById(R.id.tv_reset);
 
         Button btnApply = mView.findViewById(R.id.btn_apply);
         Button btnCancel = mView.findViewById(R.id.btn_cancel);
@@ -68,6 +70,16 @@ public abstract class RangeAlertDialog{
 
         btnCancel.setOnClickListener(view -> dialog.dismiss());
 
+        tvReset.setOnClickListener(view -> {
+
+            rbPrice.setRangePinsByValue(tickStart(), tickEnd());
+
+            tvPriceFrom.setText(String.format("%.0f", tickStart()));
+            tvPriceTo.setText(String.format("%.0f", tickEnd()));
+
+        });
+
+
         dialog.show();
     }
 
@@ -82,4 +94,5 @@ public abstract class RangeAlertDialog{
     public abstract String title();
 
     public abstract Action2<Integer, Integer> submitAction();
+
 }

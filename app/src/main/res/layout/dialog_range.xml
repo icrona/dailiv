@@ -60,10 +60,20 @@
         app:mrb_pinColor="@color/white"
         app:mrb_pinRadius="1dp" />
 
+    <TextView
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rb_price"
+        android:gravity="center_horizontal"
+        android:text="Reset"
+        />
+
     <android.support.percent.PercentRelativeLayout
+        android:id="@+id/prl_dialog_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/rb_price"
+        android:layout_below="@+id/tv_reset"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         >
 
