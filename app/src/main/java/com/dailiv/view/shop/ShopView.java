@@ -16,4 +16,6 @@ public interface ShopView extends IBaseView {
     void showIngredients(IngredientsResponse response);
 
     void getCategories(List<Category> categories);
+
+    void onAddToCart(int cartId, int cartedAmount, int ingredientId);
 }

@@ -135,8 +135,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
         shopAdapter = new ShopAdapter(
                 new ArrayList<>(),
-                this::addToCartDummy,
-//                this::addToCart,
+                this::addToCart,
                 this::deleteCart,
                 this::updateCart
         );
@@ -329,31 +328,40 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         };
 
     }
-    
+
+    public void onAddToCart(int cartId, int cartedAmount, int ingredientId) {
+
+        List<IngredientIndex> list = Stream.of(ingredients)
+                .map(i -> {
+                    if(i.getId() == ingredientId){
+                        i.setCartId(cartId);
+                    }
+                    return i;
+                })
+                .collect(toList());
+
+        shopAdapter.updateIngredients(list);
+        shopAdapter.notifyDataSetChanged();
+    }
 
     //todo
-    public void addToCart() {
+    public void addToCart(int storeIngredientId) {
 
-        System.out.println("adding to cart");
+        presenter.addToCart(1, storeIngredientId);
+        System.out.println("adding to cart with store ingredient id " + storeIngredientId);
     }
 
-    //dummy
-    public void addToCartDummy(int position) {
-
-        IngredientIndex ingredientIndex = ingredients.get(position);
-        ingredientIndex.setCartId(position);
-        shopAdapter.updateIngredients(position, ingredientIndex);
-        shopAdapter.notifyItemChanged(position);
-
-        System.out.println("add to cart with cart id " + position);
-    }
 
     public void deleteCart(int cartId) {
+
+        presenter.deleteCart(cartId);
 
         System.out.println("delete cart with cart id " + cartId);
     }
 
     public void updateCart(int cartId, int quantity) {
+
+        presenter.updateCart(cartId, quantity);
 
         System.out.println("update cart with cart id " + cartId + " and quantity " + quantity);
 

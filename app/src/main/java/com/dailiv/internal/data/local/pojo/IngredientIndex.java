@@ -28,6 +28,10 @@ public class IngredientIndex {
 
     private Integer cartId;
 
+    private Integer cartedAmount;
+
+    private int storeIngredientId;
+
     public IngredientIndex(Ingredient ingredient) {
 
         this(
@@ -37,8 +41,15 @@ public class IngredientIndex {
                 ingredient.storeIngredient.get(0).price,
                 ingredient.storeIngredient.get(0).min,
                 ingredient.unit,
-                null
+                ingredient.cart == null ? null : ingredient.cart.id,
+                ingredient.cart == null ? null : ingredient.cart.amount,
+                ingredient.storeIngredient.get(0).id
         );
+    }
+
+
+    public boolean isCarted() {
+        return cartId != null && cartedAmount != null && cartedAmount > 0;
     }
 
     public String getImageUrl() {

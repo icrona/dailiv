@@ -6,9 +6,9 @@ import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
 import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.response.Category;
+import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.util.network.NetworkView;
-import com.dailiv.view.base.AbstractSinglePresenter;
 import com.dailiv.view.base.IPresenter;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class ShopPresenter implements IPresenter<ShopView>{
 
     private NetworkView<IngredientsResponse> ingredientsResponseNetworkView;
 
-    private NetworkView<Boolean> addToCartNetworkView;
+    private NetworkView<CartResponse> addToCartNetworkView;
 
     private NetworkView<Boolean> updateCartNetworkView;
 
@@ -63,7 +63,7 @@ public class ShopPresenter implements IPresenter<ShopView>{
                 getOnStart(),
                 getOnComplete(),
                 getOnShowError(),
-                getOnCartResponse()
+                getAddToCartResponse()
         );
 
         updateCartNetworkView = new NetworkView<>(
@@ -120,6 +120,10 @@ public class ShopPresenter implements IPresenter<ShopView>{
         return System.out::println;
     }
 
+    private Action1<CartResponse> getAddToCartResponse() {
+        return cartResponse -> view.onAddToCart(cartResponse.id, cartResponse.amount, cartResponse.ingredient.id);
+    }
+
     private Action1<List<Category>> getCategoryResponse() {
 
         return view::getCategories;
@@ -142,7 +146,33 @@ public class ShopPresenter implements IPresenter<ShopView>{
         categoryNetworkView.callApi(() -> api.ingredientCategory());
     }
 
-    public void addToCart() {
+    public void addToCart(int ingredientAmount, int storeIngredientId) {
+
+        AddToCartRequest addToCartRequest = new AddToCartRequest();
+
+        addToCartRequest.ingredientAmount = ingredientAmount;
+        addToCartRequest.storeIngredientId = storeIngredientId;
+
+        addToCartNetworkView.callApi(() -> api.addToCart(addToCartRequest));
+    }
+
+    public void deleteCart(int cartId) {
+
+        DeleteCartRequest deleteCartRequest = new DeleteCartRequest();
+
+        deleteCartRequest.cartId = cartId;
+
+        deleteCartNetworkView.callApi(() -> api.deleteCart(deleteCartRequest));
+    }
+
+    public void updateCart(int cartId, int quantity) {
+
+        UpdateCartRequest updateCartRequest = new UpdateCartRequest();
+
+        updateCartRequest.cartId = cartId;
+        updateCartRequest.amount = quantity;
+
+        updateCartNetworkView.callApi(() -> api.updateCart(updateCartRequest));
 
     }
 

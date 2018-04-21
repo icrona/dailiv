@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             app:qv_maxQuantity="20"
             app:qv_minQuantity="0"
-            app:qv_quantity="1"
+            app:qv_quantity="0"
             app:qv_quantityPadding="48dp"
             app:qv_addButtonBackground="@android:color/transparent"
             app:qv_addButtonTextColor="@color/white"

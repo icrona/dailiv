@@ -28,4 +28,14 @@ public class Ingredient extends BaseResponse {
     @JsonProperty(value = "store_ingredient")
     public List<StoreIngredient> storeIngredient;
 
+    public Cart cart;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Cart {
+
+        public int id;
+
+        public int amount;
+    }
+
 }

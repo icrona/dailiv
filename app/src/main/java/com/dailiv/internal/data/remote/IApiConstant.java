@@ -44,5 +44,5 @@ public interface IApiConstant {
 
     String DELETE_CART = CART + "delete";
 
-    String ADD_TO_CART = CART + "add-to-cart";
+    String ADD_TO_CART = ACCOUNT + "add-to-cart";
 }

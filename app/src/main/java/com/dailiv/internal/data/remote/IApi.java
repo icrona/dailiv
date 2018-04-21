@@ -108,6 +108,6 @@ public interface IApi {
     Observable<Response<Boolean>> deleteCart(@Body DeleteCartRequest deleteCartRequest);
 
     @POST(ADD_TO_CART)
-    Observable<Response<Boolean>> addToCart(@Body AddToCartRequest addToCartRequest);
+    Observable<Response<CartResponse>> addToCart(@Body AddToCartRequest addToCartRequest);
 
 }
