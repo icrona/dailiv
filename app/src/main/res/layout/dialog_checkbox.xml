@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/tv_dialog_title"
         android:layout_width="match_parent"
@@ -21,38 +27,10 @@
 
     </ListView>
 
-    <android.support.percent.PercentRelativeLayout
-        android:id="@+id/prl_dialog_button"
+    <include
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:text="cancel"
-            app:layout_widthPercent="49.5%"
-            android:layout_height="wrap_content"
-            android:background="@color/red"
-            android:layout_alignParentStart="true"
-            />
-
-        <View
-            android:layout_height="wrap_content"
-            app:layout_widthPercent="1%"
-            android:background="@color/grey_light"
-            android:layout_centerInParent="true"
-            />
-        <Button
-            android:id="@+id/btn_apply"
-            android:text="apply"
-            android:layout_height="wrap_content"
-            app:layout_widthPercent="49.5%"
-            android:background="@color/red"
-            android:layout_alignParentEnd="true"
-            />
-
-    </android.support.percent.PercentRelativeLayout>
+        layout="@layout/item_dialog_button"/>
 
 </RelativeLayout>
