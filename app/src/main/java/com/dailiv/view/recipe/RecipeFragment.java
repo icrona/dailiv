@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import com.annimon.stream.Stream;
 import com.dailiv.App;
@@ -14,6 +13,7 @@ import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.CheckboxItem;
 import com.dailiv.internal.data.local.pojo.Difficulty;
 import com.dailiv.internal.data.local.pojo.FilterBy;
+import com.dailiv.internal.data.local.pojo.MealPlanning;
 import com.dailiv.internal.data.local.pojo.RecipeFilter;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
 import com.dailiv.internal.data.local.pojo.SortBy;
@@ -25,6 +25,7 @@ import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
 import com.dailiv.view.custom.FilterByAdapter;
+import com.dailiv.view.custom.MealPlanningDialog;
 import com.dailiv.view.custom.RadioButtonDialog;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
@@ -86,6 +87,8 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
     private RadioButtonDialog radioButtonDialog;
 
+    private MealPlanningDialog mealPlanningDialog;
+
     @Override
     public void inject() {
 
@@ -121,6 +124,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         presenter.getRecipes(recipeFilter);
         setRangeDialog();
         setRadioButtonDialog();
+        setMealPlanningDialog();
         setSortSpinner();
         setFilterSpinner();
     }
@@ -147,7 +151,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
     }
 
     private void addToMealPlanning(int recipeId) {
-
+        mealPlanningDialog.show(recipeId);
     }
 
     @Override
@@ -258,6 +262,29 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
             setSpinnerSelected(2, difficulty.getText());
         };
     }
+
+    private void setMealPlanningDialog() {
+
+        mealPlanningDialog = new MealPlanningDialog(getContext(), getLayoutInflater()) {
+            @Override
+            public Action1<MealPlanning> submitAction() {
+                return mealPlanning -> {
+                    if(mealPlanning.isValid()){
+                        presenter.addMealPlanning(mealPlanning);
+                    }
+                    else{
+                        //todo
+                    }
+                };
+            }
+
+            @Override
+            public String title() {
+                return "Add to meal planning";
+            }
+        };
+    }
+
 
     private void setRangeDialog() {
         rangeDialog = new RangeDialog(getContext(), getLayoutInflater()) {

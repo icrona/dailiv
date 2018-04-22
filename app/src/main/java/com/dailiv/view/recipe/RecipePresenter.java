@@ -1,11 +1,16 @@
 package com.dailiv.view.recipe;
 
+import com.dailiv.internal.data.local.pojo.MealPlanning;
 import com.dailiv.internal.data.local.pojo.RecipeFilter;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
+
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
@@ -34,6 +39,8 @@ public class RecipePresenter implements IPresenter<RecipeView>{
 
     private NetworkView<List<Category>> categoryNetworkView;
 
+    private NetworkView<Boolean> mealPlanningNetworkView;
+
     private static final int LIMIT = 10;
 
     @Override
@@ -52,12 +59,19 @@ public class RecipePresenter implements IPresenter<RecipeView>{
                 getOnShowError(),
                 getCategoryResponse()
         );
+        mealPlanningNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnAddMealPlanning()
+        );
     }
 
     @Override
     public void onDetach() {
         recipesResponseNetworkView.safeUnsubscribe();
         categoryNetworkView.safeUnsubscribe();
+        mealPlanningNetworkView.safeUnsubscribe();
         this.view = null;
     }
 
@@ -82,6 +96,12 @@ public class RecipePresenter implements IPresenter<RecipeView>{
         return view::getCategories;
     }
 
+    private Action1<Boolean> getOnAddMealPlanning() {
+        return aBoolean -> {
+
+        };
+    }
+
     public void getRecipes(RecipeFilter filter) {
 
         recipesResponseNetworkView.callApi(() -> api.recipes(
@@ -98,6 +118,18 @@ public class RecipePresenter implements IPresenter<RecipeView>{
     public void getCategories() {
 
         categoryNetworkView.callApi(() -> api.recipeCategory());
+    }
+
+    public void addMealPlanning(MealPlanning mealPlanning) {
+
+        MealPlanningRequest mealPlanningRequest = new MealPlanningRequest();
+
+        mealPlanningRequest.recipeId = mealPlanning.getRecipeId();
+        mealPlanningRequest.planningCategory = mealPlanning.getPlanningCategory().getKey();
+        mealPlanningRequest.planningDate = mealPlanning.getPlanningDateString();
+
+        mealPlanningNetworkView.callApi(() -> api.mealPlanning(mealPlanningRequest));
+
     }
 
 

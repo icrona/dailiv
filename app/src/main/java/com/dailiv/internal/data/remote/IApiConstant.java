@@ -49,4 +49,6 @@ public interface IApiConstant {
     String RECIPES = "recipes";
 
     String RECIPE_CATEGORY = RECIPE + "category";
+
+    String MEAL_PLANNING = ACCOUNT + "meal-planning";
 }

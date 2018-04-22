@@ -49,6 +49,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
 
         holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
 
+        holder.getBtnAddPlanning().setOnClickListener(v -> {
+            addToMealPlanning.call(recipes.get(holder.getAdapterPosition()).getId());
+        });
+
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
+import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
@@ -47,6 +48,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_CATEGORIES;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
+import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
@@ -125,5 +127,8 @@ public interface IApi {
 
     @GET(RECIPE_CATEGORY)
     Observable<Response<List<Category>>> recipeCategory();
+
+    @POST(MEAL_PLANNING)
+    Observable<Response<Boolean>> mealPlanning(@Body MealPlanningRequest mealPlanningRequest);
 
 }

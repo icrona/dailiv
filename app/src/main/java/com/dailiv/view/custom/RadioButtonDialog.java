@@ -19,49 +19,28 @@ import rx.functions.Action1;
  * Created by aldo on 4/21/18.
  */
 
-public abstract class RadioButtonDialog {
-
-    private Context context;
-
-    private LayoutInflater layoutInflater;
+public abstract class RadioButtonDialog extends BaseDialog implements IDialog{
 
     private RadioButtonAdapter radioButtonAdapter;
 
     public RadioButtonDialog(Context context, LayoutInflater layoutInflater, List<Difficulty> radioButtonItems) {
-        this.context = context;
-        this.layoutInflater = layoutInflater;
+        super(context, layoutInflater, R.layout.dialog_radiobutton);
 
         radioButtonAdapter = new RadioButtonAdapter(context, R.layout.item_radiobutton, radioButtonItems);
     }
 
+    @Override
     public void show() {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        View mView = layoutInflater.inflate(R.layout.dialog_radiobutton, null);
-
-        TextView tvTitle = mView.findViewById(R.id.tv_dialog_title);
-
-        Button btnApply = mView.findViewById(R.id.btn_apply);
-        Button btnCancel = mView.findViewById(R.id.btn_cancel);
-
-        tvTitle.setText(title());
 
         ListView listView = mView.findViewById(R.id.lv_radiobutton);
 
         listView.setAdapter(radioButtonAdapter);
-
-        mBuilder.setView(mView);
-
-        final AlertDialog dialog = mBuilder.create();
-        dialog.setCanceledOnTouchOutside(false);
 
         btnApply.setOnClickListener(view -> {
             dialog.dismiss();
             submitAction().call(radioButtonAdapter.getSelectedItem());
 
         });
-
-        btnCancel.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
     }

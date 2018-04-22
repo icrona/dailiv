@@ -21,6 +21,8 @@ import static java.util.Collections.singletonList;
 @AllArgsConstructor
 public class RecipeIndex {
 
+    private int id;
+
     private String slug;
 
     private String userImage;
@@ -39,6 +41,7 @@ public class RecipeIndex {
 
     public RecipeIndex(Recipe recipe) {
         this(
+                recipe.id,
                 recipe.slug,
                 recipe.user.photo,
                 recipe.name,
@@ -52,6 +55,7 @@ public class RecipeIndex {
 
     public RecipeIndex(Recipe recipe, String category) {
         this(
+                recipe.id,
                 recipe.slug,
                 recipe.user.photo,
                 recipe.name,

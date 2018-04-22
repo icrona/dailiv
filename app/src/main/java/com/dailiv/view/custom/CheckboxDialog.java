@@ -1,12 +1,8 @@
 package com.dailiv.view.custom;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.annimon.stream.Stream;
 import com.dailiv.R;
@@ -21,45 +17,26 @@ import static com.annimon.stream.Collectors.toList;
 /**
  * Created by aldo on 4/15/18.
  */
-public abstract class CheckboxDialog {
-
-    private Context context;
-
-    private LayoutInflater layoutInflater;
+public abstract class CheckboxDialog extends BaseDialog implements IDialog{
 
     private CheckboxAdapter checkboxAdapter;
 
     private List<CheckboxItem> checkboxItems;
 
     public CheckboxDialog(Context context, LayoutInflater layoutInflater, List<CheckboxItem> checkboxItems) {
-        this.context = context;
-        this.layoutInflater = layoutInflater;
+        super(context, layoutInflater, R.layout.dialog_checkbox);
         this.checkboxItems = checkboxItems;
 
         checkboxAdapter = new CheckboxAdapter(context, R.layout.item_checkbox, this.checkboxItems);
 
     }
 
+    @Override
     public void show() {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        View mView = layoutInflater.inflate(R.layout.dialog_checkbox, null);
-
-        TextView tvTitle = mView.findViewById(R.id.tv_dialog_title);
-
-        Button btnApply = mView.findViewById(R.id.btn_apply);
-        Button btnCancel = mView.findViewById(R.id.btn_cancel);
-
-        tvTitle.setText(title());
 
         ListView listView = mView.findViewById(R.id.lv_checkboxes);
 
         listView.setAdapter(checkboxAdapter);
-
-        mBuilder.setView(mView);
-
-        final AlertDialog dialog = mBuilder.create();
-        dialog.setCanceledOnTouchOutside(false);
 
         btnApply.setOnClickListener(view -> {
             dialog.dismiss();
@@ -67,10 +44,7 @@ public abstract class CheckboxDialog {
 
         });
 
-        btnCancel.setOnClickListener(view -> dialog.dismiss());
-
         dialog.show();
-
 
     }
 
@@ -86,9 +60,6 @@ public abstract class CheckboxDialog {
 
     }
 
-    public abstract String title();
-
     public abstract Action1<List<CheckboxItem>> submitAction();
-
 
 }
