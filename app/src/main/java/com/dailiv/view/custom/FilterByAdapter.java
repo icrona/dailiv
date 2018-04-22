@@ -27,7 +27,7 @@ import static com.dailiv.util.common.CollectionUtil.mapListToList;
  * Created by aldo on 4/8/18.
  */
 
-public class SpinnerAdapter extends ArrayAdapter<FilterBy> {
+public class FilterByAdapter extends ArrayAdapter<FilterBy> {
 
     private final LayoutInflater mInflater;
     private final Context mContext;
@@ -38,8 +38,8 @@ public class SpinnerAdapter extends ArrayAdapter<FilterBy> {
 
     private Action1<Integer> resetAction;
 
-    public SpinnerAdapter(@NonNull Context context, @LayoutRes int resource,
-                          @NonNull List<FilterBy> objects, Action1<Integer> resetAction) {
+    public FilterByAdapter(@NonNull Context context, @LayoutRes int resource,
+                           @NonNull List<FilterBy> objects, Action1<Integer> resetAction) {
         super(context, resource, 0, objects);
 
         mContext = context;

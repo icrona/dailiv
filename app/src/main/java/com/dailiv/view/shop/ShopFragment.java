@@ -23,7 +23,7 @@ import com.dailiv.view.custom.EndlessScrollListener;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.ReselectSpinner;
-import com.dailiv.view.custom.SpinnerAdapter;
+import com.dailiv.view.custom.FilterByAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +63,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     private List<FilterBy> filterList;
 
-    private SpinnerAdapter spinnerArrayAdapter;
+    private FilterByAdapter filterArrayAdapter;
 
     private List<IngredientIndex> ingredients = new ArrayList<>();
 
@@ -161,10 +161,10 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
         filterList = mapListToList(Arrays.asList(filter), FilterBy::new);
 
-        spinnerArrayAdapter = new SpinnerAdapter(
+        filterArrayAdapter = new FilterByAdapter(
                 getActivity(), R.layout.item_spinner, filterList, resetFilter());
 
-        spFilter.setAdapter(spinnerArrayAdapter);
+        spFilter.setAdapter(filterArrayAdapter);
 
         spFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -308,8 +308,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
     private void updateSpinnerItem(int position, FilterBy filterBy) {
 
         filterList.set(position, filterBy);
-        spinnerArrayAdapter.setItems(filterList);
-        spinnerArrayAdapter.notifyDataSetChanged();
+        filterArrayAdapter.setItems(filterList);
+        filterArrayAdapter.notifyDataSetChanged();
     }
 
     public Action1<Integer> resetFilter() {

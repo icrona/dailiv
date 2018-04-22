@@ -1,10 +1,12 @@
 package com.dailiv.view.recipe;
 
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.annimon.stream.Stream;
 import com.dailiv.App;
@@ -14,6 +16,7 @@ import com.dailiv.internal.data.local.pojo.Difficulty;
 import com.dailiv.internal.data.local.pojo.FilterBy;
 import com.dailiv.internal.data.local.pojo.RecipeFilter;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
+import com.dailiv.internal.data.local.pojo.SortBy;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
@@ -21,11 +24,12 @@ import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
+import com.dailiv.view.custom.FilterByAdapter;
 import com.dailiv.view.custom.RadioButtonDialog;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.ReselectSpinner;
-import com.dailiv.view.custom.SpinnerAdapter;
+import com.dailiv.view.custom.SortByAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +60,9 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
     @BindView(R.id.sp_filter)
     ReselectSpinner spFilter;
 
+    @BindView(R.id.sp_sort)
+    AppCompatSpinner spSort;
+
     @BindArray(R.array.recipe_filter)
     String[] filter;
 
@@ -65,7 +72,9 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
     private List<FilterBy> filterList;
 
-    private SpinnerAdapter spinnerArrayAdapter;
+    private List<SortBy> sortByList = Arrays.asList(SortBy.values());
+
+    private FilterByAdapter filterArrayAdapter;
 
     private List<RecipeIndex> recipes = new ArrayList<>();
 
@@ -112,7 +121,8 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         presenter.getRecipes(recipeFilter);
         setRangeDialog();
         setRadioButtonDialog();
-        setSpinner();
+        setSortSpinner();
+        setFilterSpinner();
     }
 
     private void setAdapter() {
@@ -221,8 +231,8 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
     private void updateSpinnerItem(int position, FilterBy filterBy) {
 
         filterList.set(position, filterBy);
-        spinnerArrayAdapter.setItems(filterList);
-        spinnerArrayAdapter.notifyDataSetChanged();
+        filterArrayAdapter.setItems(filterList);
+        filterArrayAdapter.notifyDataSetChanged();
     }
 
     private void setRadioButtonDialog() {
@@ -298,14 +308,37 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         };
     }
 
-    private void setSpinner() {
+    private void setSortSpinner() {
+
+        SortByAdapter sortByAdapter = new SortByAdapter(getContext(), R.layout.item_spinner, sortByList);
+
+        spSort.setAdapter(sortByAdapter);
+
+        spSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                recipeFilter.setSortBy(sortByList.get(i));
+
+                filterRecipe();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+
+    private void setFilterSpinner() {
 
         filterList = mapListToList(Arrays.asList(filter), FilterBy::new);
 
-        spinnerArrayAdapter = new SpinnerAdapter(
+        filterArrayAdapter = new FilterByAdapter(
                 getActivity(), R.layout.item_spinner, filterList, resetFilter());
 
-        spFilter.setAdapter(spinnerArrayAdapter);
+        spFilter.setAdapter(filterArrayAdapter);
 
         spFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
