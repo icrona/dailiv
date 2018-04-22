@@ -15,6 +15,7 @@ import com.dailiv.internal.data.local.pojo.CheckboxItem;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by aldo on 4/15/18.
@@ -25,6 +26,7 @@ public class CheckboxAdapter extends ArrayAdapter<CheckboxItem>{
     private LayoutInflater mInflater;
 
     @Getter
+    @Setter
     private List<CheckboxItem> checkboxItems;
     private int mViewResourceId;
 

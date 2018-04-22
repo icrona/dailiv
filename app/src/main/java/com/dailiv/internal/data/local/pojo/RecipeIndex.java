@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.local.pojo;
 
+import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
 
@@ -60,5 +61,10 @@ public class RecipeIndex {
                 recipe.totalLike,
                 recipe.totalView
         );
+    }
+
+    public String getRecipeImageUrl() {
+
+        return BuildConfig.RECIPE_PREFIX + getRecipeImage();
     }
 }

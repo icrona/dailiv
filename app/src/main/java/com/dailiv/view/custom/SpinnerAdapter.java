@@ -100,8 +100,12 @@ public class SpinnerAdapter extends ArrayAdapter<FilterBy> {
 
         List<FilterBy> selected = getSelected();
 
-        if(selected.size() <= 1) {
+        if(selected.size() == 1) {
             return items.get(position).getSpinnerView();
+        }
+
+        if(selected.size() == 0) {
+            return items.get(0).getSpinnerView();
         }
 
         return join(", ", mapListToList(selected, FilterBy::getText));

@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Created by aldo on 3/12/18.
+ * Created by aldo on 4/21/18.
  */
 
 @Getter
 @AllArgsConstructor
-public enum SortBy {
+public enum Difficulty {
 
-    NEWEST("Newest", "newest"),
-    POPULARITY("Popularity", "popular"),
-    MOST_LIKED("Most Liked", "liked");
+    EASY("Easy", "easy"),
+    MEDIUM("Medium", "medium"),
+    HARD("Hard", "hard");
 
     private String text;
     private String key;

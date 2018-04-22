@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <android.support.percent.PercentRelativeLayout
+        android:layout_alignParentTop="true"
+        android:id="@+id/rl_recipe_filter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/recipe">
+        android:layout_height="50dp"
+        android:background="@color/red"
+        >
 
-    </TextView>
+        <com.dailiv.view.custom.ReselectSpinner
+            android:id="@+id/sp_sort"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/sort_by"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_widthPercent="50%"/>
 
-</LinearLayout>
+        <com.dailiv.view.custom.ReselectSpinner
+            android:layout_toEndOf="@id/sp_sort"
+            android:id="@+id/sp_filter"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/filter_by"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_widthPercent="50%"/>
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/rl_recipe_filter"
+        android:id="@+id/rv_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"/>
+
+
+</RelativeLayout>

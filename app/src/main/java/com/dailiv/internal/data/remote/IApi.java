@@ -22,6 +22,7 @@ import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
+import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 
 import java.util.List;
 
@@ -46,6 +47,8 @@ import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_CATEGORIES;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
+import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
+import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
@@ -109,5 +112,18 @@ public interface IApi {
 
     @POST(ADD_TO_CART)
     Observable<Response<CartResponse>> addToCart(@Body AddToCartRequest addToCartRequest);
+
+    @GET(RECIPES)
+    Observable<Response<RecipesResponse>> recipes(
+            @Query("limit") int limit,
+            @Query("category[]") List<String> category,
+            @Query("from_duration") Integer fromDuration,
+            @Query("to_duration") Integer toDuration,
+            @Query("sort_by") String sortBy,
+            @Query("difficulty") String difficulty,
+            @Query("page") Integer page);
+
+    @GET(RECIPE_CATEGORY)
+    Observable<Response<List<Category>>> recipeCategory();
 
 }

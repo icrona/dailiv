@@ -13,4 +13,12 @@
         <item>@string/category</item>
         <item>@string/price_range</item>
     </string-array>
+
+    <string-array name="recipe_filter">
+        <item>@string/filter</item>
+        <item>@string/category</item>
+        <item>@string/difficulty</item>
+        <item>@string/duration</item>
+    </string-array>
+
 </resources>

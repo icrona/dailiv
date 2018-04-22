@@ -20,7 +20,7 @@ import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
-import com.dailiv.view.custom.IngredientGridDecorator;
+import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SpinnerAdapter;
@@ -145,7 +145,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
         rvShop.setAdapter(shopAdapter);
 
-        rvShop.addItemDecoration(new IngredientGridDecorator());
+        rvShop.addItemDecoration(new RecyclerViewDecorator());
 
         rvShop.addOnScrollListener(new EndlessScrollListener(gridLayoutManager) {
             @Override
@@ -180,7 +180,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                     }
                 }
 
-                if(position == 2) {
+                else if(position == 2) {
                     rangeDialog.show();
                 }
 
@@ -194,7 +194,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         });
     }
 
-    public void setRangeDialog() {
+    private void setRangeDialog() {
         rangeDialog = new RangeDialog(getContext(), getLayoutInflater()) {
             @Override
             public float tickStart() {
@@ -230,7 +230,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     }
 
-    public void setCheckboxDialog() {
+    private void setCheckboxDialog() {
 
         checkboxDialog = new CheckboxDialog(getContext(), getLayoutInflater(), checkboxItems) {
             @Override
@@ -316,9 +316,10 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         return position -> {
             if(position == 1) {
                 ingredientFilter.resetCategory();
+                checkboxDialog.reset();
             }
 
-            if(position == 2) {
+            else if(position == 2) {
                 ingredientFilter.resetPrice();
             }
 

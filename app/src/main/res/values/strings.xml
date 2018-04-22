@@ -47,4 +47,6 @@
     <string name="sort_by">Sort by</string>
     <string name="category">Category</string>
     <string name="price_range">Price Range</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="duration">Duration</string>
 </resources>

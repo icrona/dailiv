@@ -8,42 +8,36 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.annimon.stream.Stream;
 import com.dailiv.R;
-import com.dailiv.internal.data.local.pojo.CheckboxItem;
+import com.dailiv.internal.data.local.pojo.Difficulty;
 
 import java.util.List;
 
 import rx.functions.Action1;
 
-import static com.annimon.stream.Collectors.toList;
-
 /**
- * Created by aldo on 4/15/18.
+ * Created by aldo on 4/21/18.
  */
-public abstract class CheckboxDialog {
+
+public abstract class RadioButtonDialog {
 
     private Context context;
 
     private LayoutInflater layoutInflater;
 
-    private CheckboxAdapter checkboxAdapter;
+    private RadioButtonAdapter radioButtonAdapter;
 
-    private List<CheckboxItem> checkboxItems;
-
-    public CheckboxDialog(Context context, LayoutInflater layoutInflater, List<CheckboxItem> checkboxItems) {
+    public RadioButtonDialog(Context context, LayoutInflater layoutInflater, List<Difficulty> radioButtonItems) {
         this.context = context;
         this.layoutInflater = layoutInflater;
-        this.checkboxItems = checkboxItems;
 
-        checkboxAdapter = new CheckboxAdapter(context, R.layout.item_checkbox, this.checkboxItems);
-
+        radioButtonAdapter = new RadioButtonAdapter(context, R.layout.item_radiobutton, radioButtonItems);
     }
 
     public void show() {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        View mView = layoutInflater.inflate(R.layout.dialog_checkbox, null);
+        View mView = layoutInflater.inflate(R.layout.dialog_radiobutton, null);
 
         TextView tvTitle = mView.findViewById(R.id.tv_dialog_title);
 
@@ -52,9 +46,9 @@ public abstract class CheckboxDialog {
 
         tvTitle.setText(title());
 
-        ListView listView = mView.findViewById(R.id.lv_checkboxes);
+        ListView listView = mView.findViewById(R.id.lv_radiobutton);
 
-        listView.setAdapter(checkboxAdapter);
+        listView.setAdapter(radioButtonAdapter);
 
         mBuilder.setView(mView);
 
@@ -63,32 +57,23 @@ public abstract class CheckboxDialog {
 
         btnApply.setOnClickListener(view -> {
             dialog.dismiss();
-            submitAction().call(checkboxAdapter.getCheckboxItems());
+            submitAction().call(radioButtonAdapter.getSelectedItem());
 
         });
 
         btnCancel.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
-
-
     }
 
     public void reset() {
 
-        List<CheckboxItem> resettedCheckbox = Stream.of(checkboxItems)
-                .map(CheckboxItem::reset)
-                .collect(toList());
+        radioButtonAdapter.setSelectedItem(null);
 
-        checkboxAdapter.setCheckboxItems(resettedCheckbox);
-
-        checkboxAdapter.notifyDataSetChanged();
-
+        radioButtonAdapter.notifyDataSetChanged();
     }
 
     public abstract String title();
 
-    public abstract Action1<List<CheckboxItem>> submitAction();
-
-
+    public abstract Action1<Difficulty> submitAction();
 }

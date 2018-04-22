@@ -20,4 +20,11 @@ public class CheckboxItem {
     public CheckboxItem(Category category) {
         this(category.getName(), false);
     }
+
+    public CheckboxItem reset() {
+        return new CheckboxItem(
+                this.name,
+                false
+        );
+    }
 }

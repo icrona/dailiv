@@ -8,7 +8,7 @@ import android.view.View;
  * Created by aldo on 4/7/18.
  */
 
-public class IngredientGridDecorator extends RecyclerView.ItemDecoration {
+public class RecyclerViewDecorator extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
