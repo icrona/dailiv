@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -67,6 +70,9 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
 
     private LocationResponse suggestedLocation;
 
+    @BindView(R.id.toolbar_location)
+    Toolbar toolbar;
+
     @BindView(R.id.rb_location)
     RadioButton rbLocation;
 
@@ -101,10 +107,31 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+        setToolbar();
 
         presenter.getLocation();
 
         setupPlaceAutoComplete();
+    }
+
+    private void setToolbar() {
+        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbar.setNavigationIcon(
+                ContextCompat.getDrawable(this, R.drawable.ic_back));
+        toolbar.setTitle("Choose Location");
+        toolbar.hideOverflowMenu();
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupPlaceAutoComplete() {
