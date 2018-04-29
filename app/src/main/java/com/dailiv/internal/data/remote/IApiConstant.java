@@ -26,6 +26,8 @@ public interface IApiConstant {
 
     String RECIPE = "recipe/";
 
+    String RECIPE_DETAIL = RECIPE + "{identifier}";
+
     String COOK = RECIPE + "cook";
 
     String UNCOOK = RECIPE + "cook";
@@ -35,6 +37,8 @@ public interface IApiConstant {
     String INGREDIENT = "ingredient";
 
     String INGREDIENT_CATEGORIES = INGREDIENT + "/category";
+
+    String INGREDIENT_DETAIL = INGREDIENT + "/detail/{identifier}/{store_id}";
 
     String CART = ACCOUNT + "cart/";
 

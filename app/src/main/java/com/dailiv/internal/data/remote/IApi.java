@@ -21,8 +21,11 @@ import com.dailiv.internal.data.remote.response.authentication.AuthenticationRes
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
+import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
+import com.dailiv.internal.data.remote.response.recipe.Recipe;
+import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 
 import java.util.List;
@@ -46,11 +49,13 @@ import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.HOME;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_CATEGORIES;
+import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
+import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
@@ -130,5 +135,11 @@ public interface IApi {
 
     @POST(MEAL_PLANNING)
     Observable<Response<Boolean>> mealPlanning(@Body MealPlanningRequest mealPlanningRequest);
+
+    @GET(RECIPE_DETAIL)
+    Observable<Response<RecipeDetailResponse>> getRecipeDetail(@Path("identifier") String identifier);
+
+    @GET(INGREDIENT_DETAIL)
+    Observable<Response<IngredientDetailResponse>> getIngredientDetail(@Path("identifier") String identifier, @Path("store_id") int storeId);
 
 }

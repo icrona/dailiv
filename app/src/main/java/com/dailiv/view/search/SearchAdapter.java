@@ -12,6 +12,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+import rx.functions.Action1;
 
 import static java.util.Collections.emptyList;
 
@@ -25,6 +26,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapterViewHolder>
 
     private List<SearchResult> searchResults;
 
+    private Action1<SearchResult> navigateTo;
+
     @Override
     public SearchAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(
@@ -37,6 +40,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapterViewHolder>
     public void onBindViewHolder(SearchAdapterViewHolder holder, int position) {
 
         holder.getTextView().setText(searchResults.get(position).getName());
+        holder.getLayout().setOnClickListener(v -> navigateTo.call(searchResults.get(holder.getAdapterPosition())));
     }
 
     @Override

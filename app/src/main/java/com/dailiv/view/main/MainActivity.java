@@ -36,6 +36,7 @@ import com.dailiv.view.search.SearchAdapter;
 import com.dailiv.view.shop.ShopFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -346,9 +347,13 @@ public class MainActivity extends AbstractActivity implements MainView{
     }
 
     private void setSearchAdapter() {
-        searchAdapter = new SearchAdapter();
+        searchAdapter = new SearchAdapter(new ArrayList<>(), this::navigateTo);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvSearchResults.setLayoutManager(linearLayoutManager);
         rvSearchResults.setAdapter(searchAdapter);
+    }
+
+    private void navigateTo(SearchResult searchResult) {
+
     }
 }

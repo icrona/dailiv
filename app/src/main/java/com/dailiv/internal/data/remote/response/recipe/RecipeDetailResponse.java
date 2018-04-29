@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecipeResponse {
+public class RecipeDetailResponse {
 
     public Recipe recipe;
 
