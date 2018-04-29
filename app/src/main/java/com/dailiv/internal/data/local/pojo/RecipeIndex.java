@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import static com.dailiv.util.common.AssetUtil.getRecipeImageUrl;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static java.util.Collections.singletonList;
 
@@ -67,8 +68,8 @@ public class RecipeIndex {
         );
     }
 
-    public String getRecipeImageUrl() {
+    public String getImageUrl() {
 
-        return BuildConfig.RECIPE_PREFIX + getRecipeImage();
+        return getRecipeImageUrl(getRecipeImage());
     }
 }

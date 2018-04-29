@@ -6,6 +6,8 @@ import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import static com.dailiv.util.common.AssetUtil.getIngredientImageUrl;
+
 /**
  * Created by aldo on 4/1/18.
  */
@@ -54,7 +56,7 @@ public class IngredientIndex {
 
     public String getImageUrl() {
 
-        return BuildConfig.ASSET_PREFIX + getImage();
+        return getIngredientImageUrl(getImage());
     }
 
 

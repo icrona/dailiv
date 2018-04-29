@@ -40,7 +40,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
         Glide.get(holder.getIvRecipe().getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
         Glide.with(holder.getIvRecipe().getContext())
-                .load(recipes.get(holder.getAdapterPosition()).getRecipeImageUrl())
+                .load(recipes.get(holder.getAdapterPosition()).getImageUrl())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_home)
                 .error(R.mipmap.ic_home)

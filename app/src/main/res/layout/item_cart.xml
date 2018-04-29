@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_cart">
+
+    <RelativeLayout
+        android:id="@+id/rl_cart_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_toEndOf="@id/rl_cart_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_cart_info"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cart_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_cart_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_cart_total_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <me.himanshusoni.quantityview.QuantityView
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/qv_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:qv_maxQuantity="20"
+            app:qv_minQuantity="0"
+            app:qv_quantity="0"
+            app:qv_quantityPadding="25dp"
+            app:qv_addButtonBackground="@android:color/transparent"
+            app:qv_addButtonTextColor="@color/black"
+            app:qv_removeButtonBackground="@android:color/transparent"
+            app:qv_removeButtonTextColor="@color/black"
+            app:qv_quantityBackground="@android:color/transparent"
+            app:qv_quantityTextColor="@color/black"
+            >
+        </me.himanshusoni.quantityview.QuantityView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

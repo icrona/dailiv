@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.ActivityScope;
+import com.dailiv.view.cart.CartActivity;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
@@ -39,5 +40,7 @@ public interface ActivityComponent {
     void inject(RegisterActivity registerActivity);
 
     void inject(LocationActivity locationActivity);
+
+    void inject(CartActivity cartActivity);
 
 }

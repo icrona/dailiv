@@ -26,6 +26,7 @@ import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.account.AccountFragment;
 import com.dailiv.view.base.AbstractActivity;
+import com.dailiv.view.cart.CartActivity;
 import com.dailiv.view.custom.BadgeDrawable;
 import com.dailiv.view.home.HomeFragment;
 import com.dailiv.view.location.LocationActivity;
@@ -171,6 +172,7 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         switch (item.getItemId()) {
             case R.id.cart:{
+                navigator.openActivity(this, CartActivity.class);
                 break;
             }
         }
