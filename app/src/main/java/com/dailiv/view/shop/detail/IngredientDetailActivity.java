@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -60,7 +61,7 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
 
     @Override
     public void showDetail(IngredientDetailResponse response) {
-
+        Toast.makeText(this, response.ingredient.name, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -73,6 +74,8 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         inject();
         onAttach();
         setToolbar();
+        final Bundle bundle = getIntent().getExtras();
+        presenter.getIngredientDetail(bundle.getString("identifier"));
     }
 
     private void setToolbar() {

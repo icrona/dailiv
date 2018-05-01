@@ -1,5 +1,8 @@
 package com.dailiv.internal.data.local.pojo;
 
+import com.dailiv.view.recipe.detail.RecipeDetailActivity;
+import com.dailiv.view.shop.detail.IngredientDetailActivity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,9 +14,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SearchType {
 
-    RECIPE(""),
-    INGREDIENT("");
+    RECIPE("", RecipeDetailActivity.class),
+    INGREDIENT("", IngredientDetailActivity.class);
 
     //todo
     private String icon;
+
+    private Class activityClass;
 }

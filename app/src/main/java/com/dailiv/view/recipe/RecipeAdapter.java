@@ -27,6 +27,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
 
     private Action1<Integer> addToMealPlanning;
 
+    private Action1<String> navigateTo;
+
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -52,6 +54,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
         holder.getBtnAddPlanning().setOnClickListener(v -> {
             addToMealPlanning.call(recipes.get(holder.getAdapterPosition()).getId());
         });
+
+        holder.getLayout().setOnClickListener(v -> navigateTo.call(recipes.get(holder.getAdapterPosition()).getSlug()));
 
     }
 

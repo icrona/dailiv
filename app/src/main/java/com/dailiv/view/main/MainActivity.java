@@ -355,5 +355,6 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     private void navigateTo(SearchResult searchResult) {
 
+        navigator.openDetails(this, searchResult.getSearchType().getActivityClass(), searchResult.getIdentifier());
     }
 }

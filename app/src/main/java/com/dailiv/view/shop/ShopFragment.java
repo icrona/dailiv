@@ -17,6 +17,7 @@ import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
@@ -24,6 +25,7 @@ import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.FilterByAdapter;
+import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +49,9 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     @Inject
     ShopPresenter presenter;
+
+    @Inject
+    Navigator navigator;
 
     @BindView(R.id.rv_shop)
     RecyclerView rvShop;
@@ -131,13 +136,19 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         shopAdapter.notifyDataSetChanged();
     }
 
+    private void navigateToDetail(String identifier) {
+
+        navigator.openDetails(getActivity(), IngredientDetailActivity.class, identifier);
+    }
+
     private void setAdapter() {
 
         shopAdapter = new ShopAdapter(
                 new ArrayList<>(),
                 this::addToCart,
                 this::deleteCart,
-                this::updateCart
+                this::updateCart,
+                this::navigateToDetail
         );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);

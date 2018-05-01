@@ -21,6 +21,7 @@ import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
@@ -31,6 +32,7 @@ import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SortByAdapter;
+import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +56,9 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
     @Inject
     RecipePresenter presenter;
+
+    @Inject
+    Navigator navigator;
 
     @BindView(R.id.rv_recipe)
     RecyclerView rvRecipe;
@@ -129,9 +134,14 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         setFilterSpinner();
     }
 
+    private void navigateToDetail(String identifier) {
+
+        navigator.openDetails(getActivity(), RecipeDetailActivity.class, identifier);
+    }
+
     private void setAdapter() {
 
-        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning);
+        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning, this::navigateToDetail);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 

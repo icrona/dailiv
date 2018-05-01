@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -61,6 +62,8 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
     @Override
     public void showDetail(RecipeDetailResponse response) {
 
+        //todo
+        Toast.makeText(this, response.recipe.name, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -73,6 +76,8 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         inject();
         onAttach();
         setToolbar();
+        final Bundle bundle = getIntent().getExtras();
+        presenter.getRecipeDetail(bundle.getString("identifier"));
     }
 
     private void setToolbar() {

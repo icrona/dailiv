@@ -33,6 +33,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
 
     private Action2<Integer, Integer> updateCart;
 
+    private Action1<String> navigateTo;
 
     @Override
     public ShopAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,6 +48,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
         holder.getIngredientName().setText(ingredients.get(holder.getAdapterPosition()).getName());
 
         holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
+
+        holder.getLayout().setOnClickListener(v -> navigateTo.call(String.valueOf(ingredients.get(holder.getAdapterPosition()).getId())));
 
         Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
 

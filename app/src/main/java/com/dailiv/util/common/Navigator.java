@@ -2,6 +2,7 @@ package com.dailiv.util.common;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
@@ -19,6 +20,15 @@ public final class Navigator {
         final Intent intent = new Intent(activity, destination);
         activity.startActivity(intent);
 
+    }
+
+    public void openDetails(final Activity activity, final Class destination, final String identifier) {
+
+        final Intent intent = new Intent(activity, destination);
+        Bundle bundle = new Bundle();
+        bundle.putString("identifier", identifier);
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
     }
 
     public void openMainActivity(final Activity activity) {
