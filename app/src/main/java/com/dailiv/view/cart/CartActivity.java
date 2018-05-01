@@ -6,10 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Cart;
+import com.dailiv.internal.data.local.pojo.Checkout;
+import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
@@ -22,8 +26,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
+import static com.dailiv.util.common.Preferences.getLocation;
 
 /**
  * Created by aldo on 4/28/18.
@@ -40,7 +46,18 @@ public class CartActivity extends AbstractActivity implements CartView {
     @BindView(R.id.toolbar_cart)
     Toolbar toolbar;
 
+    @BindView(R.id.tv_subtotal)
+    TextView tvSubtotal;
+
+    @BindView(R.id.tv_delivery_fee)
+    TextView tvDeliveryFee;
+
+    @BindView(R.id.tv_total)
+    TextView tvTotal;
+
     private CartAdapter cartAdapter;
+
+    private Checkout checkout = new Checkout();
 
     @Override
     public void onDetach() {
@@ -77,6 +94,8 @@ public class CartActivity extends AbstractActivity implements CartView {
 
         cartAdapter.setCartList(mapListToList(cartResponses, Cart::new));
         cartAdapter.notifyDataSetChanged();
+
+        updateSubtotal(cartAdapter.getGrandTotal());
     }
 
     @Override
@@ -91,6 +110,16 @@ public class CartActivity extends AbstractActivity implements CartView {
         setToolbar();
         setAdapter();
         presenter.getCartList();
+        setForCheckout();
+    }
+
+    private void setForCheckout() {
+
+        Location location = getLocation();
+
+        checkout.setStoreId(location.getStoreId());
+        checkout.setLocationId(location.getLocationId());
+
     }
 
     private void setToolbar() {
@@ -134,13 +163,13 @@ public class CartActivity extends AbstractActivity implements CartView {
             @Override
             public void onItemRangeChanged(int positionStart, int itemCount) {
                 super.onItemRangeChanged(positionStart, itemCount);
-                System.out.println(cartAdapter.getGrandTotal());
+                updateSubtotal(cartAdapter.getGrandTotal());
             }
 
             @Override
             public void onItemRangeRemoved(int positionStart, int itemCount) {
                 super.onItemRangeRemoved(positionStart, itemCount);
-                System.out.println(cartAdapter.getGrandTotal());
+                updateSubtotal(cartAdapter.getGrandTotal());
             }
         });
 
@@ -159,5 +188,30 @@ public class CartActivity extends AbstractActivity implements CartView {
 
         System.out.println("update cart with cart id " + cartId + " and quantity " + quantity);
 
+    }
+
+    private void updateSubtotal(int subtotal) {
+
+        checkout.setSubtotal(subtotal);
+        updateAmount();
+    }
+
+    @Override
+    public void onGetDeliveryFee(int deliveryFee) {
+
+        checkout.setDeliveryFee(deliveryFee);
+        updateAmount();
+    }
+
+    private void updateAmount() {
+
+        tvSubtotal.setText(checkout.getSubtotalString());
+        tvDeliveryFee.setText(checkout.getDeliveryFeeString());
+        tvTotal.setText(checkout.getTotalString());
+    }
+
+    @OnClick(R.id.btn_checkout)
+    public void checkout() {
+        presenter.checkout(checkout);
     }
 }

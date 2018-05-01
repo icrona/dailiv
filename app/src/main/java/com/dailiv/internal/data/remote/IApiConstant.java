@@ -55,4 +55,10 @@ public interface IApiConstant {
     String RECIPE_CATEGORY = RECIPE + "category";
 
     String MEAL_PLANNING = ACCOUNT + "meal-planning";
+
+    String PAYMENT = ACCOUNT + "payment/";
+
+    String DELIVERY_FEE = PAYMENT + "delivery_fee/{store_id}/{location_id}";
+
+    String CHECKOUT = PAYMENT + "cash";
 }

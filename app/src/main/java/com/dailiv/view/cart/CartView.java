@@ -12,4 +12,6 @@ import java.util.List;
 public interface CartView extends IBaseView {
 
     void showCartResponse(List<CartResponse> cartResponses);
+
+    void onGetDeliveryFee(int deliveryFee);
 }

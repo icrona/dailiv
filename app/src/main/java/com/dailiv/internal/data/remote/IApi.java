@@ -10,6 +10,7 @@ import com.dailiv.internal.data.remote.request.authentication.GoogleAuthRequest;
 import com.dailiv.internal.data.remote.request.authentication.LoginRequest;
 import com.dailiv.internal.data.remote.request.authentication.RegisterRequest;
 import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
+import com.dailiv.internal.data.remote.request.cart.CheckoutRequest;
 import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
@@ -24,7 +25,6 @@ import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
-import com.dailiv.internal.data.remote.response.recipe.Recipe;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 
@@ -39,10 +39,11 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 import static com.dailiv.internal.data.remote.IApiConstant.ADD_TO_CART;
-import static com.dailiv.internal.data.remote.IApiConstant.CART;
+import static com.dailiv.internal.data.remote.IApiConstant.CHECKOUT;
 import static com.dailiv.internal.data.remote.IApiConstant.CHOOSE_LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.COOK;
 import static com.dailiv.internal.data.remote.IApiConstant.DELETE_CART;
+import static com.dailiv.internal.data.remote.IApiConstant.DELIVERY_FEE;
 import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
@@ -141,5 +142,11 @@ public interface IApi {
 
     @GET(INGREDIENT_DETAIL)
     Observable<Response<IngredientDetailResponse>> getIngredientDetail(@Path("identifier") String identifier, @Path("store_id") int storeId);
+
+    @GET(DELIVERY_FEE)
+    Observable<Response<Integer>> getDeliveryFee(@Path("store_id") int storeId, @Path("location_id") int locationId);
+
+    @POST(CHECKOUT)
+    Observable<Response<Boolean>> checkout(@Body CheckoutRequest checkoutRequest);
 
 }

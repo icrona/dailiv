@@ -1,6 +1,9 @@
 package com.dailiv.view.cart;
 
+import com.dailiv.internal.data.local.pojo.Checkout;
+import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.cart.CheckoutRequest;
 import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
@@ -39,6 +42,10 @@ public class CartPresenter implements IPresenter<CartView>{
 
     private NetworkView<Boolean> deleteCartNetworkView;
 
+    private NetworkView<Boolean> checkoutNetworkView;
+
+    private NetworkView<Integer> deliveryFeeNetworkView;
+
     @Override
     public void onAttach(CartView view) {
 
@@ -64,6 +71,20 @@ public class CartPresenter implements IPresenter<CartView>{
                 getOnShowError(),
                 getOnCartResponse()
         );
+
+        checkoutNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnCheckoutResponse()
+        );
+
+        deliveryFeeNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnDeliveryFeeResponse()
+        );
     }
 
     @Override
@@ -72,6 +93,8 @@ public class CartPresenter implements IPresenter<CartView>{
         cartListNetworkView.safeUnsubscribe();
         deleteCartNetworkView.safeUnsubscribe();
         updateCartNetworkView.safeUnsubscribe();
+        checkoutNetworkView.safeUnsubscribe();
+        deliveryFeeNetworkView.safeUnsubscribe();
         this.view = null;
 
     }
@@ -98,7 +121,11 @@ public class CartPresenter implements IPresenter<CartView>{
 
     public void getCartList() {
 
-        cartListNetworkView.callApi(() -> api.getCart(getLocation().getLocationId()));
+        Location location = getLocation();
+
+        cartListNetworkView.callApi(() -> api.getCart(location.getLocationId()));
+
+        deliveryFeeNetworkView.callApi(() -> api.getDeliveryFee(location.getStoreId(),location.getLocationId()));
     }
 
     public void deleteCart(int cartId) {
@@ -120,4 +147,18 @@ public class CartPresenter implements IPresenter<CartView>{
         updateCartNetworkView.callApi(() -> api.updateCart(updateCartRequest));
 
     }
+
+    private Action1<Boolean> getOnCheckoutResponse() {
+        return System.out::println;
+    }
+
+    private Action1<Integer> getOnDeliveryFeeResponse() {
+        return view::onGetDeliveryFee;
+    }
+
+    public void checkout(Checkout checkout) {
+
+        checkoutNetworkView.callApi(() -> api.checkout(new CheckoutRequest(checkout)));
+    }
+
 }
