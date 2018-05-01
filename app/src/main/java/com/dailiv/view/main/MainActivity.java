@@ -44,6 +44,11 @@ import javax.inject.Inject;
 import butterknife.BindArray;
 import butterknife.BindView;
 
+import static com.dailiv.util.IConstants.FragmentIndex.ACCOUNT;
+import static com.dailiv.util.IConstants.FragmentIndex.HOME;
+import static com.dailiv.util.IConstants.FragmentIndex.NOTIFICATION;
+import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
+import static com.dailiv.util.IConstants.FragmentIndex.SHOP;
 import static com.dailiv.util.common.Preferences.getLocation;
 import static java.util.Collections.emptyList;
 
@@ -215,33 +220,33 @@ public class MainActivity extends AbstractActivity implements MainView{
         navigationMenu.setOnNavigationItemSelectedListener(item -> {
           switch (item.getItemId()) {
               case R.id.nav_home:
-                  toolbar.setTitle(menuText[0]);
-                  setFragment(new HomeFragment());
+                  setFragment(new HomeFragment(), HOME);
                   return true;
               case R.id.nav_shop:
-                  toolbar.setTitle(menuText[1]);
-                  setFragment(new ShopFragment());
+                  setFragment(new ShopFragment(), SHOP);
                   return true;
               case R.id.nav_recipe:
-                  toolbar.setTitle(menuText[2]);
-                  setFragment(new RecipeFragment());
+                  setFragment(new RecipeFragment(), RECIPE);
                   return true;
               case R.id.nav_notification:
-                  toolbar.setTitle(menuText[3]);
-                  setFragment(new NotificationFragment());
+                  setFragment(new NotificationFragment(), NOTIFICATION);
                   return true;
               case R.id.nav_account:
-                  toolbar.setTitle(menuText[4]);
-                  setFragment(new AccountFragment());
+                  setFragment(new AccountFragment(), ACCOUNT);
                   return true;
           }
           return false;
         });
 
-        setFragment(new HomeFragment());
+        setFragment(new HomeFragment(), HOME);
     }
 
-    private void setFragment(Fragment fragment) {
+    public void navigateTo(int index) {
+        navigationMenu.setCurrentItem(index);
+    }
+
+    public void setFragment(Fragment fragment, int index) {
+        toolbar.setTitle(menuText[index]);
         super.onPostResume();
         final String tag = fragment.getClass().getSimpleName();
 

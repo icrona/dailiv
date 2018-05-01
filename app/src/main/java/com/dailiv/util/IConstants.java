@@ -14,4 +14,15 @@ public interface IConstants {
     String LOCATION_NAME = "location_name";
     String STORE_ID = "store_id";
 
+    interface FragmentIndex {
+
+        int HOME = 0;
+        int SHOP = 1;
+        int RECIPE = 2;
+        int NOTIFICATION = 3;
+        int ACCOUNT = 4;
+    }
+
+
+
 }

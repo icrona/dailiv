@@ -1,6 +1,7 @@
 package com.dailiv.view.home;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +19,12 @@ import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.location.LocationActivity;
+import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.recipe.RecipeAdapter;
+import com.dailiv.view.recipe.RecipeFragment;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 import com.dailiv.view.shop.ShopAdapter;
+import com.dailiv.view.shop.ShopFragment;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.annimon.stream.Collectors.toList;
+import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
+import static com.dailiv.util.IConstants.FragmentIndex.SHOP;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static com.dailiv.util.common.Preferences.getLocation;
 
@@ -171,6 +177,21 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     @OnClick(R.id.btn_change_location)
     public void changeLocation() {
         navigator.openActivity(getActivity(), LocationActivity.class);
+    }
+
+    @OnClick(R.id.tv_looking_for_ingredients)
+    public void goToIngredients() {
+        switchToFragment(SHOP);
+    }
+
+    @OnClick(R.id.tv_recipes)
+    public void goToRecipes() {
+        switchToFragment(RECIPE);
+    }
+
+    private void switchToFragment(int index) {
+
+        ((MainActivity)getActivity()).navigateTo(index);
     }
 
     @Override
