@@ -41,6 +41,10 @@
     <string name="delivery_address">Delivery Address</string>
     <string name="change">Change</string>
 
+    <string name="recipe_of_the_day">Recipe Of The Day</string>
+    <string name="popular_this_week">Popular This Week</string>
+    <string name="see_all_recipes">see all recipes ></string>
+
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>
     <string name="filter_by">Filter by</string>

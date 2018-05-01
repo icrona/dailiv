@@ -49,6 +49,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
                 .dontAnimate()
                 .into(holder.getIvRecipe());
 
+        if(addToMealPlanning == null) {
+
+            holder.getBtnAddPlanning().setVisibility(View.GONE);
+        }
+        else{
+
+            holder.getBtnAddPlanning().setVisibility(View.VISIBLE);
+        }
+
         holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
 
         holder.getBtnAddPlanning().setOnClickListener(v -> {

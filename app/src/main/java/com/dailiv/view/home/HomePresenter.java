@@ -111,8 +111,7 @@ public class HomePresenter implements IPresenter<HomeView> {
 
             RecipeOfTheDay recipeOfTheDay = new RecipeOfTheDay(homeResponse.recipeOfTheDay);
 
-            System.out.println(homeResponse);
-
+            view.onShowHome(recipeOfTheDay, recipeIndices);
         };
     }
 
