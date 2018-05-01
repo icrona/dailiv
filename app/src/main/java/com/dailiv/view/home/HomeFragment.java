@@ -1,12 +1,15 @@
 package com.dailiv.view.home;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.local.pojo.IngredientIndex;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
 import com.dailiv.internal.data.local.pojo.RecipeOfTheDay;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
@@ -17,6 +20,7 @@ import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.recipe.RecipeAdapter;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
+import com.dailiv.view.shop.ShopAdapter;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static com.dailiv.util.common.Preferences.getLocation;
 
@@ -49,9 +54,14 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     @BindView(R.id.rv_recipe)
     RecyclerView rvRecipe;
 
+    @BindView(R.id.rv_shop)
+    RecyclerView rvShop;
+
     private RecipeAdapter recipeAdapter;
 
-    private List<RecipeIndex> recipes = new ArrayList<>();
+    private ShopAdapter shopAdapter;
+
+    private List<IngredientIndex> ingredients = new ArrayList<>();
 
     @Override
     public void inject() {
@@ -94,6 +104,22 @@ public class HomeFragment extends AbstractFragment implements HomeView{
         rvRecipe.setAdapter(recipeAdapter);
 
         rvRecipe.addItemDecoration(new RecyclerViewDecorator());
+
+        shopAdapter = new ShopAdapter(
+                new ArrayList<>(),
+                this::addToCart,
+                this::deleteCart,
+                this::updateCart,
+                this::navigateToIngredientDetail
+        );
+
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        rvShop.setLayoutManager(gridLayoutManager);
+
+        rvShop.setAdapter(shopAdapter);
+
+        rvShop.addItemDecoration(new RecyclerViewDecorator());
+
     }
 
     private void navigateToRecipeDetail(String identifier) {
@@ -115,9 +141,17 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     @Override
     public void onShowHome(RecipeOfTheDay recipeOfTheDay, List<RecipeIndex> recipeList) {
 
-        recipes.addAll(recipeList);
         recipeAdapter.setRecipes(recipeList);
         recipeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onShowIngredients(List<IngredientIndex> ingredientIndices) {
+
+        ingredients.addAll(ingredientIndices);
+
+        shopAdapter.setIngredients(ingredientIndices);
+        shopAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -143,5 +177,43 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     public void onResume() {
         setLocation();
         super.onResume();
+    }
+
+    public void onAddToCart(int cartId, int cartedAmount, int ingredientId) {
+
+        List<IngredientIndex> list = Stream.of(ingredients)
+                .map(i -> {
+                    if(i.getId() == ingredientId){
+                        i.setCartId(cartId);
+                    }
+                    return i;
+                })
+                .collect(toList());
+
+        shopAdapter.updateIngredients(list);
+        shopAdapter.notifyDataSetChanged();
+    }
+
+    //todo
+    public void addToCart(int storeIngredientId) {
+
+        presenter.addToCart(1, storeIngredientId);
+        System.out.println("adding to cart with store ingredient id " + storeIngredientId);
+    }
+
+
+    public void deleteCart(int cartId) {
+
+        presenter.deleteCart(cartId);
+
+        System.out.println("delete cart with cart id " + cartId);
+    }
+
+    public void updateCart(int cartId, int quantity) {
+
+        presenter.updateCart(cartId, quantity);
+
+        System.out.println("update cart with cart id " + cartId + " and quantity " + quantity);
+
     }
 }

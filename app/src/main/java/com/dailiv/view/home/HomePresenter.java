@@ -5,6 +5,10 @@ import com.dailiv.internal.data.local.pojo.IngredientIndex;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
 import com.dailiv.internal.data.local.pojo.RecipeOfTheDay;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
+import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
+import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
+import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.util.network.NetworkView;
@@ -42,6 +46,12 @@ public class HomePresenter implements IPresenter<HomeView> {
 
     private NetworkView<IngredientsResponse> ingredientsNetworkView;
 
+    private NetworkView<CartResponse> addToCartNetworkView;
+
+    private NetworkView<Boolean> updateCartNetworkView;
+
+    private NetworkView<Boolean> deleteCartNetworkView;
+
     @Override
     public void onAttach(HomeView view) {
         this.view = view;
@@ -57,12 +67,37 @@ public class HomePresenter implements IPresenter<HomeView> {
                 getOnShowError(),
                 getOnIngredientResponse()
         );
+
+        addToCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getAddToCartResponse()
+        );
+
+        updateCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnCartResponse()
+        );
+
+        deleteCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnCartResponse()
+        );
+
     }
 
     @Override
     public void onDetach() {
         homeNetworkView.safeUnsubscribe();
         ingredientsNetworkView.safeUnsubscribe();
+        addToCartNetworkView.safeUnsubscribe();
+        updateCartNetworkView.safeUnsubscribe();
+        deleteCartNetworkView.safeUnsubscribe();
         this.view = null;
 
     }
@@ -76,7 +111,7 @@ public class HomePresenter implements IPresenter<HomeView> {
 
         ingredientsNetworkView.callApi(() -> api.ingredients(
                 getLocation().getStoreId(),
-                3,
+                2,
                 null,
                 null,
                 null,
@@ -120,7 +155,46 @@ public class HomePresenter implements IPresenter<HomeView> {
 
             List<IngredientIndex> ingredientIndices = mapListToList(ingredientsResponse.data, IngredientIndex::new);
 
-            System.out.println(ingredientsResponse);
+            view.onShowIngredients(ingredientIndices);
         };
     }
+
+    private Action1<Boolean> getOnCartResponse() {
+        return System.out::println;
+    }
+
+    private Action1<CartResponse> getAddToCartResponse() {
+        return cartResponse -> view.onAddToCart(cartResponse.id, cartResponse.amount, cartResponse.ingredient.id);
+    }
+
+    public void addToCart(int ingredientAmount, int storeIngredientId) {
+
+        AddToCartRequest addToCartRequest = new AddToCartRequest();
+
+        addToCartRequest.ingredientAmount = ingredientAmount;
+        addToCartRequest.storeIngredientId = storeIngredientId;
+
+        addToCartNetworkView.callApi(() -> api.addToCart(addToCartRequest));
+    }
+
+    public void deleteCart(int cartId) {
+
+        DeleteCartRequest deleteCartRequest = new DeleteCartRequest();
+
+        deleteCartRequest.cartId = cartId;
+
+        deleteCartNetworkView.callApi(() -> api.deleteCart(deleteCartRequest));
+    }
+
+    public void updateCart(int cartId, int quantity) {
+
+        UpdateCartRequest updateCartRequest = new UpdateCartRequest();
+
+        updateCartRequest.cartId = cartId;
+        updateCartRequest.amount = quantity;
+
+        updateCartNetworkView.callApi(() -> api.updateCart(updateCartRequest));
+
+    }
+
 }

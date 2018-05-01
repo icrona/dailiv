@@ -44,6 +44,8 @@
     <string name="recipe_of_the_day">Recipe Of The Day</string>
     <string name="popular_this_week">Popular This Week</string>
     <string name="see_all_recipes">see all recipes ></string>
+    <string name="looking_for_ingredient">Looking For Ingredients?</string>
+    <string name="shop_now">shop now ></string>
 
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>
