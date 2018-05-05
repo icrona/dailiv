@@ -1,7 +1,7 @@
 package com.dailiv.internal.data.local.pojo;
 
-import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
+import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +49,20 @@ public class IngredientIndex {
         );
     }
 
+    public IngredientIndex(IngredientDetailResponse.Ingredient ingredient) {
+
+        this(
+                ingredient.id,
+                ingredient.photo,
+                ingredient.name,
+                ingredient.price,
+                ingredient.min,
+                ingredient.unit,
+                ingredient.cart == null ? null : ingredient.cart.id,
+                ingredient.cart == null ? null : ingredient.cart.amount,
+                0
+        );
+    }
 
     public boolean isCarted() {
         return cartId != null && cartedAmount != null && cartedAmount > 0;

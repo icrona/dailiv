@@ -32,5 +32,7 @@ public class IngredientDetailResponse {
         public String photo;
 
         public String category;
+
+        public com.dailiv.internal.data.remote.response.ingredient.Ingredient.Cart cart;
     }
 }

@@ -113,7 +113,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
             holder.getQuantityView().setQuantity(0);
         }
 
-
     }
 
     private int getBackgroundId(int position) {

@@ -10,4 +10,6 @@ import com.dailiv.view.base.IBaseView;
 public interface IngredientDetailView extends IBaseView{
 
     void showDetail(IngredientDetailResponse response);
+
+    void onAddToCart(int cartId, int cartedAmount, int ingredientId);
 }

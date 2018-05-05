@@ -38,6 +38,104 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/iv_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+
+        <LinearLayout
+            android:layout_below="@id/iv_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_ingredient_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@string/similar_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_ingredient_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            android:background="@color/red">
+
+            <me.himanshusoni.quantityview.QuantityView
+
+                android:gravity="center_horizontal"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/qv_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:qv_maxQuantity="20"
+                app:qv_minQuantity="0"
+                app:qv_quantity="0"
+                app:qv_quantityPadding="48dp"
+                app:qv_addButtonBackground="@android:color/transparent"
+                app:qv_addButtonTextColor="@color/white"
+                app:qv_removeButtonBackground="@android:color/transparent"
+                app:qv_removeButtonTextColor="@color/white"
+                app:qv_quantityBackground="@android:color/transparent"
+                app:qv_quantityTextColor="@color/white"
+                >
+            </me.himanshusoni.quantityview.QuantityView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add to cart"/>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

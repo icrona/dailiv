@@ -1,6 +1,10 @@
 package com.dailiv.view.shop.detail;
 
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.cart.AddToCartRequest;
+import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
+import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
+import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
@@ -33,6 +37,11 @@ public class IngredientDetailPresenter implements IPresenter<IngredientDetailVie
 
     private NetworkView<IngredientDetailResponse> ingredientDetailResponseNetworkView;
 
+    private NetworkView<CartResponse> addToCartNetworkView;
+
+    private NetworkView<Boolean> updateCartNetworkView;
+
+    private NetworkView<Boolean> deleteCartNetworkView;
 
 
     @Override
@@ -45,6 +54,27 @@ public class IngredientDetailPresenter implements IPresenter<IngredientDetailVie
                 getOnComplete(),
                 getOnShowError(),
                 getOnIngredientDetail()
+        );
+
+        addToCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getAddToCartResponse()
+        );
+
+        updateCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnCartResponse()
+        );
+
+        deleteCartNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnCartResponse()
         );
     }
 
@@ -75,5 +105,43 @@ public class IngredientDetailPresenter implements IPresenter<IngredientDetailVie
     public void getIngredientDetail(String identifer) {
 
         ingredientDetailResponseNetworkView.callApi(() -> api.getIngredientDetail(identifer, getLocation().getStoreId()));
+    }
+
+    private Action1<Boolean> getOnCartResponse() {
+        return System.out::println;
+    }
+
+    private Action1<CartResponse> getAddToCartResponse() {
+        return cartResponse -> view.onAddToCart(cartResponse.id, cartResponse.amount, cartResponse.ingredient.id);
+    }
+
+    public void addToCart(int ingredientAmount, int storeIngredientId) {
+
+        AddToCartRequest addToCartRequest = new AddToCartRequest();
+
+        addToCartRequest.ingredientAmount = ingredientAmount;
+        addToCartRequest.storeIngredientId = storeIngredientId;
+
+        addToCartNetworkView.callApi(() -> api.addToCart(addToCartRequest));
+    }
+
+    public void deleteCart(int cartId) {
+
+        DeleteCartRequest deleteCartRequest = new DeleteCartRequest();
+
+        deleteCartRequest.cartId = cartId;
+
+        deleteCartNetworkView.callApi(() -> api.deleteCart(deleteCartRequest));
+    }
+
+    public void updateCart(int cartId, int quantity) {
+
+        UpdateCartRequest updateCartRequest = new UpdateCartRequest();
+
+        updateCartRequest.cartId = cartId;
+        updateCartRequest.amount = quantity;
+
+        updateCartNetworkView.callApi(() -> api.updateCart(updateCartRequest));
+
     }
 }
