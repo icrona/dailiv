@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeDetail;
+import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
@@ -39,8 +41,10 @@ import javax.inject.Inject;
 
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.annimon.stream.Collectors.toList;
+import static java.util.Collections.singletonList;
 
 /**
  * Created by aldo on 4/29/18.
@@ -68,6 +72,12 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
     @BindView(R.id.tv_recipe_description)
     TextView tvRecipeDescription;
+
+    @BindView(R.id.tv_num_of_comments)
+    TextView tvNumOfComments;
+
+    @BindView(R.id.et_comment)
+    EditText etComment;
 
     @BindView(R.id.elv_recipe)
     NonScrollExpandableListView elvRecipe;
@@ -161,6 +171,12 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         commentAdapter.setComments(recipeDetail.getComments());
         commentAdapter.notifyDataSetChanged();
 
+        updateNumOfComments();
+
+    }
+
+    private void updateNumOfComments() {
+        tvNumOfComments.setText(recipeDetail.getNumOfComments());
     }
 
     @Override
@@ -238,5 +254,29 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
     private void navigateToDetail(String identifier) {
 
         navigator.openDetails(this, RecipeDetailActivity.class, identifier);
+    }
+
+    @OnClick(R.id.btn_add_comment)
+    public void addComment() {
+
+        presenter.addComment(recipeDetail.getId(), etComment.getText().toString());
+        etComment.getText().clear();
+    }
+
+    @Override
+    public void onThoughtAdded(AddThoughtResponse response) {
+
+        RecipeDetail.Comment comment = new RecipeDetail.Comment(response);
+
+        List<RecipeDetail.Comment> comments = recipeDetail.getComments();
+        comments.add(0, comment);
+
+        recipeDetail.setComments(comments);
+
+        commentAdapter.setComments(comments);
+
+        commentAdapter.notifyDataSetChanged();
+
+        updateNumOfComments();
     }
 }

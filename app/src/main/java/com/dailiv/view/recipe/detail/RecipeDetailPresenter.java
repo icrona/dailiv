@@ -1,6 +1,8 @@
 package com.dailiv.view.recipe.detail;
 
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
+import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
@@ -30,6 +32,8 @@ public class RecipeDetailPresenter implements IPresenter<RecipeDetailView>{
 
     private NetworkView<RecipeDetailResponse> recipeDetailNetworkView;
 
+    private NetworkView<AddThoughtResponse> addThoughtNetworkView;
+
     @Override
     public void onAttach(RecipeDetailView view) {
 
@@ -40,6 +44,13 @@ public class RecipeDetailPresenter implements IPresenter<RecipeDetailView>{
                 getOnComplete(),
                 getOnShowError(),
                 getOnRecipeDetail()
+        );
+
+        addThoughtNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnAddThought()
         );
 
     }
@@ -67,8 +78,23 @@ public class RecipeDetailPresenter implements IPresenter<RecipeDetailView>{
         return view::showDetail;
     }
 
+    private Action1<AddThoughtResponse> getOnAddThought() {
+
+        return view::onThoughtAdded;
+    }
+
     public void getRecipeDetail(String identifier) {
 
         recipeDetailNetworkView.callApi(() -> api.getRecipeDetail(identifier));
+    }
+
+    public void addComment(int recipeId, String thought) {
+
+        ThoughtRequest thoughtRequest = new ThoughtRequest();
+        thoughtRequest.recipeId = recipeId;
+        thoughtRequest.thought = thought;
+
+
+        addThoughtNetworkView.callApi(() -> api.comment(thoughtRequest));
     }
 }

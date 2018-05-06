@@ -28,6 +28,8 @@ public interface IApiConstant {
 
     String RECIPE_DETAIL = RECIPE + "{identifier}";
 
+    String COMMENT = RECIPE + "thought";
+
     String COOK = RECIPE + "cook";
 
     String UNCOOK = RECIPE + "cook";

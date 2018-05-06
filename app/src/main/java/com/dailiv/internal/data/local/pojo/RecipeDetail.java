@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.local.pojo;
 
+import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.Instruction;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
@@ -57,6 +58,11 @@ public class RecipeDetail extends RecipeIndex{
 
     private List<Comment> comments;
 
+    public String getNumOfComments() {
+
+        return getComments().size() + " " + "comments";
+    }
+
     @Data
     @AllArgsConstructor
     public static class RelatedRecipe{
@@ -97,6 +103,18 @@ public class RecipeDetail extends RecipeIndex{
 
         }
 
+        public Comment(AddThoughtResponse response) {
+
+            this(
+                    response.thoughtId,
+                    //todo
+                    0,
+                    response.name,
+                    response.thought,
+                    response.photo,
+                    response.date
+            );
+        }
     }
 
 

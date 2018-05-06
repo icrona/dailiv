@@ -17,6 +17,7 @@ import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
+import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
@@ -25,6 +26,7 @@ import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
+import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 
@@ -41,6 +43,7 @@ import rx.Observable;
 import static com.dailiv.internal.data.remote.IApiConstant.ADD_TO_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.CHECKOUT;
 import static com.dailiv.internal.data.remote.IApiConstant.CHOOSE_LOCATION;
+import static com.dailiv.internal.data.remote.IApiConstant.COMMENT;
 import static com.dailiv.internal.data.remote.IApiConstant.COOK;
 import static com.dailiv.internal.data.remote.IApiConstant.DELETE_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.DELIVERY_FEE;
@@ -148,5 +151,8 @@ public interface IApi {
 
     @POST(CHECKOUT)
     Observable<Response<Boolean>> checkout(@Body CheckoutRequest checkoutRequest);
+
+    @POST(COMMENT)
+    Observable<Response<AddThoughtResponse>> comment(@Body ThoughtRequest thoughtRequest);
 
 }

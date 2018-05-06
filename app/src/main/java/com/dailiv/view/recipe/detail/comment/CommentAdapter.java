@@ -24,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapterViewHolder>{
 
+    @Setter
     private List<RecipeDetail.Comment> comments = new ArrayList<>();
 
     @Override
@@ -59,7 +60,4 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapterViewHolde
         return comments.size();
     }
 
-    public void setComments(List<RecipeDetail.Comment> comments) {
-        this.comments.addAll(comments);
-    }
 }
