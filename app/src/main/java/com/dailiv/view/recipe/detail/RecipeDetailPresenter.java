@@ -1,6 +1,8 @@
 package com.dailiv.view.recipe.detail;
 
+import com.dailiv.internal.data.local.pojo.MealPlanning;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
 import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
@@ -72,6 +74,8 @@ public class RecipeDetailPresenter implements IPresenter<RecipeDetailView>{
     public void onDetach() {
 
         recipeDetailNetworkView.safeUnsubscribe();
+        addThoughtNetworkView.safeUnsubscribe();
+        recipeActionNetworkView.safeUnsubscribe();
         this.view = null;
     }
 
@@ -134,6 +138,18 @@ public class RecipeDetailPresenter implements IPresenter<RecipeDetailView>{
     public void unLike(int recipeId) {
 
         recipeAction(() -> api.unlike(getRecipeBaseRequest(recipeId)));
+    }
+
+    public void addMealPlanning(MealPlanning mealPlanning) {
+
+        MealPlanningRequest mealPlanningRequest = new MealPlanningRequest();
+
+        mealPlanningRequest.recipeId = mealPlanning.getRecipeId();
+        mealPlanningRequest.planningCategory = mealPlanning.getPlanningCategory().getKey();
+        mealPlanningRequest.planningDate = mealPlanning.getPlanningDateString();
+
+        recipeAction(() -> api.mealPlanning(mealPlanningRequest));
+
     }
 
     private RecipeBaseRequest getRecipeBaseRequest(int recipeId) {

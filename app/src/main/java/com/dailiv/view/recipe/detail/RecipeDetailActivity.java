@@ -18,6 +18,7 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.local.pojo.MealPlanning;
 import com.dailiv.internal.data.local.pojo.RecipeDetail;
 import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
@@ -27,6 +28,7 @@ import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.ExpandableListAdapter;
+import com.dailiv.view.custom.MealPlanningDialog;
 import com.dailiv.view.custom.NonScrollExpandableListView;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.recipe.detail.comment.CommentAdapter;
@@ -42,6 +44,7 @@ import javax.inject.Inject;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 import static com.annimon.stream.Collectors.toList;
 import static java.util.Collections.singletonList;
@@ -111,6 +114,7 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
     private CommentAdapter commentAdapter;
 
+    private MealPlanningDialog mealPlanningDialog;
 
     @Override
     public void onDetach() {
@@ -215,6 +219,29 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         setAdapters();
         final Bundle bundle = getIntent().getExtras();
         presenter.getRecipeDetail(bundle.getString("identifier"));
+        setMealPlanningDialog();
+    }
+
+    private void setMealPlanningDialog() {
+
+        mealPlanningDialog = new MealPlanningDialog(this, getLayoutInflater()) {
+            @Override
+            public Action1<MealPlanning> submitAction() {
+                return mealPlanning -> {
+                    if(mealPlanning.isValid()){
+                        presenter.addMealPlanning(mealPlanning);
+                    }
+                    else{
+                        //todo
+                    }
+                };
+            }
+
+            @Override
+            public String title() {
+                return "Add to meal planning";
+            }
+        };
     }
 
     private void setAdapters() {
@@ -313,6 +340,12 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         recipeDetail.toggleCook();
         updateCookButton();
     }
+
+    @OnClick(R.id.btn_add_meal_planning)
+    public void addToMealPlanning() {
+        mealPlanningDialog.show(recipeDetail.getId());
+    }
+
 
 
     @Override
