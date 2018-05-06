@@ -54,6 +54,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.HOME;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENTS;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_CATEGORIES;
 import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_DETAIL;
+import static com.dailiv.internal.data.remote.IApiConstant.LIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
@@ -63,6 +64,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
+import static com.dailiv.internal.data.remote.IApiConstant.UNLIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.UPDATE_CART;
 
 public interface IApi {
@@ -111,6 +113,12 @@ public interface IApi {
 
     @POST(UNCOOK)
     Observable<Response<Boolean>> uncook(@Body RecipeBaseRequest recipeBaseRequest);
+
+    @POST(LIKE)
+    Observable<Response<Boolean>> like(@Body RecipeBaseRequest recipeBaseRequest);
+
+    @POST(UNLIKE)
+    Observable<Response<Boolean>> unlike(@Body RecipeBaseRequest recipeBaseRequest);
 
     @GET(GET_CART)
     Observable<Response<List<CartResponse>>> getCart(@Path("location_id") int locationId);

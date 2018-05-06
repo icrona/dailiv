@@ -94,6 +94,15 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
     @BindView(R.id.rv_comment)
     RecyclerView rvComment;
 
+    @BindView(R.id.tv_num_of_like)
+    TextView tvNumOfLike;
+
+    @BindView(R.id.iv_like)
+    ImageView ivLike;
+
+    @BindView(R.id.iv_mark)
+    ImageView ivCook;
+
     private RecipeDetail recipeDetail;
 
     private ExpandableListAdapter expandableListAdapter;
@@ -152,6 +161,9 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
                 .into(ivRecipe);
 
 
+        updateLikeButton();
+        updateCookButton();
+
         Map<String, List<String>> itemListMap = new LinkedHashMap<String, List<String>>(){{
             put(sIngredients, recipeDetail.getIngredients());
             put(sInstructions, recipeDetail.getInstructions());
@@ -175,6 +187,17 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
     }
 
+    private void updateLikeButton() {
+
+        ivLike.setImageResource(recipeDetail.isLiked() ? R.drawable.ic_like : R.drawable.ic_unlike);
+
+        tvNumOfLike.setText(String.valueOf(recipeDetail.getLike()));
+    }
+
+    private void updateCookButton() {
+
+        ivCook.setImageResource(recipeDetail.isCooked() ? R.drawable.ic_mark : R.drawable.ic_unmark);
+    }
     private void updateNumOfComments() {
         tvNumOfComments.setText(recipeDetail.getNumOfComments());
     }
@@ -262,6 +285,35 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         presenter.addComment(recipeDetail.getId(), etComment.getText().toString());
         etComment.getText().clear();
     }
+
+    @OnClick(R.id.iv_like)
+    public void toggleLike() {
+
+        if(recipeDetail.isLiked()) {
+            presenter.unLike(recipeDetail.getId());
+        }
+        else{
+            presenter.like(recipeDetail.getId());
+        }
+
+        recipeDetail.toggleLike();
+        updateLikeButton();
+    }
+
+    @OnClick(R.id.iv_mark)
+    public void toggleCook() {
+
+        if(recipeDetail.isCooked()) {
+            presenter.unCook(recipeDetail.getId());
+        }
+        else{
+            presenter.cook(recipeDetail.getId());
+        }
+
+        recipeDetail.toggleCook();
+        updateCookButton();
+    }
+
 
     @Override
     public void onThoughtAdded(AddThoughtResponse response) {

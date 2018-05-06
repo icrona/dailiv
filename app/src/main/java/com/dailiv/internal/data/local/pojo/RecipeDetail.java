@@ -63,6 +63,21 @@ public class RecipeDetail extends RecipeIndex{
         return getComments().size() + " " + "comments";
     }
 
+    public void toggleLike() {
+        setLiked(!isLiked());
+        if(isLiked()) {
+            addLike();
+        }
+        else {
+            subtractLike();
+        }
+    }
+
+    public void toggleCook() {
+        setCooked(!isCooked());
+    }
+
+
     @Data
     @AllArgsConstructor
     public static class RelatedRecipe{

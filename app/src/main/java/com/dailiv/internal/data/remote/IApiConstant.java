@@ -32,7 +32,11 @@ public interface IApiConstant {
 
     String COOK = RECIPE + "cook";
 
-    String UNCOOK = RECIPE + "cook";
+    String UNCOOK = RECIPE + "uncook";
+
+    String LIKE = RECIPE + "like";
+
+    String UNLIKE = RECIPE + "unlike";
 
     String INGREDIENTS = "ingredients";
 

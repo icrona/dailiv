@@ -40,6 +40,14 @@ public class RecipeIndex {
 
     private int view;
 
+    public void addLike() {
+        setLike(getLike() + 1);
+    }
+
+    public void subtractLike() {
+        setLike(getLike() - 1);
+    }
+
     public RecipeIndex(Recipe recipe) {
         this(
                 recipe.id,
