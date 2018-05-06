@@ -1,16 +1,16 @@
 package com.dailiv.internal.data.local.pojo;
 
-import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.remote.response.Category;
+import com.dailiv.internal.data.remote.response.User;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
 
-import java.util.Collections;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import static com.dailiv.util.common.AssetUtil.getRecipeImageUrl;
+import static com.dailiv.util.common.AssetUtil.getUserImageUrl;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static java.util.Collections.singletonList;
 
@@ -54,6 +54,20 @@ public class RecipeIndex {
         );
     }
 
+    public RecipeIndex(Recipe recipe, User user) {
+        this(
+                recipe.id,
+                recipe.slug,
+                user.photo,
+                recipe.name,
+                recipe.thumbnailPhoto,
+                recipe.difficulty,
+                mapListToList(recipe.category, Category::getName),
+                recipe.totalLike,
+                recipe.totalView
+        );
+    }
+
     public RecipeIndex(Recipe recipe, String category) {
         this(
                 recipe.id,
@@ -71,5 +85,11 @@ public class RecipeIndex {
     public String getImageUrl() {
 
         return getRecipeImageUrl(getRecipeImage());
+    }
+
+    public String getUserPhotoUrl() {
+
+        return getUserImageUrl(getUserImage());
+
     }
 }

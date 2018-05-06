@@ -60,7 +60,7 @@ public class IngredientIndex {
                 ingredient.unit,
                 ingredient.cart == null ? null : ingredient.cart.id,
                 ingredient.cart == null ? null : ingredient.cart.amount,
-                0
+                ingredient.storeIngredient.id
         );
     }
 

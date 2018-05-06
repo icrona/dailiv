@@ -4,6 +4,8 @@ import com.dailiv.internal.data.remote.response.BaseResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Getter;
+
 /**
  * Created by aldo on 3/10/18.
  */
@@ -14,5 +16,6 @@ public class Instruction extends BaseResponse {
     @JsonProperty(value = "recipe_id")
     public int recipeId;
 
+    @Getter
     public String body;
 }

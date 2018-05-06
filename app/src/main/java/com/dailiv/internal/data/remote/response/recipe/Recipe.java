@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.remote.response.recipe;
 
+import com.dailiv.internal.data.local.pojo.RecipeDetail;
 import com.dailiv.internal.data.remote.response.BaseResponse;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.User;
@@ -45,5 +46,15 @@ public class Recipe extends BaseResponse {
     public User user;
 
     public List<Category> category;
+
+    public RecipeDetail.RelatedRecipe toRelatedRecipe() {
+
+        return new RecipeDetail.RelatedRecipe(
+                id,
+                slug,
+                name,
+                fullPhoto
+        );
+    }
 
 }

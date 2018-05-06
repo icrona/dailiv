@@ -1,6 +1,8 @@
 package com.dailiv.internal.data.remote.response.recipe;
 
+import com.dailiv.internal.data.local.pojo.RecipeDetail;
 import com.dailiv.internal.data.remote.response.BaseResponse;
+import com.dailiv.internal.data.remote.response.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,4 +24,20 @@ public class Thought extends BaseResponse {
     public int helpful;
 
     public boolean clicked;
+
+    public User user;
+
+    public String diffForHuman;
+
+    public RecipeDetail.Comment toComment() {
+
+        return new RecipeDetail.Comment(
+                id,
+                userId,
+                user.getFullname(),
+                body,
+                user.photo,
+                diffForHuman
+        );
+    }
 }

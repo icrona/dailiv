@@ -46,6 +46,7 @@ import static com.dailiv.util.common.CollectionUtil.mapListToList;
 
 public class IngredientDetailActivity extends AbstractActivity implements IngredientDetailView{
 
+
     @Inject
     IngredientDetailPresenter presenter;
 

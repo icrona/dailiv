@@ -25,11 +25,15 @@ public class CheckoutRequest {
     @JsonProperty(value = "store_id")
     public int storeId;
 
+    @JsonProperty(value = "discount_coupon")
+    public String discountCoupon;
+
     public CheckoutRequest(Checkout checkout) {
         this.grossAmount = checkout.getSubtotal();
         this.locationId = checkout.getLocationId();
         this.deliveryFee = checkout.getDeliveryFee();
         this.note = checkout.getNote();
         this.storeId = checkout.getStoreId();
+        this.discountCoupon = checkout.getCouponCode();
     }
 }

@@ -18,7 +18,7 @@ public class RecipeDetailResponse {
 
     public List<Instruction> instructions;
 
-    public List<RecipeIngredient> ingridients;
+    public List<RecipeIngredient> ingredients;
 
     public User user;
 

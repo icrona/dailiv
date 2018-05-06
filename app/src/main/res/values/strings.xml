@@ -48,6 +48,13 @@
     <string name="shop_now">shop now ></string>
     
     <string name="similar_products">Similar Products</string>
+    
+    <string name="description">Description</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="related_recipes">Related Recipes</string>
+    <string name="see_recipe">See Recipe ></string>
+    <string name="add_to_meal_planning">Add To Meal Planning</string>
 
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>

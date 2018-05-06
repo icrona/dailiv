@@ -17,4 +17,8 @@ public class AssetUtil {
 
         return BuildConfig.RECIPE_PREFIX + slug;
     }
+
+    public static String getUserImageUrl(String slug) {
+        return BuildConfig.USER_PREFIX + slug;
+    }
 }

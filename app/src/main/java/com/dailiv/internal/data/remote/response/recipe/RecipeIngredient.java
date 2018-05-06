@@ -15,4 +15,11 @@ public class RecipeIngredient {
 
     public int amount;
 
+    public String stringify() {
+
+        return this.name + " " +
+                this.amount + " " +
+                this.unit;
+    }
+
 }

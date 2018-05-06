@@ -41,4 +41,9 @@ public class User extends BaseResponse {
     @JsonProperty(value = "last_activity")
     public String lastActivity;
 
+    public String getFullname() {
+
+        return firstname + " " + lastname;
+    }
+
 }
