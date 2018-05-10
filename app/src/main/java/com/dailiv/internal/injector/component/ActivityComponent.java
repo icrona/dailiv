@@ -6,10 +6,12 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.ActivityScope;
 import com.dailiv.view.cart.CartActivity;
+import com.dailiv.view.delivery.DeliveryActivity;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
+import com.dailiv.view.payment.PaymentActivity;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 import com.dailiv.view.register.RegisterActivity;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
@@ -44,6 +46,10 @@ public interface ActivityComponent {
     void inject(LocationActivity locationActivity);
 
     void inject(CartActivity cartActivity);
+
+    void inject(DeliveryActivity deliveryActivity);
+
+    void inject(PaymentActivity paymentActivity);
 
     void inject(RecipeDetailActivity recipeDetailActivity);
 

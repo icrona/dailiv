@@ -35,6 +35,7 @@ public class IngredientDetailResponse {
 
         public com.dailiv.internal.data.remote.response.ingredient.Ingredient.Cart cart;
 
+        @JsonProperty(value = "store_ingredient")
         public StoreIngredient storeIngredient;
     }
 }

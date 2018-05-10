@@ -1,12 +1,16 @@
 package com.dailiv.view.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dailiv.App;
@@ -17,8 +21,13 @@ import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
+import com.dailiv.util.IConstants;
+import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.RecyclerViewDecorator;
+import com.dailiv.view.delivery.DeliveryActivity;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +49,23 @@ public class CartActivity extends AbstractActivity implements CartView {
     @Inject
     CartPresenter presenter;
 
+    @Inject
+    Navigator navigator;
+
     @BindView(R.id.rv_cart)
     RecyclerView rvCart;
 
     @BindView(R.id.toolbar_cart)
     Toolbar toolbar;
 
+    @BindView(R.id.rl_cart)
+    RelativeLayout rlCart;
+
     @BindView(R.id.tv_subtotal)
     TextView tvSubtotal;
+
+    @BindView(R.id.tv_discount)
+    TextView tvDiscount;
 
     @BindView(R.id.tv_delivery_fee)
     TextView tvDeliveryFee;
@@ -92,10 +110,18 @@ public class CartActivity extends AbstractActivity implements CartView {
     @Override
     public void showCartResponse(List<CartResponse> cartResponses) {
 
-        cartAdapter.setCartList(mapListToList(cartResponses, Cart::new));
-        cartAdapter.notifyDataSetChanged();
+        if(cartResponses.isEmpty()) {
 
-        updateSubtotal(cartAdapter.getGrandTotal());
+            rlCart.setVisibility(View.GONE);
+        }
+        else{
+
+            rlCart.setVisibility(View.VISIBLE);
+            cartAdapter.setCartList(mapListToList(cartResponses, Cart::new));
+            cartAdapter.notifyDataSetChanged();
+
+            updateSubtotal(cartAdapter.getGrandTotal());
+        }
     }
 
     @Override
@@ -207,11 +233,24 @@ public class CartActivity extends AbstractActivity implements CartView {
 
         tvSubtotal.setText(checkout.getSubtotalString());
         tvDeliveryFee.setText(checkout.getDeliveryFeeString());
+        tvDiscount.setText(checkout.getDiscountString());
         tvTotal.setText(checkout.getTotalString());
     }
 
     @OnClick(R.id.btn_checkout)
     public void checkout() {
-        presenter.checkout(checkout);
+        navigator.openCheckoutActivity(this, DeliveryActivity.class, checkout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == IConstants.CHECKOUT_REQUEST_CODE) {
+            final Parcelable parcelable = data.getParcelableExtra(IConstants.CHECKOUT);
+            checkout = Parcels.unwrap(parcelable);
+            updateAmount();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

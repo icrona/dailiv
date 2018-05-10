@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/red">
+
+        <RelativeLayout
+            android:id="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_delivery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.Toolbar"
+                app:title="Delivery"
+                app:titleTextAppearance="@style/AppTheme.ToolbarTitle">
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/abl_delivery"
+        android:id="@+id/rl_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address Detail"/>
+
+            <EditText
+                android:id="@+id/et_address_detail"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:inputType="text|textMultiLine"
+                android:gravity="top"
+                android:background="@drawable/bg_edit_text"
+                android:textCursorDrawable="@null"
+                android:padding="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coupon Code"/>
+
+            <EditText
+                android:id="@+id/et_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:gravity="top"
+                android:background="@drawable/bg_edit_text"
+                android:textCursorDrawable="@null"
+                android:padding="8dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes for driver"/>
+
+            <EditText
+                android:id="@+id/et_notes"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:inputType="text|textMultiLine"
+                android:gravity="top"
+                android:background="@drawable/bg_edit_text"
+                android:textCursorDrawable="@null"
+                android:padding="8dp"
+                />
+
+        </LinearLayout>
+
+        <include
+            android:layout_above="@+id/btn_proceed_to_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_checkout"
+            />
+
+
+        <Button
+            android:id="@+id/btn_proceed_to_payment"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed to payment"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

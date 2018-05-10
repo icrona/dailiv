@@ -3,10 +3,16 @@ package com.dailiv.util.common;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 
+import com.dailiv.internal.data.local.pojo.Checkout;
+import com.dailiv.util.IConstants;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
+
+import org.parceler.Parcels;
 
 /**
  * Created by aldo on 3/1/18.
@@ -50,5 +56,11 @@ public final class Navigator {
         final Intent intent = new Intent(activity, destination);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(intent);
+    }
+
+    public void openCheckoutActivity(final Activity activity, final Class destination, Checkout checkout) {
+        final Intent intent = new Intent(activity, destination);
+        intent.putExtra(IConstants.CHECKOUT, Parcels.wrap(checkout));
+        activity.startActivityForResult(intent, IConstants.CHECKOUT_REQUEST_CODE);
     }
 }

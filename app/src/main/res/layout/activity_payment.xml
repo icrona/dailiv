@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/abl_cart"
+        android:id="@+id/abl_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,11 +18,11 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar_cart"
+                android:id="@+id/toolbar_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/AppTheme.Toolbar"
-                app:title="Your Cart"
+                app:title="Payment Details"
                 app:titleTextAppearance="@style/AppTheme.ToolbarTitle">
 
             </android.support.v7.widget.Toolbar>
@@ -34,42 +33,34 @@
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/abl_cart"
-        android:id="@+id/rl_cart"
+        android:layout_below="@+id/abl_payment"
+        android:id="@+id/rl_payment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <com.dailiv.view.custom.NonScrollExpandableListView
             android:layout_alignParentTop="true"
-            android:layout_above="@+id/ll_cart"
-            android:id="@+id/rv_cart"
+            android:id="@+id/elv_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:groupIndicator="@android:color/transparent"
+            android:divider="@drawable/divider_padding"
+            android:dividerHeight="1dp"
+            />
 
-        </android.support.v7.widget.RecyclerView>
+        <include
+            android:layout_above="@+id/btn_checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_checkout"
+            />
 
-        <LinearLayout
-            android:id="@+id/ll_cart"
+        <Button
+            android:id="@+id/btn_checkout"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/item_checkout"
-                />
-
-            <Button
-                android:id="@+id/btn_checkout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Checkout"/>
-
-        </LinearLayout>
-
+            android:text="Checkout"/>
 
     </RelativeLayout>
 

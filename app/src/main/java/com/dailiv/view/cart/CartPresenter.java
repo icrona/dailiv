@@ -42,7 +42,6 @@ public class CartPresenter implements IPresenter<CartView>{
 
     private NetworkView<Boolean> deleteCartNetworkView;
 
-    private NetworkView<Boolean> checkoutNetworkView;
 
     private NetworkView<Integer> deliveryFeeNetworkView;
 
@@ -72,13 +71,6 @@ public class CartPresenter implements IPresenter<CartView>{
                 getOnCartResponse()
         );
 
-        checkoutNetworkView = new NetworkView<>(
-                getOnStart(),
-                getOnComplete(),
-                getOnShowError(),
-                getOnCheckoutResponse()
-        );
-
         deliveryFeeNetworkView = new NetworkView<>(
                 getOnStart(),
                 getOnComplete(),
@@ -93,7 +85,6 @@ public class CartPresenter implements IPresenter<CartView>{
         cartListNetworkView.safeUnsubscribe();
         deleteCartNetworkView.safeUnsubscribe();
         updateCartNetworkView.safeUnsubscribe();
-        checkoutNetworkView.safeUnsubscribe();
         deliveryFeeNetworkView.safeUnsubscribe();
         this.view = null;
 
@@ -148,17 +139,8 @@ public class CartPresenter implements IPresenter<CartView>{
 
     }
 
-    private Action1<Boolean> getOnCheckoutResponse() {
-        return System.out::println;
-    }
-
     private Action1<Integer> getOnDeliveryFeeResponse() {
         return view::onGetDeliveryFee;
-    }
-
-    public void checkout(Checkout checkout) {
-
-        checkoutNetworkView.callApi(() -> api.checkout(new CheckoutRequest(checkout)));
     }
 
 }

@@ -1,5 +1,8 @@
 package com.dailiv.internal.data.local.pojo;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,13 +12,16 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Parcel(Parcel.Serialization.BEAN)
+@NoArgsConstructor(onConstructor = @__(@ParcelConstructor))
 public class Checkout {
 
     private int storeId;
 
     private int locationId;
+
+    private int discount;
 
     private int deliveryFee;
 
@@ -30,7 +36,7 @@ public class Checkout {
     private String note;
 
     public int getTotal() {
-        return deliveryFee + subtotal;
+        return getDeliveryFee() + getSubtotal() - getDiscount();
     }
 
     public String getTotalString() {
@@ -45,7 +51,16 @@ public class Checkout {
         return stringify(getSubtotal());
     }
 
+    public String getDiscountString() {
+        return stringify(getDiscount());
+    }
+
     private String stringify(int value){
         return "Rp " + value;
+    }
+
+    public void setDiscountRate(double discountRate) {
+
+        setDiscount((int)(getSubtotal() * discountRate));
     }
 }

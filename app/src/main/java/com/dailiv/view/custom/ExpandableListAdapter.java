@@ -26,8 +26,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
-    private List<String> headerList = new ArrayList<>();
-    private Map<String, List<String>> itemListMap = new LinkedHashMap<>();
+    protected List<String> headerList = new ArrayList<>();
+    protected Map<String, List<String>> itemListMap = new LinkedHashMap<>();
 
     @Override
     public int getGroupCount() {

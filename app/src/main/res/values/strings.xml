@@ -64,4 +64,12 @@
     <string name="price_range">Price Range</string>
     <string name="difficulty">Difficulty</string>
     <string name="duration">Duration</string>
+    
+    <string name="choose_payment_method">Choose Payment Method</string>
+    <string name="cash_on_delivery">Cash On Delivery</string>
+    <string name="atm"> ATM</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="cod_1">Pembayaran hanya dilakukan saat pengantar sudah mengantar barang yang dipesan</string>
+    <string name="cod_2">Pengantar akan menghubungi anda dalam waktu dekat setelah tombol dibawah diklik</string>
+    <string name="cod_3">Harap hubungi bagian support kami melalui halaman ini jika ada kesalahan dari pihak kami seperti:\n\t- Barang yang dibeli tidak sama dengan yang dipesan\n\t- Barang sudah tidak fresh</string>
 </resources>

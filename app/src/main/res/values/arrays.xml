@@ -21,4 +21,10 @@
         <item>@string/duration</item>
     </string-array>
 
+    <string-array name="cod_details">
+        <item>@string/cod_1</item>
+        <item>@string/cod_2</item>
+        <item>@string/cod_3</item>
+    </string-array>
+
 </resources>

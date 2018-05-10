@@ -21,6 +21,7 @@ import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
+import com.dailiv.internal.data.remote.response.checkout.CouponResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
@@ -47,6 +48,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.COMMENT;
 import static com.dailiv.internal.data.remote.IApiConstant.COOK;
 import static com.dailiv.internal.data.remote.IApiConstant.DELETE_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.DELIVERY_FEE;
+import static com.dailiv.internal.data.remote.IApiConstant.DISCOUNT_COUPON;
 import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
@@ -162,5 +164,8 @@ public interface IApi {
 
     @POST(COMMENT)
     Observable<Response<AddThoughtResponse>> comment(@Body ThoughtRequest thoughtRequest);
+
+    @GET(DISCOUNT_COUPON)
+    Observable<Response<CouponResponse>> discountCoupon(@Path("code") String code);
 
 }

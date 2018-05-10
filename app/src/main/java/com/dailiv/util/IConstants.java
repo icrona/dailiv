@@ -14,6 +14,10 @@ public interface IConstants {
     String LOCATION_NAME = "location_name";
     String STORE_ID = "store_id";
 
+    String CHECKOUT = "checkout";
+
+    int CHECKOUT_REQUEST_CODE = 1;
+
     interface FragmentIndex {
 
         int HOME = 0;
