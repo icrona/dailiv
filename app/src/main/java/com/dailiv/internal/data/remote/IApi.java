@@ -30,6 +30,7 @@ import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
+import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.LIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
+import static com.dailiv.internal.data.remote.IApiConstant.ORDER_HISTORY;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_DETAIL;
@@ -168,4 +170,6 @@ public interface IApi {
     @GET(DISCOUNT_COUPON)
     Observable<Response<CouponResponse>> discountCoupon(@Path("code") String code);
 
+    @GET(ORDER_HISTORY)
+    Observable<Response<OrderHistoryResponse>> orderHistory();
 }

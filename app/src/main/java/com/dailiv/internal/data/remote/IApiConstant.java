@@ -64,6 +64,8 @@ public interface IApiConstant {
 
     String PAYMENT = ACCOUNT + "payment/";
 
+    String ORDER_HISTORY = ACCOUNT + "purchase/history";
+
     String DELIVERY_FEE = PAYMENT + "delivery_fee/{store_id}/{location_id}";
 
     String CHECKOUT = PAYMENT + "cash";
