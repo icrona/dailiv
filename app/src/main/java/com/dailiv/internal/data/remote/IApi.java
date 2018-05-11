@@ -171,5 +171,5 @@ public interface IApi {
     Observable<Response<CouponResponse>> discountCoupon(@Path("code") String code);
 
     @GET(ORDER_HISTORY)
-    Observable<Response<OrderHistoryResponse>> orderHistory();
+    Observable<Response<List<OrderHistoryResponse>>> orderHistory();
 }

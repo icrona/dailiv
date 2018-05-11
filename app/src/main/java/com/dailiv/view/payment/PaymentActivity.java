@@ -17,6 +17,8 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.IConstants;
 import com.dailiv.util.common.Common;
+import com.dailiv.util.common.Navigator;
+import com.dailiv.view.account.history.OrderHistoryActivity;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.ExpandableListAdapter;
 import com.dailiv.view.custom.NonScrollExpandableListView;
@@ -50,6 +52,9 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
 
     @Inject
     Common common;
+
+    @Inject
+    Navigator navigator;
 
     @BindView(R.id.toolbar_payment)
     Toolbar toolbar;
@@ -215,6 +220,8 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
     @OnClick(R.id.btn_checkout)
     public void checkout() {
 
-        presenter.checkout(checkout);
+        //todo
+        //presenter.checkout(checkout);
+        navigator.openActivity(this, OrderHistoryActivity.class);
     }
 }

@@ -193,4 +193,6 @@ dependencies {
     compile 'me.himanshusoni.quantityview:quantity-view:1.2.0'
 
     compile 'com.appyvet:materialrangebar:1.4.1'
+
+    compile 'me.grantland:autofittextview:0.2.+'
 }
