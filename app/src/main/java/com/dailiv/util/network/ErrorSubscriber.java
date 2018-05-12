@@ -1,9 +1,17 @@
 package com.dailiv.util.network;
 
+import android.app.Activity;
+import android.content.Intent;
+
+import com.dailiv.view.login.LoginActivity;
+
 import lombok.AllArgsConstructor;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
+
+import static com.dailiv.App.getContext;
 
 /**
  * Created by aldo on 3/1/18.
@@ -29,14 +37,33 @@ public class ErrorSubscriber<T> extends Subscriber<T> {
     @Override
     public void onError(Throwable e) {
 
-        String errorMessage = "";
+        String errorMessage = e.getMessage();
 
         //TODO check by HttpException, NetworkException etc
+
+        if(e instanceof HttpException) {
+
+            HttpException exception = (HttpException) e;
+
+            if(exception.code() == 401) {
+
+                redirectToLogin();
+
+            }
+
+            errorMessage = exception.getMessage();
+        }
 
         onError.call(errorMessage);
 
         onComplete.call();
 
+    }
+
+    public void redirectToLogin() {
+        final Intent intent = new Intent(getContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getContext().startActivity(intent);
     }
 
     @Override

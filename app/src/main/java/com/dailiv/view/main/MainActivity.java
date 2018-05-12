@@ -24,7 +24,7 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
-import com.dailiv.view.account.AccountFragment;
+import com.dailiv.view.profile.ProfileFragment;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.cart.CartActivity;
 import com.dailiv.view.custom.BadgeDrawable;
@@ -44,7 +44,7 @@ import javax.inject.Inject;
 import butterknife.BindArray;
 import butterknife.BindView;
 
-import static com.dailiv.util.IConstants.FragmentIndex.ACCOUNT;
+import static com.dailiv.util.IConstants.FragmentIndex.PROFILE;
 import static com.dailiv.util.IConstants.FragmentIndex.HOME;
 import static com.dailiv.util.IConstants.FragmentIndex.NOTIFICATION;
 import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
@@ -232,7 +232,7 @@ public class MainActivity extends AbstractActivity implements MainView{
                   setFragment(new NotificationFragment(), NOTIFICATION);
                   return true;
               case R.id.nav_account:
-                  setFragment(new AccountFragment(), ACCOUNT);
+                  setFragment(new ProfileFragment(), PROFILE);
                   return true;
           }
           return false;

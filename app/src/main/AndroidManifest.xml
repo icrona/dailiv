@@ -103,7 +103,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <activity
-            android:name=".view.account.history.OrderHistoryActivity"
+            android:name=".view.profile.history.OrderHistoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
 

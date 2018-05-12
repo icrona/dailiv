@@ -24,7 +24,7 @@ public interface IConstants {
         int SHOP = 1;
         int RECIPE = 2;
         int NOTIFICATION = 3;
-        int ACCOUNT = 4;
+        int PROFILE = 4;
     }
 
 

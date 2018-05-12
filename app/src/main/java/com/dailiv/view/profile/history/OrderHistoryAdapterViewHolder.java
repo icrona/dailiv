@@ -1,4 +1,4 @@
-package com.dailiv.view.account.history;
+package com.dailiv.view.profile.history;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

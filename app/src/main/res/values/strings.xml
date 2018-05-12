@@ -31,7 +31,7 @@
     <string name="recipe">Recipe</string>
     <string name="shop">Shop</string>
     <string name="notification">Notification</string>
-    <string name="account">Account</string>
+    <string name="profile">Profile</string>
 
     <string name="search">Search</string>
     <string name="cart">Cart</string>
@@ -66,6 +66,7 @@
     <string name="duration">Duration</string>
     
     <string name="choose_payment_method">Choose Payment Method</string>
+    <string name="coming_soon">coming soon</string>
     <string name="cash_on_delivery">Cash On Delivery</string>
     <string name="atm"> ATM</string>
     <string name="credit_card">Credit Card</string>
@@ -78,4 +79,6 @@
     <string name="date">Date</string>
     <string name="amount">Amount</string>
     <string name="status">Status</string>
+
+    <string name="meal_planning">Meal Planning</string>
 </resources>

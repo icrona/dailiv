@@ -27,11 +27,15 @@ public class PaymentMethodListAdapter extends ExpandableListAdapter{
 
         final ImageView indicator = ButterKnife.findById(view, R.id.iv_indicator);
 
+        final TextView comingSoon = ButterKnife.findById(view, R.id.tv_coming_soon);
+
         if (getChildrenCount( groupPosition ) == 0 ) {
-            indicator.setVisibility( View.INVISIBLE );
+            indicator.setVisibility(View.GONE);
+            comingSoon.setVisibility(View.VISIBLE);
         }
         else {
-            indicator.setVisibility( View.VISIBLE );
+            indicator.setVisibility(View.VISIBLE);
+            comingSoon.setVisibility(View.GONE);
             indicator.setImageResource( isExpanded ? R.drawable.ic_arrow_down : R.drawable.ic_arrow_down );
         }
 

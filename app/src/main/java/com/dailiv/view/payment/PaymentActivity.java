@@ -18,9 +18,8 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.IConstants;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
-import com.dailiv.view.account.history.OrderHistoryActivity;
+import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.base.AbstractActivity;
-import com.dailiv.view.custom.ExpandableListAdapter;
 import com.dailiv.view.custom.NonScrollExpandableListView;
 import com.dailiv.view.custom.PaymentMethodListAdapter;
 

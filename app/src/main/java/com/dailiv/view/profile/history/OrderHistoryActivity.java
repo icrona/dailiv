@@ -1,4 +1,4 @@
-package com.dailiv.view.account.history;
+package com.dailiv.view.profile.history;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;

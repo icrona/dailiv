@@ -5,7 +5,7 @@ import android.content.Context;
 import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.FragmentScope;
-import com.dailiv.view.account.AccountFragment;
+import com.dailiv.view.profile.ProfileFragment;
 import com.dailiv.view.home.HomeFragment;
 import com.dailiv.view.notification.NotificationFragment;
 import com.dailiv.view.recipe.RecipeFragment;
@@ -29,7 +29,7 @@ public interface FragmentComponent {
 
     void inject(HomeFragment homeFragment);
 
-    void inject(AccountFragment accountFragment);
+    void inject(ProfileFragment profileFragment);
 
     void inject(NotificationFragment notificationFragment);
 

@@ -1,4 +1,4 @@
-package com.dailiv.view.account.history;
+package com.dailiv.view.profile.history;
 
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.view.base.AbstractSinglePresenter;

@@ -5,7 +5,7 @@
         <item>@string/shop</item>
         <item>@string/recipe</item>
         <item>@string/notification</item>
-        <item>@string/account</item>
+        <item>@string/profile</item>
     </string-array>
 
     <string-array name="shop_filter">
