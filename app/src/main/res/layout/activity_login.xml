@@ -8,87 +8,169 @@
             name="presenter"
             type="com.dailiv.view.login.LoginPresenter"/>
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+
+    <RelativeLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:text="@={login.email}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/white">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/password"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:text="@={login.password}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/red"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:background="@drawable/btn_red"
-            android:onClick="@{() -> presenter.doLogin(login)}"
-            android:textAllCaps="false"/>
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fb_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btn_login_fb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="facebook"
-            android:background="@drawable/btn_red"
-            android:onClick="@{() -> presenter.doLoginFb()}"
-            android:textAllCaps="false"/>
-
-        <Button
-            android:id="@+id/btn_login_google"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="google"
-            android:background="@drawable/btn_red"
-            android:onClick="@{() -> presenter.doLoginGoogle()}"
-            android:textAllCaps="false"/>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/ic_home"
+            android:layout_centerHorizontal="true"
+            />
 
         <LinearLayout
+            android:layout_below="@+id/iv_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                android:layout_marginBottom="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:text="@={login.email}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/white"
+                android:layout_marginBottom="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:text="@={login.password}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/red"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:background="@drawable/btn_red"
+                android:onClick="@{() -> presenter.doLogin(login)}"
+                android:textAllCaps="false"/>
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <View
+                    android:layout_alignParentStart="true"
+                    app:layout_widthPercent="40%"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_centerVertical="true">
+                </View>
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/or">
+
+                </TextView>
+                <View
+                    android:layout_alignParentEnd="true"
+                    app:layout_widthPercent="40%"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_centerVertical="true">
+                </View>
+            </android.support.percent.PercentRelativeLayout>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/fb_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_transparent_btn"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> presenter.doLoginFb()}">
+
+                <Button
+                    android:id="@+id/btn_login_fb"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:duplicateParentState="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/with_facebook"
+                    android:drawableStart="@drawable/ic_facebook"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> presenter.doLoginFb()}"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_transparent_btn"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> presenter.doLoginGoogle()}">
+
+                <Button
+                    android:id="@+id/btn_login_google"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:duplicateParentState="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/with_google"
+                    android:drawableStart="@drawable/ic_google"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> presenter.doLoginGoogle()}"
+                    android:background="@android:color/transparent"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -112,5 +194,6 @@
                 android:onClick="@{() -> presenter.goToRegister()}"
                 />
         </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </layout>
