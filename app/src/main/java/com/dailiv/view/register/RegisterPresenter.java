@@ -46,5 +46,19 @@ public class RegisterPresenter extends AbstractSinglePresenter<RegisterView> {
         return registerRequest;
     }
 
+    public void goToLogin() {
+
+        view.goToLogin();
+    }
+
+    public void goToTerm() {
+
+        view.goToTerm();
+    }
+
+    public void goToPrivacyPolicy() {
+
+        view.goToPrivacyPolicy();
+    }
 
 }

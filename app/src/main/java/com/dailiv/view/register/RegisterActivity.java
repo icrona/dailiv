@@ -12,6 +12,7 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
+import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 
 import javax.inject.Inject;
@@ -82,5 +83,20 @@ public class RegisterActivity extends AbstractActivity implements RegisterView{
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         binding.setRegister(new RegisterBinding());
         binding.setPresenter(presenter);
+    }
+
+    @Override
+    public void goToLogin() {
+        navigator.openActivityWitClearTask(this, LoginActivity.class);
+    }
+
+    @Override
+    public void goToTerm() {
+        navigator.openTerms(this);
+    }
+
+    @Override
+    public void goToPrivacyPolicy() {
+        navigator.openPrivacyPolicy(this);
     }
 }

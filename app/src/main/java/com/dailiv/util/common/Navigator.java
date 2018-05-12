@@ -2,10 +2,12 @@ package com.dailiv.util.common;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.local.pojo.Checkout;
 import com.dailiv.util.IConstants;
 import com.dailiv.view.login.LoginActivity;
@@ -62,5 +64,22 @@ public final class Navigator {
         final Intent intent = new Intent(activity, destination);
         intent.putExtra(IConstants.CHECKOUT, Parcels.wrap(checkout));
         activity.startActivityForResult(intent, IConstants.CHECKOUT_REQUEST_CODE);
+    }
+
+    public void openTerms(final Activity activity) {
+
+        openUrl(activity, BuildConfig.TERMS);
+    }
+
+    public void openPrivacyPolicy(final Activity activity) {
+
+        openUrl(activity, BuildConfig.PRIVACY_POLICY);
+    }
+
+    public void openUrl(final Activity activity, final String url) {
+
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        activity.startActivity(intent);
     }
 }

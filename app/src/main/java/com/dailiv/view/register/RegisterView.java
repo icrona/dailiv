@@ -8,4 +8,10 @@ import com.dailiv.view.base.IView;
  */
 
 public interface RegisterView extends IView<AuthenticationResponse> {
+
+    void goToLogin();
+
+    void goToTerm();
+
+    void goToPrivacyPolicy();
 }

@@ -8,100 +8,209 @@
             name="presenter"
             type="com.dailiv.view.register.RegisterPresenter"/>
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout 
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> presenter.goToLogin()}"/>
+
+            <TextView
+                android:layout_toEndOf="@id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_account"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
+            android:orientation="vertical">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_name"
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/full_name"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:text="@={register.fullName}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                android:layout_marginBottom="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="fonts/Roboto-Regular.ttf"
+                    android:hint="@string/full_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:text="@={register.fullName}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_email"
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:text="@={register.email}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                android:layout_marginBottom="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/white">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="fonts/Roboto-Regular.ttf"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:text="@={register.email}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_password"
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:text="@={register.password}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/white"
+                android:layout_marginBottom="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/AppTheme.WhiteTextInputLayoutHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="fonts/Roboto-Regular.ttf"
+                    android:hint="@string/password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:text="@={register.password}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/tiet_phone"
+            <android.support.design.widget.TextInputLayout
+                style="@style/AppTheme.WhiteTextInputLayoutHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="fonts/Roboto-Regular.ttf"
-                android:hint="@string/phone"
-                android:imeOptions="actionDone"
-                android:inputType="phone"
-                android:text="@={register.phone}"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textCursorDrawable="@drawable/bg_white_cursor"/>
-        </android.support.design.widget.TextInputLayout>
+                app:hintTextAppearance="@style/AppTheme.WhiteTextInputLayout"
+                android:layout_marginBottom="32dp">
 
-        <Button
-            android:id="@+id/btn_register"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="fonts/Roboto-Regular.ttf"
+                    android:hint="@string/phone"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:text="@={register.phone}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textCursorDrawable="@drawable/bg_white_cursor"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:background="@drawable/btn_red"
+                android:textAllCaps="false"
+                android:onClick="@{() -> presenter.doRegister(register)}"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agree"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="@string/terms"
+                    android:onClick="@{() -> presenter.goToTerm()}"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/and"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="@string/privacy_policy"
+                    android:onClick="@{() -> presenter.goToPrivacyPolicy()}"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:background="@drawable/btn_red"
-            android:textAllCaps="false"
-            android:onClick="@{() -> presenter.doRegister(register)}"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_account"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:text="@string/sign_in"
+                android:onClick="@{() -> presenter.goToLogin()}"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
 </layout>

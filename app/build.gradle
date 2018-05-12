@@ -64,6 +64,8 @@ android {
 
     productFlavors {
         development {
+            buildConfigField 'String', 'PRIVACY_POLICY', '"http://dev.dailiv.co/privacy-policy"'
+            buildConfigField 'String', 'TERMS', '"http://dev.dailiv.co/terms"'
             buildConfigField 'String', 'HOST', '"dev.dailiv.co"'
             buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
@@ -76,6 +78,8 @@ android {
         }
         production {
             //todo
+            buildConfigField 'String', 'PRIVACY_POLICY', '"http://dev.dailiv.co/privacy-policy"'
+            buildConfigField 'String', 'TERMS', '"http://dev.dailiv.co/terms"'
             buildConfigField 'String', 'HOST', '"dev.dailiv.co"'
             buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
