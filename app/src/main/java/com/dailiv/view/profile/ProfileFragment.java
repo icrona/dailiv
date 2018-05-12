@@ -12,6 +12,7 @@ import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
+import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.profile.menu.ProfileMenuAdapter;
 
@@ -22,7 +23,9 @@ import javax.inject.Inject;
 
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.OnClick;
 
+import static com.dailiv.util.common.Preferences.deleteAccessToken;
 import static java.util.Collections.singletonList;
 
 /**
@@ -113,5 +116,13 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     private void navigateTo(Class destination) {
 
         navigator.openActivity(getActivity(), destination);
+    }
+
+    @OnClick(R.id.btn_logout)
+    public void logout() {
+
+        deleteAccessToken();
+
+        navigator.openActivityWitClearTask(getActivity(), LoginActivity.class);
     }
 }

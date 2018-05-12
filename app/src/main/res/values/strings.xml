@@ -81,4 +81,6 @@
     <string name="status">Status</string>
 
     <string name="meal_planning">Meal Planning</string>
+
+    <string name="log_out">Log Out</string>
 </resources>
