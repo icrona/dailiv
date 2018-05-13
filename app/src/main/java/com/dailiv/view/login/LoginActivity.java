@@ -3,6 +3,7 @@ package com.dailiv.view.login;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -12,6 +13,7 @@ import com.dailiv.internal.data.remote.response.authentication.AuthenticationRes
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.util.validator.ValidatorFactory;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.register.RegisterActivity;
 import com.facebook.CallbackManager;
@@ -44,6 +46,9 @@ public class LoginActivity extends AbstractActivity implements LoginView{
 
     @Inject
     Navigator navigator;
+
+    @Inject
+    ValidatorFactory validatorFactory;
 
     @BindView(R.id.fb_login_button)
     LoginButton fbLoginBtn;
@@ -184,5 +189,23 @@ public class LoginActivity extends AbstractActivity implements LoginView{
         } catch (ApiException e) {
             System.out.println(e.getStatusCode());
         }
+    }
+
+    @Override
+    public boolean isValidLoginBinding(LoginBinding loginBinding) {
+
+        if(!validatorFactory.getEmailValidator().isValid(loginBinding.getEmail())) {
+
+            Toast.makeText(this, R.string.email_not_valid, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(loginBinding.getPassword() == null || loginBinding.getPassword().equals("")) {
+
+            Toast.makeText(this, R.string.password_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }

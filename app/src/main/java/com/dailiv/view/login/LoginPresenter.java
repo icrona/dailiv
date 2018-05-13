@@ -26,13 +26,10 @@ public class LoginPresenter extends AbstractSinglePresenter<LoginView> {
 
     public void doLogin(LoginBinding loginBinding) {
 
-        networkView.callApi(() -> api.login(getLoginRequest(loginBinding)).map(mapResponseToObject()));
+        if(view.isValidLoginBinding(loginBinding)){
+            networkView.callApi(() -> api.login(getLoginRequest(loginBinding)).map(mapResponseToObject()));
+        }
 
-////        networkView.callApi(() -> api.cook(recipeBaseRequest()).map(mapResponseToObject()));
-//
-////        networkView.callApi(() -> api.search(loginBinding.getEmail()).map(mapResponseToObject()));
-//
-//        networkView.callApi(() -> api.home().map(mapResponseToObject()));
     }
 
     public void doLoginFb() {

@@ -1,5 +1,6 @@
 package com.dailiv.view.login;
 
+import com.dailiv.internal.data.local.binding.LoginBinding;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.view.base.IView;
 
@@ -14,4 +15,6 @@ public interface LoginView extends IView<AuthenticationResponse>{
     void doLoginFb();
 
     void doLoginGoogle();
+
+    boolean isValidLoginBinding(LoginBinding loginBinding);
 }
