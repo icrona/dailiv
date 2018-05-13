@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="16dp"
@@ -13,37 +14,61 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.percent.PercentRelativeLayout
             android:id="@+id/ll_location"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:background="@drawable/bg_border_bottom">
 
-            <TextView
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/delivery_address">
-            </TextView>
+                android:src="@drawable/ic_location"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:tint="@color/red"/>
 
-            <TextView
-                android:id="@+id/tv_current_location"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_location"
+                app:layout_widthPercent="65%"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
-                />
+                android:orientation="vertical"
+                android:layout_marginEnd="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery_address">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_current_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+            </LinearLayout>
 
             <Button
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/btn_change_location"
-                android:layout_width="match_parent"
+                app:layout_widthPercent="20%"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_white"
+                android:textColor="@color/red"
+                android:textAllCaps="false"
+                android:minHeight="30dp"
                 android:text="@string/change">
             </Button>
 
-        </LinearLayout>
+        </android.support.percent.PercentRelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_recipe_of_the_day"
