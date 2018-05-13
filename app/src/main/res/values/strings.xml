@@ -52,6 +52,8 @@
     <string name="change">Change</string>
 
     <string name="recipe_of_the_day">Recipe Of The Day</string>
+    <string name="recipe_of_the_day_info">Cooking time: %smin | Level: %s</string>
+
     <string name="popular_this_week">Popular This Week</string>
     <string name="see_all_recipes">see all recipes ></string>
     <string name="looking_for_ingredient">Looking For Ingredients?</string>

@@ -199,4 +199,8 @@ dependencies {
     compile 'com.appyvet:materialrangebar:1.4.1'
 
     compile 'me.grantland:autofittextview:0.2.+'
+
+    compile 'org.apache.commons:commons-lang3:3.6'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

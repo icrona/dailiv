@@ -80,7 +80,11 @@ public class FilterByAdapter extends ArrayAdapter<FilterBy> {
         if(position == 0){
 
             textView.setVisibility(View.GONE);
-            reset.setVisibility(View.INVISIBLE);
+            reset.setVisibility(View.GONE);
+        }
+
+        else {
+            textView.setVisibility(View.VISIBLE);
         }
 
         return mView;

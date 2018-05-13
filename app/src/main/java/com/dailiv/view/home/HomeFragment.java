@@ -5,9 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.MemoryCategory;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
@@ -27,11 +31,14 @@ import com.dailiv.view.shop.ShopAdapter;
 import com.dailiv.view.shop.ShopFragment;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -62,6 +69,30 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     @BindView(R.id.rv_shop)
     RecyclerView rvShop;
+
+    @BindView(R.id.iv_recipe_of_the_day)
+    ImageView ivRecipeOfTheDay;
+
+    @BindView(R.id.tv_recipe_of_the_day_name)
+    TextView tvRecipeOfTheDayName;
+
+    @BindView(R.id.tv_recipe_of_the_day_category)
+    TextView tvRecipeOfTheDayCategory;
+
+    @BindView(R.id.tv_recipe_of_the_day_info)
+    TextView tvRecipeOfTheDayInfo;
+
+    @BindView(R.id.tv_recipe_of_the_day_desc)
+    TextView tvRecipeOfTheDayDesc;
+
+    @BindView(R.id.tv_recipe_of_the_day_user)
+    TextView tvRecipeOfTheDayUser;
+
+    @BindView(R.id.civ_recipe_of_the_day_user)
+    ImageView civRecipeOfTheDayUser;
+
+    @BindString(R.string.recipe_of_the_day_info)
+    String sRecipeOfTheDayInfo;
 
     private RecipeAdapter recipeAdapter;
 
@@ -147,8 +178,50 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     @Override
     public void onShowHome(RecipeOfTheDay recipeOfTheDay, List<RecipeIndex> recipeList) {
 
+        showRecipeOfTheDay(recipeOfTheDay);
+
         recipeAdapter.setRecipes(recipeList);
         recipeAdapter.notifyDataSetChanged();
+    }
+
+    public void showRecipeOfTheDay(RecipeOfTheDay recipeOfTheDay) {
+
+        Glide.get(ivRecipeOfTheDay.getContext()).setMemoryCategory(MemoryCategory.HIGH);
+
+        Glide.with(ivRecipeOfTheDay.getContext())
+                .load(recipeOfTheDay.getImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_home)
+                .error(R.mipmap.ic_home)
+                .dontAnimate()
+                .into(ivRecipeOfTheDay);
+
+        tvRecipeOfTheDayName.setText(recipeOfTheDay.getRecipeName());
+
+        tvRecipeOfTheDayCategory.setText(recipeOfTheDay.getCategoriesString());
+
+        String info = String.format(
+                sRecipeOfTheDayInfo,
+                String.valueOf(recipeOfTheDay.getDuration()),
+                StringUtils.capitalize(recipeOfTheDay.getDifficulty())
+                );
+
+        tvRecipeOfTheDayInfo.setText(info);
+
+        tvRecipeOfTheDayDesc.setText(recipeOfTheDay.getDesc());
+
+        tvRecipeOfTheDayUser.setText(recipeOfTheDay.getUsername());
+
+        Glide.get(civRecipeOfTheDayUser.getContext()).setMemoryCategory(MemoryCategory.HIGH);
+
+        Glide.with(civRecipeOfTheDayUser.getContext())
+                .load(recipeOfTheDay.getUserPhotoUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_account)
+                .error(R.mipmap.ic_account)
+                .dontAnimate()
+                .into(civRecipeOfTheDayUser);
+
     }
 
     @Override

@@ -162,7 +162,7 @@
                     android:layout_height="100dp"
                     android:inputType="text|textMultiLine"
                     android:gravity="top"
-                    android:background="@drawable/bg_edit_text"
+                    android:background="@drawable/bg_border_radius"
                     android:textCursorDrawable="@null"
                     android:padding="8dp"
                     />

@@ -25,7 +25,7 @@ public class RecipeOfTheDay extends RecipeIndex{
         super(recipe);
         this.duration = recipe.duration;
         this.desc = recipe.description;
-        this.username = recipe.user.firstname + recipe.user.lastname;
+        this.username = recipe.user.firstname + " " + recipe.user.lastname;
 
     }
 }

@@ -1,5 +1,7 @@
 package com.dailiv.internal.data.local.pojo;
 
+import android.text.TextUtils;
+
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.User;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
@@ -99,5 +101,10 @@ public class RecipeIndex {
 
         return getUserImageUrl(getUserImage());
 
+    }
+
+    public String getCategoriesString() {
+
+        return TextUtils.join(", ", getCategories());
     }
 }

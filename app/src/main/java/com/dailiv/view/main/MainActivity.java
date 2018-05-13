@@ -318,13 +318,13 @@ public class MainActivity extends AbstractActivity implements MainView{
     private void updateCartBadge() {
 
         //todo
-        setBadgeCount(cartIcon, 1);
+//        setBadgeCount(cartIcon, 1);
     }
 
     private void updateNotifBadge() {
 
         //todo
-        setBadgeCount(notifIcon, 1);
+//        setBadgeCount(notifIcon, 1);
     }
 
     private void getChosenLocation() {
