@@ -93,4 +93,7 @@
     <string name="meal_planning">Meal Planning</string>
 
     <string name="log_out">Log Out</string>
+
+    <string name="or_use_this_location">Or use this location</string>
+    <string name="continue_location">Continue</string>
 </resources>

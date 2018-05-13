@@ -32,57 +32,71 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:id="@+id/topPanel"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/abl_location">
-
-        <fragment
-            android:id="@+id/place_autocomplete_fragment"
-            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"/>
-    </LinearLayout>
-
     <android.support.percent.PercentRelativeLayout
-        android:layout_below="@id/topPanel"
+        android:layout_below="@id/abl_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <LinearLayout
+            android:id="@+id/prl_map"
             android:layout_width="match_parent"
             app:layout_heightPercent="70%"
-            tools:context="com.example.user.mapapps.MapsActivity" />
+            android:orientation="vertical"
+            >
+            <fragment
+                android:id="@+id/place_autocomplete_fragment"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_below="@+id/map"
+            android:layout_below="@+id/prl_map"
             android:background="@color/white"
-            app:layout_heightPercent="70%"
+            app:layout_heightPercent="30%"
+            android:padding="8dp"
             android:orientation="vertical">
-
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or_use_this_location"
+                android:textSize="14sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center_horizontal"/>
+            
             <com.dailiv.view.custom.CustomToggleRadioButton
                 android:id="@+id/rb_location"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:textSize="14sp"
                 android:layout_weight="1"
                 android:visibility="gone"
+                android:ellipsize="end"
+                android:maxLines="2"
                 />
 
             <Button
                 android:id="@+id/btn_choose_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="continue"/>
+                android:textAllCaps="false"
+                android:background="@drawable/btn_red"
+                android:textColor="@color/white"
+                android:text="@string/continue_location"/>
 
         </LinearLayout>
 
