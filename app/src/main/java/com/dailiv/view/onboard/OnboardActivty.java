@@ -9,7 +9,6 @@ import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
-import com.dailiv.util.common.Preferences;
 import com.dailiv.view.login.LoginActivity;
 import com.github.paolorotolo.appintro.AppIntro2;
 
@@ -27,6 +26,7 @@ public class OnboardActivty extends AppIntro2 {
         inject();
         addSlide(OnboardSlide.newInstance(R.layout.onboard_slide_1));
         addSlide(OnboardSlide.newInstance(R.layout.onboard_slide_2));
+        addSlide(OnboardSlide.newInstance(R.layout.onboard_slide_3));
 
         showSkipButton(false);
 
