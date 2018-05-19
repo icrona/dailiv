@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
@@ -73,6 +74,9 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     @BindView(R.id.iv_recipe_of_the_day)
     ImageView ivRecipeOfTheDay;
 
+    @BindView(R.id.ll_recipe_of_the_day)
+    LinearLayout llRecipeOfTheDay;
+
     @BindView(R.id.tv_recipe_of_the_day_name)
     TextView tvRecipeOfTheDayName;
 
@@ -90,6 +94,12 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     @BindView(R.id.civ_recipe_of_the_day_user)
     ImageView civRecipeOfTheDayUser;
+
+    @BindView(R.id.tv_recipe_of_the_day_like)
+    TextView tvRecipeOfTheDayLike;
+
+    @BindView(R.id.tv_recipe_of_the_day_view)
+    TextView tvRecipeOfTheDayView;
 
     @BindString(R.string.recipe_of_the_day_info)
     String sRecipeOfTheDayInfo;
@@ -186,6 +196,8 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     public void showRecipeOfTheDay(RecipeOfTheDay recipeOfTheDay) {
 
+        llRecipeOfTheDay.setOnClickListener(v -> navigateToRecipeDetail(recipeOfTheDay.getSlug()));
+
         Glide.get(ivRecipeOfTheDay.getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
         Glide.with(ivRecipeOfTheDay.getContext())
@@ -221,6 +233,10 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 .error(R.mipmap.ic_account)
                 .dontAnimate()
                 .into(civRecipeOfTheDayUser);
+
+        tvRecipeOfTheDayLike.setText(String.valueOf(recipeOfTheDay.getLike()));
+
+        tvRecipeOfTheDayView.setText(String.valueOf(recipeOfTheDay.getView()));
 
     }
 
