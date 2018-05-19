@@ -19,11 +19,15 @@ import android.widget.LinearLayout;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Location;
+import com.dailiv.internal.data.local.pojo.Review;
 import com.dailiv.internal.data.local.pojo.SearchResult;
+import com.dailiv.internal.data.remote.request.review.SubmitReviewRequest;
+import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.view.custom.ReviewDialog;
 import com.dailiv.view.profile.ProfileFragment;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.cart.CartActivity;
@@ -43,6 +47,7 @@ import javax.inject.Inject;
 
 import butterknife.BindArray;
 import butterknife.BindView;
+import rx.functions.Action1;
 
 import static com.dailiv.util.IConstants.FragmentIndex.PROFILE;
 import static com.dailiv.util.IConstants.FragmentIndex.HOME;
@@ -93,6 +98,8 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     private SearchAdapter searchAdapter;
 
+    private ReviewDialog reviewDialog;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -117,7 +124,6 @@ public class MainActivity extends AbstractActivity implements MainView{
                 return false;
             }
         });
-
 
 
         searchView.findViewById(R.id.search_close_btn).setOnClickListener(v -> {
@@ -192,6 +198,8 @@ public class MainActivity extends AbstractActivity implements MainView{
         onAttach();
         setToolbar();
 
+        setReviewDialog();
+        presenter.checkReviewIsNeeded();
         setNavigation();
 
         //todo
@@ -200,6 +208,29 @@ public class MainActivity extends AbstractActivity implements MainView{
         setSearchAdapter();
 
     }
+
+    private void setReviewDialog() {
+
+        reviewDialog = new ReviewDialog(this, getLayoutInflater()) {
+            @Override
+            public Action1<SubmitReviewRequest> submitAction() {
+                return presenter::submitReview;
+            }
+
+            @Override
+            public String title() {
+                return null;
+            }
+        };
+
+    }
+
+    @Override
+    public void onGetReviewNeeded(ReviewNeededResponse reviewNeededResponse) {
+
+        reviewDialog.show(new Review(reviewNeededResponse));
+    }
+
     private void setToolbar() {
         toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         toolbar.setTitle(menuText[0]);

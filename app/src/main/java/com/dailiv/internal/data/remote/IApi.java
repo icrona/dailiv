@@ -18,6 +18,7 @@ import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
+import com.dailiv.internal.data.remote.request.review.SubmitReviewRequest;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
@@ -31,6 +32,7 @@ import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
+import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 
 import java.util.List;
 
@@ -66,7 +68,9 @@ import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
+import static com.dailiv.internal.data.remote.IApiConstant.REVIEW_NEEDED;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
+import static com.dailiv.internal.data.remote.IApiConstant.SUBMIT_REVIEW;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
 import static com.dailiv.internal.data.remote.IApiConstant.UNLIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.UPDATE_CART;
@@ -172,4 +176,10 @@ public interface IApi {
 
     @GET(ORDER_HISTORY)
     Observable<Response<List<OrderHistoryResponse>>> orderHistory();
+
+    @GET(REVIEW_NEEDED)
+    Observable<Response<ReviewNeededResponse>> reviewNeeded();
+
+    @POST(SUBMIT_REVIEW)
+    Observable<Response<Boolean>> submitReview(@Body SubmitReviewRequest submitReviewRequest);
 }

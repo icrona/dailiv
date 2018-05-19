@@ -71,4 +71,8 @@ public interface IApiConstant {
     String CHECKOUT = PAYMENT + "cash";
 
     String DISCOUNT_COUPON = "discount-coupon/{code}";
+
+    String REVIEW_NEEDED = ACCOUNT + "purchase/success-transaction-without-rating";
+
+    String SUBMIT_REVIEW = ACCOUNT + "purchase/review";
 }

@@ -44,14 +44,18 @@ public abstract class BaseDialog {
         btnApply = mView.findViewById(R.id.btn_apply);
         btnCancel = mView.findViewById(R.id.btn_cancel);
 
-        tvTitle.setText(title());
+        if(title() != null){
+            tvTitle.setText(title());
+        }
 
         mBuilder.setView(mView);
 
         dialog = mBuilder.create();
         dialog.setCanceledOnTouchOutside(false);
 
-        btnCancel.setOnClickListener(onCancelClickListener());
+        if(btnCancel != null) {
+            btnCancel.setOnClickListener(onCancelClickListener());
+        }
 
     }
 

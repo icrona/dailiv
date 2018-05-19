@@ -1,9 +1,10 @@
 package com.dailiv.util.network;
 
-import android.app.Activity;
 import android.content.Intent;
 
 import com.dailiv.view.login.LoginActivity;
+
+import java.io.IOException;
 
 import lombok.AllArgsConstructor;
 import retrofit2.adapter.rxjava.HttpException;
@@ -51,7 +52,14 @@ public class ErrorSubscriber<T> extends Subscriber<T> {
 
             }
 
-            errorMessage = exception.getMessage();
+            try{
+                errorMessage = exception.response().errorBody().string();
+            }
+            catch (IOException ex) {
+
+                errorMessage = exception.getMessage();
+            }
+
         }
 
         onError.call(errorMessage);

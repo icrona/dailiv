@@ -2,7 +2,9 @@ package com.dailiv.view.main;
 
 import com.dailiv.internal.data.local.pojo.SearchResult;
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.request.review.SubmitReviewRequest;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
+import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
 
@@ -35,6 +37,10 @@ public class MainPresenter implements IPresenter<MainView> {
 
     private NetworkView<SearchResponse> searchNetworkView;
 
+    private NetworkView<ReviewNeededResponse> reviewNeededNetworkView;
+
+    private NetworkView<Boolean> submitReviewNetworkView;
+
     private MainView view;
 
 
@@ -47,11 +53,28 @@ public class MainPresenter implements IPresenter<MainView> {
                 getOnShowError(),
                 getSearchResult()
         );
+
+        reviewNeededNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnReviewNeeded()
+        );
+
+        submitReviewNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getOnSubmitReview()
+        );
+
     }
 
     @Override
     public void onDetach() {
         searchNetworkView.safeUnsubscribe();
+        reviewNeededNetworkView.safeUnsubscribe();
+        submitReviewNetworkView.safeUnsubscribe();
         this.view = null;
     }
 
@@ -83,5 +106,24 @@ public class MainPresenter implements IPresenter<MainView> {
         };
     }
 
+    private Action1<ReviewNeededResponse> getOnReviewNeeded() {
+
+        return view::onGetReviewNeeded;
+    }
+
+    private Action1<Boolean> getOnSubmitReview() {
+
+        return System.out::println;
+    }
+
+    public void checkReviewIsNeeded() {
+
+        reviewNeededNetworkView.callApi(() -> api.reviewNeeded());
+    }
+
+    public void submitReview(SubmitReviewRequest submitReviewRequest) {
+
+        submitReviewNetworkView.callApi(() -> api.submitReview(submitReviewRequest));
+    }
 
 }
