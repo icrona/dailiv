@@ -1,5 +1,6 @@
 package com.dailiv.view.recipe;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,17 +11,18 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
+import com.dailiv.view.custom.RoundedCornersTransformation;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import rx.functions.Action1;
+
+import static com.dailiv.App.getContext;
 
 /**
  * Created by aldo on 4/21/18.
  */
 
-@AllArgsConstructor
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>{
 
     private List<RecipeIndex> recipes;
@@ -28,6 +30,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
     private Action1<Integer> addToMealPlanning;
 
     private Action1<String> navigateTo;
+
+    private int radius;
+
+    public RecipeAdapter(List<RecipeIndex> recipes, Action1<Integer> addToMealPlanning, Action1<String> navigateTo) {
+        this.recipes = recipes;
+        this.addToMealPlanning = addToMealPlanning;
+        this.navigateTo = navigateTo;
+
+        radius = getDpFromPixel(getContext(), 4);
+    }
+
+    private int getDpFromPixel(final Context context, final float pixels) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pixels * scale + 0.5f);
+    }
 
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,25 +64,42 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
                 .placeholder(R.mipmap.ic_home)
                 .error(R.mipmap.ic_home)
                 .dontAnimate()
+                .bitmapTransform(new RoundedCornersTransformation(getContext(), radius, 0))
+
                 .into(holder.getIvRecipe());
 
         if(addToMealPlanning == null) {
 
-            holder.getBtnAddPlanning().setVisibility(View.GONE);
+            holder.getIvAddPlanning().setVisibility(View.GONE);
         }
         else{
 
-            holder.getBtnAddPlanning().setVisibility(View.VISIBLE);
+            holder.getIvAddPlanning().setVisibility(View.VISIBLE);
         }
 
-        holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
-
-        holder.getBtnAddPlanning().setOnClickListener(v -> {
+        holder.getIvAddPlanning().setOnClickListener(v -> {
             addToMealPlanning.call(recipes.get(holder.getAdapterPosition()).getId());
         });
 
         holder.getLayout().setOnClickListener(v -> navigateTo.call(recipes.get(holder.getAdapterPosition()).getSlug()));
 
+        holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
+
+        Glide.get(holder.getCivRecipeUserPhoto().getContext()).setMemoryCategory(MemoryCategory.HIGH);
+
+        Glide.with(holder.getCivRecipeUserPhoto().getContext())
+                .load(recipes.get(holder.getAdapterPosition()).getUserPhotoUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_account)
+                .error(R.mipmap.ic_account)
+                .dontAnimate()
+                .into(holder.getCivRecipeUserPhoto());
+
+        holder.getTvRecipeLike().setText(String.valueOf(recipes.get(holder.getAdapterPosition()).getLike()));
+
+        holder.getTvRecipeView().setText(String.valueOf(recipes.get(holder.getAdapterPosition()).getView()));
+
+        holder.getTvRecipeInfo().setText(recipes.get(holder.getAdapterPosition()).getInfo());
     }
 
     @Override

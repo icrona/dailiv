@@ -6,6 +6,8 @@ import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.User;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import static com.dailiv.util.common.AssetUtil.getRecipeImageUrl;
 import static com.dailiv.util.common.AssetUtil.getUserImageUrl;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static java.util.Collections.singletonList;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 /**
  * Created by aldo on 4/1/18.
@@ -106,5 +109,16 @@ public class RecipeIndex {
     public String getCategoriesString() {
 
         return TextUtils.join(", ", getCategories());
+    }
+
+    public String getInfo() {
+
+        String difficulty = capitalize(getDifficulty());
+        if(getCategories().isEmpty()) {
+
+            return difficulty;
+        }
+
+        return capitalize(getCategories().get(0)) + " | " + difficulty;
     }
 }

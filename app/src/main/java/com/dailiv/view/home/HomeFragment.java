@@ -20,9 +20,11 @@ import com.dailiv.internal.data.local.pojo.RecipeIndex;
 import com.dailiv.internal.data.local.pojo.RecipeOfTheDay;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.RecyclerViewDecorator;
+import com.dailiv.view.custom.RoundedCornersTransformation;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.recipe.RecipeAdapter;
@@ -44,6 +46,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.annimon.stream.Collectors.toList;
+import static com.dailiv.App.getContext;
 import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
 import static com.dailiv.util.IConstants.FragmentIndex.SHOP;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
@@ -55,6 +58,8 @@ import static com.dailiv.util.common.Preferences.getLocation;
 
 public class HomeFragment extends AbstractFragment implements HomeView{
 
+    @Inject
+    Common common;
 
     @Inject
     Navigator navigator;
@@ -205,6 +210,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_home)
                 .error(R.mipmap.ic_home)
+                .bitmapTransform(new RoundedCornersTransformation(getContext(), common.getDpFromPixel(getContext(), 4), 0, RoundedCornersTransformation.CornerType.TOP))
                 .dontAnimate()
                 .into(ivRecipeOfTheDay);
 
