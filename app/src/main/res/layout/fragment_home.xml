@@ -205,24 +205,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/popular_this_week"/>
+                    android:text="@string/popular_this_week"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/tv_recipes"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/see_all_recipes"/>
+                    android:text="@string/see_all_recipes"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/red"/>
 
             </RelativeLayout>
 
@@ -238,24 +243,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/popular_this_week"/>
+                    android:text="@string/looking_for_ingredient"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/tv_looking_for_ingredients"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/looking_for_ingredient"/>
+                    android:text="@string/shop_now"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/red"/>
 
             </RelativeLayout>
 
