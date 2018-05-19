@@ -36,7 +36,7 @@ public class PaymentMethodListAdapter extends ExpandableListAdapter{
         else {
             indicator.setVisibility(View.VISIBLE);
             comingSoon.setVisibility(View.GONE);
-            indicator.setImageResource( isExpanded ? R.drawable.ic_arrow_down : R.drawable.ic_arrow_down );
+            indicator.setImageResource( isExpanded ? R.drawable.ic_arrow_up : R.drawable.ic_arrow_down );
         }
 
         final TextView textView = ButterKnife.findById(view, R.id.tv_header);
