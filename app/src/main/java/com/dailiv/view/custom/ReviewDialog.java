@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.MemoryCategory;
@@ -52,8 +53,16 @@ public abstract class ReviewDialog extends BaseDialog{
         this.review = review;
 
         btnApply.setOnClickListener(view -> {
+
+            int rating = (int) ratingBar.getRating();
+
+            if(rating == 0) {
+
+                Toast.makeText(context, R.string.please_give_rating, Toast.LENGTH_SHORT).show();
+                return;
+            }
             this.review.setReview(etReview.getText().toString());
-            this.review.setRating((int) ratingBar.getRating());
+            this.review.setRating(rating);
             dialog.dismiss();
             submitAction().call(this.review.toRequest());
         });
