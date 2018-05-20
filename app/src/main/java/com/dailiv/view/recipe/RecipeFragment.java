@@ -42,6 +42,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindArray;
+import butterknife.BindString;
 import butterknife.BindView;
 import rx.functions.Action1;
 import rx.functions.Action2;
@@ -75,6 +76,15 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
     @BindView(R.id.tv_filter_label)
     TextView tvFilterLabel;
+
+    @BindString(R.string.filter_by_category)
+    String sFilterByCategory;
+
+    @BindString(R.string.filter_by_difficulty)
+    String sFilterByDifficulty;
+
+    @BindString(R.string.filter_by_duration)
+    String sFilterByDuration;
 
     private RecipeAdapter recipeAdapter;
 
@@ -199,7 +209,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         checkboxDialog = new CheckboxDialog(getContext(), getLayoutInflater(), checkboxItems) {
             @Override
             public String title() {
-                return "Filter by category";
+                return sFilterByCategory;
             }
 
             @Override
@@ -268,7 +278,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         radioButtonDialog = new RadioButtonDialog(getContext(), getLayoutInflater(), Arrays.asList(Difficulty.values())) {
             @Override
             public String title() {
-                return "Filter by difficulty";
+                return sFilterByDifficulty;
             }
 
             @Override
@@ -334,7 +344,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
             @Override
             public String title() {
-                return "Filter by duration";
+                return sFilterByDuration;
             }
 
             @Override

@@ -35,6 +35,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindArray;
+import butterknife.BindString;
 import butterknife.BindView;
 import rx.functions.Action1;
 import rx.functions.Action2;
@@ -65,6 +66,12 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     @BindView(R.id.tv_filter_label)
     TextView tvFilterLabel;
+
+    @BindString(R.string.filter_by_price)
+    String sFilterByPrice;
+
+    @BindString(R.string.filter_by_category)
+    String sFilterByCategory;
 
     private ShopAdapter shopAdapter;
 
@@ -234,7 +241,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
             @Override
             public String title() {
-                return "Filter by price";
+                return sFilterByPrice;
             }
 
             @Override
@@ -251,7 +258,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         checkboxDialog = new CheckboxDialog(getContext(), getLayoutInflater(), checkboxItems) {
             @Override
             public String title() {
-                return "Filter by category";
+                return sFilterByCategory;
             }
 
             @Override

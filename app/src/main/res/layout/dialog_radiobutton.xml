@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl_dialog_radio_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <include
+            android:id="@+id/item_dialog_title"
+            layout="@layout/item_dialog_title"/>
+
+        <ListView
+            android:id="@+id/lv_radiobutton"
+            android:layout_below="@id/item_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="0dp"
+            android:divider="@null">
+        </ListView>
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_dialog_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
-
-    <ListView
-        android:id="@+id/lv_radiobutton"
-        android:layout_below="@id/tv_dialog_title"
-        android:layout_above="@id/prl_dialog_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="0dp"
-        android:divider="@null">
-
-    </ListView>
-
     <include
+        android:id="@+id/item_dialog_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/rl_dialog_radio_button"
         layout="@layout/item_dialog_button"/>
 
 </RelativeLayout>

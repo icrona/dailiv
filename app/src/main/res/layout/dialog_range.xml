@@ -1,78 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/tv_dialog_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_below="@+id/tv_dialog_title"
-        android:id="@+id/rl_price_info"
+        android:id="@+id/rl_dialog_range"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <include
+            android:id="@+id/item_dialog_title"
+            layout="@layout/item_dialog_title" />
+
+        <RelativeLayout
+            android:layout_below="@id/item_dialog_title"
+            android:id="@+id/rl_price_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_price_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="-"
+                />
+
+            <TextView
+                android:id="@+id/tv_price_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:layout_below="@id/rl_price_info"
+            android:id="@+id/rb_price"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mrb_selectorBoundarySize="0dp"
+            app:mrb_selectorSize="10dp"
+            app:mrb_tickStart="1"
+            app:mrb_tickEnd="1000000"
+            app:mrb_tickInterval="1"
+            app:mrb_selectorColor="@color/red"
+            app:mrb_rangeBarColor="@color/red"
+            app:mrb_connectingLineColor="@color/red"
+            app:mrb_tickColor="@color/red"
+            app:mrb_pinMinFont="8dp"
+            app:mrb_pinPadding="16dp"
+            app:mrb_pinTextColor="@color/black"
+            app:mrb_pinColor="@color/white"
+            app:mrb_pinRadius="1dp" />
 
         <TextView
-            android:id="@+id/tv_price_from"
+            android:id="@+id/tv_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_below="@id/rb_price"
+            android:gravity="center_horizontal"
+            android:text="Reset"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="-"
-            />
-
-        <TextView
-            android:id="@+id/tv_price_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            />
 
     </RelativeLayout>
 
-    <com.appyvet.materialrangebar.RangeBar
-        android:layout_below="@id/rl_price_info"
-        android:id="@+id/rb_price"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:mrb_selectorBoundarySize="0dp"
-        app:mrb_selectorSize="10dp"
-        app:mrb_tickStart="1"
-        app:mrb_tickEnd="1000000"
-        app:mrb_tickInterval="1"
-        app:mrb_selectorColor="@color/red"
-        app:mrb_rangeBarColor="@color/red"
-        app:mrb_connectingLineColor="@color/red"
-        app:mrb_tickColor="@color/red"
-        app:mrb_pinMinFont="8dp"
-        app:mrb_pinPadding="16dp"
-        app:mrb_pinTextColor="@color/black"
-        app:mrb_pinColor="@color/white"
-        app:mrb_pinRadius="1dp" />
-
-    <TextView
-        android:id="@+id/tv_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rb_price"
-        android:gravity="center_horizontal"
-        android:text="Reset"
-        />
-
     <include
+        android:id="@+id/item_dialog_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/tv_reset"
+        android:layout_below="@+id/rl_dialog_range"
         layout="@layout/item_dialog_button"/>
 
 </RelativeLayout>
