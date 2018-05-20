@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="menu">
-        <item>@string/home</item>
-        <item>@string/shop</item>
+        <item>@string/dailiv</item>
+        <item>@string/store</item>
         <item>@string/recipe</item>
         <item>@string/notification</item>
         <item>@string/profile</item>

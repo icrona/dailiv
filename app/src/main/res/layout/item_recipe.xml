@@ -23,8 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_add_circle"
-        android:tint="@color/red" />
+        android:src="@drawable/ic_add_circle" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,8 +71,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_like"
-                android:tint="@color/red"/>
+                android:src="@drawable/ic_like" />
 
             <TextView
                 android:id="@+id/tv_recipe_like"
@@ -84,8 +82,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_view"
-                android:tint="@color/grey"/>
+                android:src="@drawable/ic_view"/>
 
             <TextView
                 android:id="@+id/tv_recipe_view"

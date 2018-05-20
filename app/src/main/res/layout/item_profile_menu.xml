@@ -20,7 +20,6 @@
         android:layout_alignParentEnd="true"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:tint="@color/red"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>

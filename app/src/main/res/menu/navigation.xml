@@ -4,16 +4,16 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@mipmap/ic_home"
-        android:title="@string/home"
+        android:title="@string/dailiv"
         />
     <item
         android:id="@+id/nav_shop"
-        android:icon="@mipmap/ic_home"
-        android:title="@string/shop"
+        android:icon="@drawable/ic_store"
+        android:title="@string/store"
         />
     <item
         android:id="@+id/nav_recipe"
-        android:icon="@mipmap/ic_home"
+        android:icon="@drawable/ic_recipe"
         android:title="@string/recipe"
         />
     <item

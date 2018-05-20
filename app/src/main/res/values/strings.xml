@@ -37,9 +37,9 @@
     <string name="already_account">Already have an account?</string>
     <string name="sign_in">Sign In</string>
 
-    <string name="home">Home</string>
+    <string name="dailiv">Dailiv</string>
     <string name="recipe">Recipe</string>
-    <string name="shop">Shop</string>
+    <string name="store">Store</string>
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
 
