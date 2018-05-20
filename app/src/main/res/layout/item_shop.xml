@@ -1,29 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:id="@+id/rl_ingredient"
-    android:padding="1dp">
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_ingredient">
 
-    <ImageView
-        android:id="@+id/iv_ingredient"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"/>
-
-    <TextView
-        android:id="@+id/tv_ingredient_name"
+    <LinearLayout
+        android:id="@+id/ll_ingredient"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_ingredient"/>
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/iv_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+/>
+        <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/tv_ingredient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_ingredient_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/red"/>
+
+            <TextView
+                android:id="@+id/tv_ingredient_min_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_qty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:background="@color/red">
+        android:layout_below="@+id/ll_ingredient"
+        android:visibility="gone">
 
         <me.himanshusoni.quantityview.QuantityView
 
@@ -49,8 +80,7 @@
     <LinearLayout
         android:id="@+id/ll_add_to_cart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"        android:layout_below="@+id/ll_ingredient"
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="true">
@@ -58,13 +88,19 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/grey"/>
+            android:background="@color/grey_light"/>
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_cart_red"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:textSize="20sp"
+            android:drawablePadding="4dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add to cart"/>
+            android:text="@string/add_to_cart"/>
 
     </LinearLayout>
 

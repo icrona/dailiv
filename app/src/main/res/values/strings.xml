@@ -103,4 +103,6 @@
     <string name="review_rate">Rate Your Experience</string>
     <string name="review_feedback">Write your feedback</string>
     <string name="submit">Submit</string>
+
+    <string name="add_to_cart">Add to cart</string>
 </resources>

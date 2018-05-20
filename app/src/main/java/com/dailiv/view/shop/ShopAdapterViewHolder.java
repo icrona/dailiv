@@ -21,6 +21,8 @@ public class ShopAdapterViewHolder extends RecyclerView.ViewHolder{
 
     private RelativeLayout layout;
     private TextView ingredientName;
+    private TextView tvPrice;
+    private TextView tvMinUnit;
     private ImageView image;
     private LinearLayout quantityLayout;
     private QuantityView quantityView;
@@ -31,6 +33,8 @@ public class ShopAdapterViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         layout = itemView.findViewById(R.id.rl_ingredient);
         ingredientName = itemView.findViewById(R.id.tv_ingredient_name);
+        tvPrice = itemView.findViewById(R.id.tv_ingredient_price);
+        tvMinUnit = itemView.findViewById(R.id.tv_ingredient_min_unit);
         image = itemView.findViewById(R.id.iv_ingredient);
         quantityLayout = itemView.findViewById(R.id.ll_qty);
         quantityView = itemView.findViewById(R.id.qv_shop);

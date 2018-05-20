@@ -47,7 +47,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
 
         holder.getIngredientName().setText(ingredients.get(holder.getAdapterPosition()).getName());
 
+        holder.getTvPrice().setText(ingredients.get(holder.getAdapterPosition()).getPriceString());
+
+        holder.getTvMinUnit().setText(ingredients.get(holder.getAdapterPosition()).getMinUnit());
+
         holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
+
+        holder.getQuantityLayout().setBackgroundResource(getAddToCartBackground(holder.getAdapterPosition()));
 
         holder.getLayout().setOnClickListener(v -> navigateTo.call(String.valueOf(ingredients.get(holder.getAdapterPosition()).getId())));
 
@@ -80,12 +86,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
             @Override
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
 
-                int cartId = ingredients.get(holder.getAdapterPosition()).getCartId();
+                Integer cartId = ingredients.get(holder.getAdapterPosition()).getCartId();
 
                 if(newQuantity == 0) {
                     holder.getQuantityLayout().setVisibility(View.GONE);
                     holder.getAddToCartLayout().setVisibility(View.VISIBLE);
                     deleteCart.call(cartId);
+                    holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
                 }
                 else{
                     updateCart.call(cartId, newQuantity);
@@ -106,11 +113,15 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
             holder.getAddToCartLayout().setVisibility(View.GONE);
             holder.getQuantityLayout().setVisibility(View.VISIBLE);
             holder.getQuantityView().setQuantity(ingredients.get(position).getCartedAmount());
+            holder.getLayout().setBackgroundResource(getBackgroundIdActive(holder.getAdapterPosition()));
+
         }
         else{
             holder.getAddToCartLayout().setVisibility(View.VISIBLE);
             holder.getQuantityLayout().setVisibility(View.GONE);
             holder.getQuantityView().setQuantity(0);
+            holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
+
         }
 
     }
@@ -121,6 +132,23 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
         }
 
         return R.drawable.bg_ingredient_right;
+    }
+
+    private int getBackgroundIdActive(int position) {
+        if(position % 2 == 0) {
+            return R.drawable.bg_ingredient_left_active;
+        }
+
+        return R.drawable.bg_ingredient_right_active;
+    }
+
+    private int getAddToCartBackground(int position) {
+
+        if(position % 2 == 0) {
+            return R.drawable.bg_add_to_cart_left;
+        }
+
+        return R.drawable.bg_add_to_cart_right;
     }
 
     @Override

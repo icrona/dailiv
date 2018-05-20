@@ -1,5 +1,7 @@
 package com.dailiv.internal.data.local.pojo;
 
+import android.text.SpannableString;
+
 import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 
@@ -7,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import static com.dailiv.util.common.AssetUtil.getIngredientImageUrl;
+import static com.dailiv.util.common.MoneyUtil.getMoney;
+import static com.dailiv.util.common.MoneyUtil.getMoneyString;
 
 /**
  * Created by aldo on 4/1/18.
@@ -33,6 +37,16 @@ public class IngredientIndex {
     private Integer cartedAmount;
 
     private int storeIngredientId;
+
+    public SpannableString getPriceString() {
+
+        return getMoneyString(getPrice());
+    }
+
+    public String getMinUnit() {
+
+        return "/" + getMin() + " " + getUnit();
+    }
 
     public IngredientIndex(Ingredient ingredient) {
 
