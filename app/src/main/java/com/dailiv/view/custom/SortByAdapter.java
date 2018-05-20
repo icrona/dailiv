@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dailiv.R;
@@ -42,11 +44,24 @@ public class SortByAdapter extends ArrayAdapter<SortBy>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return createView(position, convertView, parent);
+
+        final View view = mInflater.inflate(mResource, parent, false);
+
+        TextView textView = view.findViewById(R.id.tv_spinner_text);
+
+        textView.setText(items.get(position).getText());
+        textView.setTextColor(mContext.getResources().getColor(R.color.white));
+
+        return view;
     }
 
     private View createView(int position, View convertView, ViewGroup parent) {
         final View view = mInflater.inflate(mResource, parent, false);
+
+        RelativeLayout relativeLayout = view.findViewById(R.id.rl_spinner);
+
+        int padding = mContext.getResources().getDimensionPixelOffset(R.dimen.s);
+        relativeLayout.setPadding(padding, padding, padding, padding);
 
         TextView textView = view.findViewById(R.id.tv_spinner_text);
 
@@ -54,4 +69,5 @@ public class SortByAdapter extends ArrayAdapter<SortBy>{
 
         return view;
     }
+
 }

@@ -38,12 +38,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
         this.addToMealPlanning = addToMealPlanning;
         this.navigateTo = navigateTo;
 
-        radius = getDpFromPixel(getContext(), 4);
-    }
-
-    private int getDpFromPixel(final Context context, final float pixels) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pixels * scale + 0.5f);
+        radius = getContext().getResources().getDimensionPixelOffset(R.dimen.xs);
     }
 
     @Override

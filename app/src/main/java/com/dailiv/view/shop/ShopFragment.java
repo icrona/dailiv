@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.annimon.stream.Stream;
 import com.dailiv.App;
@@ -61,6 +62,9 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     @BindArray(R.array.shop_filter)
     String[] filter;
+
+    @BindView(R.id.tv_filter_label)
+    TextView tvFilterLabel;
 
     private ShopAdapter shopAdapter;
 
@@ -182,6 +186,7 @@ public class ShopFragment extends AbstractFragment implements ShopView{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if(position == 0){
+                    tvFilterLabel.setVisibility(View.INVISIBLE);
                     return;
                 }
 
@@ -301,6 +306,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
     private void setSpinnerSelected(int position, String info) {
 
+        tvFilterLabel.setVisibility(View.VISIBLE);
+
         FilterBy filterBy = filterList.get(position);
         filterBy.setSelected(true);
         filterBy.setInfo(info);
@@ -321,6 +328,15 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         filterList.set(position, filterBy);
         filterArrayAdapter.setItems(filterList);
         filterArrayAdapter.notifyDataSetChanged();
+
+        boolean isAnySelected = Stream.of(filterList).anyMatch(FilterBy::isSelected);
+
+        if(isAnySelected) {
+            tvFilterLabel.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvFilterLabel.setVisibility(View.INVISIBLE);
+        }
     }
 
     public Action1<Integer> resetFilter() {

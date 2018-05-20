@@ -4,10 +4,12 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
@@ -77,15 +79,22 @@ public class FilterByAdapter extends ArrayAdapter<FilterBy> {
             }
         );
 
+        RelativeLayout relativeLayout = mView.findViewById(R.id.rl_spinner);
+
+        int padding = mContext.getResources().getDimensionPixelOffset(R.dimen.s);
         if(position == 0){
 
             textView.setVisibility(View.GONE);
             reset.setVisibility(View.GONE);
+            relativeLayout.setPadding(0, 0, 0, 0);
         }
 
         else {
             textView.setVisibility(View.VISIBLE);
+            relativeLayout.setPadding(padding, padding, padding, padding);
         }
+
+
 
         return mView;
     }
@@ -96,6 +105,12 @@ public class FilterByAdapter extends ArrayAdapter<FilterBy> {
         TextView textView = view.findViewById(R.id.tv_spinner_text);
 
         textView.setText(determineSpinnerView(position));
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setMarqueeRepeatLimit(-1);
+        textView.setSingleLine(true);
+        textView.setSelected(true);
+
+        textView.setTextColor(mContext.getResources().getColor(R.color.white));
 
         return view;
     }

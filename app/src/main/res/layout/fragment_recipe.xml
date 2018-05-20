@@ -6,6 +6,10 @@
     android:layout_height="match_parent">
 
     <android.support.percent.PercentRelativeLayout
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_alignParentTop="true"
         android:id="@+id/rl_recipe_filter"
         android:layout_width="match_parent"
@@ -13,24 +17,60 @@
         android:background="@color/red"
         >
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/sp_sort"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/sort_by"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_widthPercent="50%"/>
+            app:layout_widthPercent="48%"
+            android:orientation="vertical"
+            >
 
-        <com.dailiv.view.custom.ReselectSpinner
-            android:layout_toEndOf="@id/sp_sort"
-            android:id="@+id/sp_filter"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_by"
+                android:textSize="12sp"
+                android:textColor="@color/white_light"/>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/sp_sort"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/sort_by"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:backgroundTint="@color/white" />
+        </LinearLayout>
+
+        <View
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/filter_by"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_widthPercent="50%"/>
+            android:layout_width="0.5dp"
+            android:background="@color/white_light"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="48%"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_filter_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by"
+                android:textSize="12sp"
+                android:textColor="@color/white_light"
+                android:visibility="invisible"/>
+
+            <com.dailiv.view.custom.ReselectSpinner
+                android:id="@+id/sp_filter"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/filter_by"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:backgroundTint="@color/white"/>
+
+        </LinearLayout>
 
     </android.support.percent.PercentRelativeLayout>
 

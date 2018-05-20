@@ -210,7 +210,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_home)
                 .error(R.mipmap.ic_home)
-                .bitmapTransform(new RoundedCornersTransformation(getContext(), common.getDpFromPixel(getContext(), 4), 0, RoundedCornersTransformation.CornerType.TOP))
+                .bitmapTransform(new RoundedCornersTransformation(getContext(), getContext().getResources().getDimensionPixelOffset(R.dimen.xs), 0, RoundedCornersTransformation.CornerType.TOP))
                 .dontAnimate()
                 .into(ivRecipeOfTheDay);
 

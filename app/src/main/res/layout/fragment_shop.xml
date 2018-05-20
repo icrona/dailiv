@@ -6,6 +6,10 @@
     android:layout_height="match_parent">
 
     <android.support.percent.PercentRelativeLayout
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_alignParentTop="true"
         android:id="@+id/rl_shop_filter"
         android:layout_width="match_parent"
@@ -13,14 +17,30 @@
         android:background="@color/red"
         >
 
-        <com.dailiv.view.custom.ReselectSpinner
-            android:id="@+id/sp_filter"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/filter_by"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_widthPercent="50%"/>
+            app:layout_widthPercent="48%"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_filter_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by"
+                android:textSize="12sp"
+                android:textColor="@color/white_light"
+                android:visibility="invisible"/>
+
+            <com.dailiv.view.custom.ReselectSpinner
+                android:id="@+id/sp_filter"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/filter_by"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:backgroundTint="@color/white"/>
+
+        </LinearLayout>
 
     </android.support.percent.PercentRelativeLayout>
 

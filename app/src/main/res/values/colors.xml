@@ -11,4 +11,5 @@
     <color name="grey_light">#CCCCCC</color>
 
     <color name="white">#ffffff</color>
+    <color name="white_light">#BFffffff</color>
 </resources>
