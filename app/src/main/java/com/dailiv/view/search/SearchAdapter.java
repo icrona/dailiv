@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.SearchResult;
+import com.dailiv.internal.data.local.pojo.SearchType;
 
 import java.util.List;
 
@@ -40,7 +41,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapterViewHolder>
     public void onBindViewHolder(SearchAdapterViewHolder holder, int position) {
 
         holder.getTextView().setText(searchResults.get(position).getName());
+
+        holder.getImageView().setImageResource(getDrawableByType(holder.getAdapterPosition()));
+
         holder.getLayout().setOnClickListener(v -> navigateTo.call(searchResults.get(holder.getAdapterPosition())));
+    }
+
+    private int getDrawableByType(int position) {
+
+        if(searchResults.get(position).getSearchType().equals(SearchType.RECIPE)) {
+
+            return R.drawable.ic_recipe;
+        }
+
+        return R.drawable.ic_store;
     }
 
     @Override

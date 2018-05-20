@@ -391,6 +391,9 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     private void navigateTo(SearchResult searchResult) {
 
+        llSearchResults.setVisibility(View.GONE);
+        flMain.setVisibility(View.VISIBLE);
+
         navigator.openDetails(this, searchResult.getSearchType().getActivityClass(), searchResult.getIdentifier());
     }
 }
