@@ -40,6 +40,8 @@ public class RecipeDetail extends RecipeIndex{
         this.instructions = mapListToList(response.instructions, Instruction::getBody);
         this.comments = mapListToList(response.thoughts, Thought::toComment);
         this.relatedRecipes = mapListToList(response.relatedRecipes, Recipe::toRelatedRecipe);
+        this.duration = response.recipe.duration;
+        this.username = response.user.firstname + " " + response.user.lastname;
     }
 
     private String description;
@@ -57,6 +59,10 @@ public class RecipeDetail extends RecipeIndex{
     private List<RelatedRecipe> relatedRecipes;
 
     private List<Comment> comments;
+
+    private int duration;
+
+    private String username;
 
     public String getNumOfComments() {
 

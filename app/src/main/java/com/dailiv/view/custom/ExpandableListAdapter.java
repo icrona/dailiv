@@ -1,5 +1,6 @@
 package com.dailiv.view.custom;
 
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import static com.dailiv.App.getContext;
 
 /**
  * Created by aldo on 5/5/18.
@@ -74,6 +77,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
         final TextView textView = ButterKnife.findById(view, R.id.tv_header);
         textView.setText(headerList.get(groupPosition));
+
+        final LinearLayout linearLayout = ButterKnife.findById(view, R.id.ll_header);
+
+        linearLayout.setBackgroundColor(ContextCompat.getColor(getContext(), isExpanded ? R.color.grey_light : R.color.white ));
         return view;
     }
 
