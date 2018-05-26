@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -224,7 +225,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 StringUtils.capitalize(recipeOfTheDay.getDifficulty())
                 );
 
-        tvRecipeOfTheDayInfo.setText(info);
+        tvRecipeOfTheDayInfo.setText(Html.fromHtml(info));
 
         tvRecipeOfTheDayDesc.setText(recipeOfTheDay.getDesc());
 

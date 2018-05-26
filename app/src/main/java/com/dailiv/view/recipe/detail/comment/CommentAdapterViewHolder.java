@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.dailiv.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import lombok.Getter;
 
 /**
@@ -16,7 +17,7 @@ import lombok.Getter;
 @Getter
 public class CommentAdapterViewHolder extends RecyclerView.ViewHolder{
 
-    private ImageView userPhoto;
+    private CircleImageView userPhoto;
 
     private TextView userName;
 

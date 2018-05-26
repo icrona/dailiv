@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -34,6 +35,8 @@ import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.recipe.detail.comment.CommentAdapter;
 import com.dailiv.view.recipe.detail.related.RelatedRecipeAdapter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,6 +47,8 @@ import javax.inject.Inject;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
+import me.grantland.widget.AutofitTextView;
 import rx.functions.Action1;
 
 import static com.annimon.stream.Collectors.toList;
@@ -109,6 +114,21 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
     @BindString(R.string.add_to_meal_plan)
     String sAddMealPlan;
 
+    @BindString(R.string.recipe_detail_info)
+    String sRecipeDetailInfo;
+
+    @BindView(R.id.tv_recipe_category)
+    TextView tvCategory;
+
+    @BindView(R.id.tv_recipe_info)
+    AutofitTextView tvRecipeInfo;
+
+    @BindView(R.id.civ_recipe_user_photo)
+    CircleImageView civUserPhoto;
+
+    @BindView(R.id.tv_recipe_user)
+    TextView tvRecipeUser;
+
     private RecipeDetail recipeDetail;
 
     private ExpandableListAdapter expandableListAdapter;
@@ -155,7 +175,30 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         recipeDetail = new RecipeDetail(response);
 
         tvRecipeName.setText(recipeDetail.getRecipeName());
+
+        tvCategory.setText(recipeDetail.getCategoriesString());
+
+        String info = String.format(
+                sRecipeDetailInfo,
+                String.valueOf(recipeDetail.getDuration()),
+                String.valueOf(recipeDetail.getPortion()),
+                StringUtils.capitalize(recipeDetail.getDifficulty())
+        );
+
+        tvRecipeInfo.setText(Html.fromHtml(info));
         tvRecipeDescription.setText(recipeDetail.getDescription());
+
+        Glide.get(civUserPhoto.getContext()).setMemoryCategory(MemoryCategory.HIGH);
+
+        Glide.with(civUserPhoto.getContext())
+                .load(recipeDetail.getUserPhotoUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_account)
+                .error(R.mipmap.ic_account)
+                .dontAnimate()
+                .into(civUserPhoto);
+
+        tvRecipeUser.setText(recipeDetail.getUsername());
 
         Glide.get(ivRecipe.getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
@@ -266,8 +309,6 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
         rvRelatedRecipe.setAdapter(relatedRecipeAdapter);
 
-        rvRelatedRecipe.addItemDecoration(new RecyclerViewDecorator());
-
         commentAdapter = new CommentAdapter();
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -352,6 +393,11 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         RecipeDetail.Comment comment = new RecipeDetail.Comment(response);
 
         List<RecipeDetail.Comment> comments = recipeDetail.getComments();
+
+        if(comments.isEmpty()) {
+            comments = new ArrayList<>();
+        }
+
         comments.add(0, comment);
 
         recipeDetail.setComments(comments);
