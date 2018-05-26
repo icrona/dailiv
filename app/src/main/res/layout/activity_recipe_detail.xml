@@ -247,9 +247,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="32dp"
+=======
+>>>>>>> 82a56d271d30649349166d8bbae7fa3d7860c323
                 android:orientation="vertical">
 
                 <TextView
@@ -291,10 +294,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+<<<<<<< HEAD
         android:text="@string/add_to_meal_planning"
         android:background="@color/red"
         android:textColor="@color/white"
         android:textAllCaps="false">
+=======
+        android:text="@string/add_to_meal_planning">
+>>>>>>> 82a56d271d30649349166d8bbae7fa3d7860c323
     </Button>
 
 
