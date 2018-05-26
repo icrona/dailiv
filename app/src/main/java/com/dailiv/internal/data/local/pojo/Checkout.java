@@ -1,11 +1,15 @@
 package com.dailiv.internal.data.local.pojo;
 
+import android.text.SpannableString;
+
 import org.parceler.Parcel;
 import org.parceler.ParcelConstructor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static com.dailiv.util.common.MoneyUtil.getMoneyString;
 
 /**
  * Created by aldo on 5/1/18.
@@ -39,24 +43,24 @@ public class Checkout {
         return getDeliveryFee() + getSubtotal() - getDiscount();
     }
 
-    public String getTotalString() {
+    public SpannableString getTotalString() {
         return stringify(getTotal());
     }
 
-    public String getDeliveryFeeString() {
+    public SpannableString getDeliveryFeeString() {
         return stringify(getDeliveryFee());
     }
 
-    public String getSubtotalString() {
+    public SpannableString getSubtotalString() {
         return stringify(getSubtotal());
     }
 
-    public String getDiscountString() {
+    public SpannableString getDiscountString() {
         return stringify(getDiscount());
     }
 
-    private String stringify(int value){
-        return "Rp " + value;
+    private SpannableString stringify(int value){
+        return getMoneyString(value);
     }
 
     public void setDiscountRate(double discountRate) {

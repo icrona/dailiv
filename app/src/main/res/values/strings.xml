@@ -124,4 +124,16 @@
 
     <string name="add_comment">Add comment</string>
 
+    <string name="checkout">Checkout</string>
+
+    <string name="subtotal">Subtotal</string>
+    <string name="discount">Discount</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="total">Total</string>
+
+    <string name="address_detail">Address Detail</string>
+    <string name="coupon_code">Coupon Code</string>
+    <string name="notes_for_driver">Notes for driver</string>
+    <string name="proceed_to_payment">Proceed to payment</string>
+
 </resources>

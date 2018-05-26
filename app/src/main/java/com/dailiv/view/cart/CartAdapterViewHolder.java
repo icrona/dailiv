@@ -20,6 +20,7 @@ public class CartAdapterViewHolder extends RecyclerView.ViewHolder{
     private ImageView image;
     private TextView tvName;
     private TextView tvPrice;
+    private TextView tvUnit;
     private TextView tvTotalPrice;
     private QuantityView qvCart;
 
@@ -28,6 +29,7 @@ public class CartAdapterViewHolder extends RecyclerView.ViewHolder{
         image = itemView.findViewById(R.id.iv_cart);
         tvName = itemView.findViewById(R.id.tv_cart_name);
         tvPrice = itemView.findViewById(R.id.tv_cart_price);
+        tvUnit = itemView.findViewById(R.id.tv_cart_unit);
         tvTotalPrice = itemView.findViewById(R.id.tv_cart_total_price);
         qvCart = itemView.findViewById(R.id.qv_cart);
     }

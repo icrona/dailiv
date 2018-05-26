@@ -53,6 +53,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapterViewHolder>{
 
         holder.getTvTotalPrice().setText(cartList.get(holder.getAdapterPosition()).getTotalPriceString());
 
+        holder.getTvUnit().setText(cartList.get(holder.getAdapterPosition()).getMinUnit());
+
         Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
         Glide.with(holder.getImage().getContext())

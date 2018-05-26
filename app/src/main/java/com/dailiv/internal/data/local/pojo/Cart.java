@@ -1,11 +1,14 @@
 package com.dailiv.internal.data.local.pojo;
 
+import android.text.SpannableString;
+
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import static com.dailiv.util.common.AssetUtil.getIngredientImageUrl;
+import static com.dailiv.util.common.MoneyUtil.getMoneyString;
 
 /**
  * Created by aldo on 4/28/18.
@@ -29,6 +32,8 @@ public class Cart {
 
     private String image;
 
+    private int min;
+
     public String getImageUrl() {
 
         return getIngredientImageUrl(getImage());
@@ -39,14 +44,14 @@ public class Cart {
         return getPrice() * getAmount();
     }
 
-    public String getPriceString() {
+    public SpannableString getPriceString() {
 
-        return String.valueOf(getPrice());
+        return getMoneyString(getPrice());
     }
 
-    public String getTotalPriceString() {
+    public SpannableString getTotalPriceString() {
 
-        return String.valueOf(getTotalPrice());
+        return getMoneyString(getTotalPrice());
     }
 
     public Cart(CartResponse cartResponse) {
@@ -58,7 +63,14 @@ public class Cart {
                 cartResponse.amount,
                 cartResponse.ingredient.unit,
                 cartResponse.storeIngredient.price,
-                cartResponse.ingredient.photo
+                cartResponse.ingredient.photo,
+                cartResponse.storeIngredient.min
         );
     }
+
+    public String getMinUnit() {
+
+        return "/" + getMin() + " " + getUnit();
+    }
+
 }

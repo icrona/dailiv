@@ -2,68 +2,97 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/rl_cart">
+    android:id="@+id/rl_cart"
+    android:background="@drawable/bg_border_bottom"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp">
 
     <RelativeLayout
-        android:id="@+id/rl_cart_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/iv_cart"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_toEndOf="@id/rl_cart_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/ll_cart_info"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_cart_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_cart_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_cart_total_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <me.himanshusoni.quantityview.QuantityView
-
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/qv_cart"
+        <RelativeLayout
+            android:id="@+id/rl_cart_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:qv_maxQuantity="20"
-            app:qv_minQuantity="0"
-            app:qv_quantity="0"
-            app:qv_quantityPadding="25dp"
-            app:qv_addButtonBackground="@android:color/transparent"
-            app:qv_addButtonTextColor="@color/black"
-            app:qv_removeButtonBackground="@android:color/transparent"
-            app:qv_removeButtonTextColor="@color/black"
-            app:qv_quantityBackground="@android:color/transparent"
-            app:qv_quantityTextColor="@color/black"
-            >
-        </me.himanshusoni.quantityview.QuantityView>
+            android:background="@drawable/bg_frame"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/rl_cart_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/ll_cart_info"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_cart_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_dark"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_cart_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_cart_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_cart_total_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/grey_dark"/>
+
+            </LinearLayout>
+
+            <me.himanshusoni.quantityview.QuantityView
+
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/qv_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:qv_maxQuantity="20"
+                app:qv_minQuantity="0"
+                app:qv_quantity="0"
+                app:qv_quantityPadding="25dp"
+                app:qv_addButtonBackground="@android:color/transparent"
+                app:qv_addButtonTextColor="@color/black"
+                app:qv_removeButtonBackground="@android:color/transparent"
+                app:qv_removeButtonTextColor="@color/black"
+                app:qv_quantityBackground="@android:color/transparent"
+                app:qv_quantityTextColor="@color/black"
+                >
+            </me.himanshusoni.quantityview.QuantityView>
+        </RelativeLayout>
     </RelativeLayout>
-
 
 </RelativeLayout>
