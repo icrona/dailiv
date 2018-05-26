@@ -2,11 +2,15 @@ package com.dailiv.view.custom;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.MealPlanning;
@@ -27,6 +31,9 @@ import rx.functions.Action1;
 public abstract class MealPlanningDialog extends BaseDialog{
     private MealPlanning mealPlanning;
 
+    private LinearLayout llDate;
+
+    private ImageView ivDate;
     private TextView tvDate;
 
     private List<PlanningCategory> planningCategories = Arrays.asList(PlanningCategory.values());
@@ -41,10 +48,14 @@ public abstract class MealPlanningDialog extends BaseDialog{
         mealPlanning.setRecipeId(recipeId);
 
         tvDate = mView.findViewById(R.id.tv_select_date);
-        tvDate.setText("Select date");
+        llDate = mView.findViewById(R.id.ll_select_date);
+        ivDate = mView.findViewById(R.id.iv_select_date);
+
+        resetDateLayout();
+
         AppCompatSpinner spMealCategory = mView.findViewById(R.id.sp_meal_category);
 
-        tvDate.setOnClickListener(view -> {
+        llDate.setOnClickListener(view -> {
             final DatePickerDialog datePickerDialog = initDatePickerDialog();
             datePickerDialog.show();
         });
@@ -70,8 +81,13 @@ public abstract class MealPlanningDialog extends BaseDialog{
         });
 
         btnApply.setOnClickListener(view -> {
-            dialog.dismiss();
-            submitAction().call(mealPlanning);
+            if(mealPlanning.isValid()){
+                submitAction().call(mealPlanning);
+                dialog.dismiss();
+            }
+            else{
+                Toast.makeText(context, R.string.please_select_meal_date_and_time, Toast.LENGTH_SHORT).show();
+            }
         });
 
         dialog.show();
@@ -94,9 +110,25 @@ public abstract class MealPlanningDialog extends BaseDialog{
             calendar.set(Calendar.MONTH, i1);
             calendar.set(Calendar.DAY_OF_MONTH, i2);
             mealPlanning.setPlanningDate(LocalDate.fromCalendarFields(calendar));
-            tvDate.setText(mealPlanning.getPlanningDateString());
+            setSelectedDate(mealPlanning.getPlanningDateString());
         };
     }
 
     public abstract Action1<MealPlanning> submitAction();
+
+    private void setSelectedDate(String date) {
+
+        tvDate.setText(date);
+        ivDate.setColorFilter(ContextCompat.getColor(context, R.color.grey_dark), android.graphics.PorterDuff.Mode.SRC_IN);
+        tvDate.setTextColor(ContextCompat.getColor(context, R.color.grey_dark));
+
+
+    }
+
+    private void resetDateLayout() {
+        tvDate.setText(context.getResources().getString(R.string.select_date));
+        ivDate.setColorFilter(ContextCompat.getColor(context, R.color.grey_light), android.graphics.PorterDuff.Mode.SRC_IN);
+        tvDate.setTextColor(ContextCompat.getColor(context, R.color.grey_light));
+
+    }
 }

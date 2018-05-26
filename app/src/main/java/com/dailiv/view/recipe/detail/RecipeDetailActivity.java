@@ -106,6 +106,9 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
     @BindView(R.id.iv_mark)
     ImageView ivCook;
 
+    @BindString(R.string.add_to_meal_plan)
+    String sAddMealPlan;
+
     private RecipeDetail recipeDetail;
 
     private ExpandableListAdapter expandableListAdapter;
@@ -228,18 +231,13 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
             @Override
             public Action1<MealPlanning> submitAction() {
                 return mealPlanning -> {
-                    if(mealPlanning.isValid()){
-                        presenter.addMealPlanning(mealPlanning);
-                    }
-                    else{
-                        //todo
-                    }
+                    presenter.addMealPlanning(mealPlanning);
                 };
             }
 
             @Override
             public String title() {
-                return "Add to meal planning";
+                return sAddMealPlan;
             }
         };
     }

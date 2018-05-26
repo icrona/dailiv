@@ -113,4 +113,10 @@
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
     <string name="reset">Reset</string>
+
+    <string name="add_to_meal_plan">Add to meal plan</string>
+    <string name="choose_your_cooking_date">Choose your cooking date</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_meal_time">Select meal time</string>
+    <string name="please_select_meal_date_and_time">Please select meal date and time</string>
 </resources>

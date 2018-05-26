@@ -20,22 +20,68 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/item_dialog_title"
-                layout="@layout/item_dialog_title"/>
-
-            <TextView
-                android:id="@+id/tv_select_date"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select date"
-                android:layout_marginBottom="20dp"/>
+                android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/sp_meal_category"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_your_cooking_date"
+                    android:layout_marginBottom="8dp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_select_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_radius"
+                    android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/iv_select_date"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_date_range"
+                        android:tint="@color/grey_light"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
+                        />
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/tv_select_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select_date"
+                        android:textColor="@color/grey"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_meal_time"
+                    android:layout_marginBottom="8dp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_radius"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/sp_meal_category"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

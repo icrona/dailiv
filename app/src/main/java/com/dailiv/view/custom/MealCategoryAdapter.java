@@ -3,6 +3,7 @@ package com.dailiv.view.custom;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ public class MealCategoryAdapter extends ArrayAdapter<PlanningCategory>{
     private final Context mContext;
     private final int mResource;
 
+    private int padding;
+
     private List<PlanningCategory> items;
 
     public MealCategoryAdapter(@NonNull Context context, int resource, @NonNull List<PlanningCategory> objects) {
@@ -32,6 +35,7 @@ public class MealCategoryAdapter extends ArrayAdapter<PlanningCategory>{
         mInflater = LayoutInflater.from(context);
         mResource = resource;
         items = objects;
+        padding = mContext.getResources().getDimensionPixelOffset(R.dimen.s);
     }
 
     @Override
@@ -52,6 +56,10 @@ public class MealCategoryAdapter extends ArrayAdapter<PlanningCategory>{
 
         textView.setText(items.get(position).getText());
 
+        textView.setTextColor(ContextCompat.getColor(mContext, position == 0 ? R.color.grey_light : R.color.grey_dark));
+
+        textView.setPadding(padding, padding, padding, padding);
+
         return view;
     }
 
@@ -68,6 +76,8 @@ public class MealCategoryAdapter extends ArrayAdapter<PlanningCategory>{
             textView.setVisibility(View.VISIBLE);
             textView.setText(items.get(position).getText());
         }
+
+        textView.setPadding(padding, padding, padding, padding);
 
         return view;
     }

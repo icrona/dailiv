@@ -88,6 +88,9 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
     @BindString(R.string.filter_by_duration)
     String sFilterByDuration;
 
+    @BindString(R.string.add_to_meal_plan)
+    String sAddMealPlan;
+
     private RecipeAdapter recipeAdapter;
 
     private RecipeFilter recipeFilter = new RecipeFilter();
@@ -316,7 +319,7 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
 
             @Override
             public String title() {
-                return "Add to meal planning";
+                return sAddMealPlan;
             }
         };
     }
