@@ -3,11 +3,13 @@ package com.dailiv.view.shop;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Function;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.CheckboxItem;
@@ -18,14 +20,15 @@ import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.util.common.MoneyUtil;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.CheckboxDialog;
 import com.dailiv.view.custom.EndlessScrollListener;
-import com.dailiv.view.custom.RecyclerViewDecorator;
-import com.dailiv.view.custom.RangeDialog;
-import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.FilterByAdapter;
+import com.dailiv.view.custom.RangeDialog;
+import com.dailiv.view.custom.RecyclerViewDecorator;
+import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ import rx.functions.Action2;
 
 import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
+import static com.dailiv.util.common.MoneyUtil.getMoney;
 
 /**
  * Created by aldo on 4/1/18.
@@ -249,6 +253,15 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                 return onFilterPrice();
             }
 
+            @Override
+            public Function<String, SpannableString> spannableTextView() {
+                return MoneyUtil::getMoneyString;
+            }
+
+            @Override
+            public Function<Float, String> textFormat() {
+                return f -> getMoney(Math.round(f));
+            }
         };
 
     }

@@ -1,9 +1,11 @@
 package com.dailiv.view.custom;
 
 import android.content.Context;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.annimon.stream.function.Function;
 import com.appyvet.materialrangebar.RangeBar;
 import com.dailiv.R;
 
@@ -15,15 +17,19 @@ import rx.functions.Action2;
 
 public abstract class RangeDialog extends BaseDialog implements IDialog{
 
+    private TextView tvPriceFrom;
+    private TextView tvPriceTo;
+
     public RangeDialog(Context context, LayoutInflater layoutInflater) {
         super(context, layoutInflater, R.layout.dialog_range);
+
+        tvPriceFrom = mView.findViewById(R.id.tv_price_from);
+        tvPriceTo = mView.findViewById(R.id.tv_price_to);
     }
 
     @Override
     public void show() {
 
-        TextView tvPriceFrom = mView.findViewById(R.id.tv_price_from);
-        TextView tvPriceTo = mView.findViewById(R.id.tv_price_to);
         TextView tvReset = mView.findViewById(R.id.tv_reset);
 
         RangeBar rbPrice = mView.findViewById(R.id.rb_price);
@@ -36,13 +42,11 @@ public abstract class RangeDialog extends BaseDialog implements IDialog{
 
         rbPrice.setRangePinsByValue(fromValue(), toValue());
 
-        tvPriceFrom.setText(String.format("%.0f",fromValue()));
-        tvPriceTo.setText(String.format("%.0f",toValue()));
+        setFromAndTo(fromValue(), toValue());
 
         rbPrice.setOnRangeBarChangeListener(((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
 
-            tvPriceFrom.setText(leftPinValue);
-            tvPriceTo.setText(rightPinValue);
+            setFromAndTo(Float.valueOf(leftPinValue), Float.valueOf(rightPinValue));
         }));
 
 
@@ -55,12 +59,17 @@ public abstract class RangeDialog extends BaseDialog implements IDialog{
 
             rbPrice.setRangePinsByValue(tickStart(), tickEnd());
 
-            tvPriceFrom.setText(String.format("%.0f", tickStart()));
-            tvPriceTo.setText(String.format("%.0f", tickEnd()));
+            setFromAndTo(tickStart(), tickEnd());
 
         });
 
         dialog.show();
+    }
+
+    private void setFromAndTo(float from, float to) {
+
+        tvPriceFrom.setText(spannableTextView().apply(textFormat().apply(from)));
+        tvPriceTo.setText(spannableTextView().apply(textFormat().apply(to)));
     }
 
     public abstract float tickStart();
@@ -70,6 +79,10 @@ public abstract class RangeDialog extends BaseDialog implements IDialog{
     public abstract float fromValue();
 
     public abstract float toValue();
+
+    public abstract Function<String, SpannableString> spannableTextView();
+
+    public abstract Function<Float, String> textFormat();
 
     public abstract Action2<Integer, Integer> submitAction();
 

@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Function;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.CheckboxItem;
@@ -350,6 +352,16 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
             @Override
             public Action2<Integer, Integer> submitAction() {
                 return onFilterDuration();
+            }
+
+            @Override
+            public Function<String, SpannableString> spannableTextView() {
+                return SpannableString::new;
+            }
+
+            @Override
+            public Function<Float, String> textFormat() {
+                return f -> String.format("%.0f min", f);
             }
         };
     }

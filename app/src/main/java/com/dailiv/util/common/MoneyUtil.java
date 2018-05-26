@@ -20,7 +20,12 @@ public class MoneyUtil {
 
     public static SpannableString getMoneyString(int value) {
 
-        SpannableString ss = new SpannableString(getMoney(value));
+        return getMoneyString(getMoney(value));
+    }
+
+    public static SpannableString getMoneyString(String value) {
+
+        SpannableString ss = new SpannableString(value);
 
         ss.setSpan(new TopAlignSuperscriptSpan(0.5f), 0,2, 0);
 
