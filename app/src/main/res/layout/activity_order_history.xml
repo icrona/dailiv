@@ -56,6 +56,7 @@
                 android:ellipsize="end"
                 android:layout_height="wrap_content"
                 android:text="@string/address"
+                android:textStyle="bold"
                 >
             </TextView>
 
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:text="@string/date"
+                android:textStyle="bold"
                 >
 
             </me.grantland.widget.AutofitTextView>
@@ -79,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:text="@string/amount"
+                android:textStyle="bold"
                 >
 
             </me.grantland.widget.AutofitTextView>
@@ -91,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:text="@string/status"
+                android:textStyle="bold"
                 >
 
             </me.grantland.widget.AutofitTextView>
