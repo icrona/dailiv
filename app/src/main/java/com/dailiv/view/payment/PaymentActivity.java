@@ -18,11 +18,11 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.IConstants;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
-import com.dailiv.view.custom.ThankYouDialog;
-import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.NonScrollExpandableListView;
 import com.dailiv.view.custom.PaymentMethodListAdapter;
+import com.dailiv.view.custom.ThankYouDialog;
+import com.dailiv.view.main.MainActivity;
 
 import org.parceler.Parcels;
 
@@ -135,7 +135,7 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
     }
 
     public void navigateToOrderHistory() {
-        navigator.openActivity(this, OrderHistoryActivity.class);
+        navigator.openActivityWitClearTask(this, MainActivity.class);
     }
 
     @Override

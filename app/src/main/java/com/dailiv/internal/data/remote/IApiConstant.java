@@ -75,4 +75,6 @@ public interface IApiConstant {
     String REVIEW_NEEDED = ACCOUNT + "purchase/success-transaction-without-rating";
 
     String SUBMIT_REVIEW = ACCOUNT + "purchase/review";
+
+    String MEAL_PLAN = ACCOUNT + "meal-plan";
 }

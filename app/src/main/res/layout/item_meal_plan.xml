@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_meal_plan_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/breakfast"
+        />
+
+    <TextView
+        android:id="@+id/tv_meal_plan_breakfast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lunch"
+        />
+
+    <TextView
+        android:id="@+id/tv_meal_plan_lunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dinner"
+        />
+
+    <TextView
+        android:id="@+id/tv_meal_plan_dinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/snack"
+        />
+
+    <TextView
+        android:id="@+id/tv_meal_plan_snack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

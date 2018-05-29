@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_meal_plan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/red">
+
+        <RelativeLayout
+            android:id="@+id/rl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_meal_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.Toolbar"
+                app:title="@string/meal_plan"
+                app:titleTextAppearance="@style/AppTheme.ToolbarTitle">
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="16dp"
+        android:layout_below="@+id/abl_meal_plan">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_meal_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+</RelativeLayout>

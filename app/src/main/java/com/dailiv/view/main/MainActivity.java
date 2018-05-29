@@ -228,6 +228,9 @@ public class MainActivity extends AbstractActivity implements MainView{
     @Override
     public void onGetReviewNeeded(ReviewNeededResponse reviewNeededResponse) {
 
+        if(reviewNeededResponse.driverAssignPurchase == null) {
+            return;
+        }
         reviewDialog.show(new Review(reviewNeededResponse));
     }
 

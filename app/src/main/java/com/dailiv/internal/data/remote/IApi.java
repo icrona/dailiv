@@ -28,6 +28,7 @@ import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
+import com.dailiv.internal.data.remote.response.mealplan.MealPlanResponse;
 import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
@@ -35,6 +36,7 @@ import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
 import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -62,6 +64,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.INGREDIENT_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.LIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
+import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLAN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
 import static com.dailiv.internal.data.remote.IApiConstant.ORDER_HISTORY;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
@@ -182,4 +185,7 @@ public interface IApi {
 
     @POST(SUBMIT_REVIEW)
     Observable<Response<Boolean>> submitReview(@Body SubmitReviewRequest submitReviewRequest);
+
+    @GET(MEAL_PLAN)
+    Observable<Response<Map<String, MealPlanResponse>>> getMealPlan();
 }

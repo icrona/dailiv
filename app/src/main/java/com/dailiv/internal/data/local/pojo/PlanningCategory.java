@@ -12,9 +12,10 @@ import lombok.Getter;
 public enum PlanningCategory {
 
     NONE("Select Meal Time", null),
-    BREAKFAST("Breakfast", "breakfast"),
-    LUNCH("Lunch", "lunch"),
-    DINNER("Dinner", "dinner");
+    BREAKFAST("Breakfast", "Breakfast"),
+    LUNCH("Lunch", "Lunch"),
+    DINNER("Dinner", "Dinner"),
+    SNACK("Snack", "Snack");
 
     private String text;
 

@@ -14,8 +14,10 @@ import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.profile.history.OrderHistoryActivity;
+import com.dailiv.view.profile.mealplan.MealPlanActivity;
 import com.dailiv.view.profile.menu.ProfileMenuAdapter;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,6 +47,9 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
     @BindString(R.string.order_history)
     String sOrderHistory;
+
+    @BindString(R.string.meal_plan)
+    String sMealPlan;
 
     @Override
     public void inject() {
@@ -96,11 +101,18 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
     private List<ProfileMenu> getProfileMenu() {
 
-        return singletonList(new ProfileMenu(
-                sOrderHistory,
-                R.mipmap.ic_home,
-                OrderHistoryActivity.class
-        ));
+        return Arrays.asList(
+                new ProfileMenu(
+                        sOrderHistory,
+                        R.mipmap.ic_home,
+                        OrderHistoryActivity.class
+                ),
+                new ProfileMenu(
+                        sMealPlan,
+                        R.mipmap.ic_home,
+                        MealPlanActivity.class
+                )
+        );
     }
 
     @Override
