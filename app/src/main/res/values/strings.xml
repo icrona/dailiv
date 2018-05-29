@@ -135,5 +135,7 @@
     <string name="coupon_code">Coupon Code</string>
     <string name="notes_for_driver">Notes for driver</string>
     <string name="proceed_to_payment">Proceed to payment</string>
+    <string name="ok">Ok</string>
+    <string name="thank_you_for_your_purchase">Thank You For Your Purchase</string>
 
 </resources>

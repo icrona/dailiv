@@ -18,6 +18,7 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.IConstants;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
+import com.dailiv.view.custom.ThankYouDialog;
 import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.NonScrollExpandableListView;
@@ -36,6 +37,7 @@ import butterknife.BindArray;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action0;
 
 import static com.annimon.stream.Collectors.toList;
 import static java.util.Collections.emptyList;
@@ -117,6 +119,23 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
     @Override
     public void onCheckoutResponse(boolean response) {
 
+        ThankYouDialog thankYouDialog = new ThankYouDialog(this, getLayoutInflater()) {
+            @Override
+            public Action0 submitAction() {
+                return () -> navigateToOrderHistory();
+            }
+
+            @Override
+            public String title() {
+                return null;
+            }
+        };
+
+        thankYouDialog.show();
+    }
+
+    public void navigateToOrderHistory() {
+        navigator.openActivity(this, OrderHistoryActivity.class);
     }
 
     @Override
@@ -219,8 +238,8 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
     @OnClick(R.id.btn_checkout)
     public void checkout() {
 
-        //todo
-        //presenter.checkout(checkout);
-        navigator.openActivity(this, OrderHistoryActivity.class);
+        presenter.checkout(checkout);
     }
+
+
 }
