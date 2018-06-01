@@ -20,7 +20,6 @@ import rx.functions.Action1;
 public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileMenuAdapterViewHolder>{
 
     private List<ProfileMenu> profileMenus;
-    private Action1<Class> navigateTo;
 
     @Override
     public ProfileMenuAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,16 +31,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileMenuAdapterV
     @Override
     public void onBindViewHolder(ProfileMenuAdapterViewHolder holder, int position) {
 
-        holder.getLayout().setOnClickListener(v -> {
-
-            Class destination = profileMenus.get(holder.getAdapterPosition()).getDestination();
-
-            if(destination!=null) {
-
-                navigateTo.call(destination);
-            }
-
-        });
+        holder.getLayout().setOnClickListener(v -> profileMenus.get(holder.getAdapterPosition()).getProfileAction().call());
 
         holder.getTvName().setText(profileMenus.get(holder.getAdapterPosition()).getName());
 

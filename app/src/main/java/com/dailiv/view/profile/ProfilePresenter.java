@@ -1,16 +1,21 @@
 package com.dailiv.view.profile;
 
 import com.dailiv.internal.data.remote.IApi;
+import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
+import com.dailiv.util.network.NetworkView;
+import com.dailiv.view.base.AbstractSinglePresenter;
 import com.dailiv.view.base.IPresenter;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static com.dailiv.util.common.Preferences.getAccountSlug;
+
 /**
  * Created by aldo on 4/1/18.
  */
 
-public class ProfilePresenter implements IPresenter<ProfileView>{
+public class ProfilePresenter extends AbstractSinglePresenter<ProfileView> {
 
     @Inject
     @Named("common")
@@ -19,15 +24,8 @@ public class ProfilePresenter implements IPresenter<ProfileView>{
     @Inject
     public ProfilePresenter(){}
 
-    private ProfileView view;
-
-    @Override
-    public void onAttach(ProfileView view) {
-        this.view = view;
+    public void getProfile() {
+        networkView.callApi(() -> api.getProfileBySlug(getAccountSlug()).map(mapResponseToObject()));
     }
 
-    @Override
-    public void onDetach() {
-        this.view = null;
-    }
 }

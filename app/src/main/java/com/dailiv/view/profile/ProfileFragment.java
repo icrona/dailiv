@@ -3,11 +3,17 @@ package com.dailiv.view.profile;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.MemoryCategory;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
-import com.dailiv.internal.data.local.pojo.OrderHistory;
+import com.dailiv.internal.data.local.pojo.Profile;
 import com.dailiv.internal.data.local.pojo.ProfileMenu;
+import com.dailiv.internal.data.local.pojo.ProfileRecipeList;
+import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.util.common.Navigator;
@@ -18,7 +24,6 @@ import com.dailiv.view.profile.mealplan.MealPlanActivity;
 import com.dailiv.view.profile.menu.ProfileMenuAdapter;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,9 +31,12 @@ import javax.inject.Inject;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.dailiv.util.common.Preferences.deleteAccessToken;
-import static java.util.Collections.singletonList;
+import static com.dailiv.internal.data.remote.IApiConstant.COOKED_RECIPE;
+import static com.dailiv.internal.data.remote.IApiConstant.LIKED_RECIPE;
+import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_ME;
+import static com.dailiv.util.common.Preferences.deleteAccessTokenAndSlug;
 
 /**
  * Created by aldo on 4/1/18.
@@ -59,6 +67,26 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     String sNewsFeed;
     @BindString(R.string.recipe_by_me)
     String sRecipeByMe;
+
+    private Profile profile;
+
+    @BindView(R.id.civ_user_photo)
+    CircleImageView civUserPhoto;
+
+    @BindView(R.id.tv_user_name)
+    TextView tvName;
+
+    @BindView(R.id.tv_user_headline)
+    TextView tvHeadline;
+
+    @BindView(R.id.tv_num_of_recipe)
+    TextView tvNumOfRecipe;
+
+    @BindView(R.id.tv_num_followers)
+    TextView tvNumOfFollowers;
+
+    @BindView(R.id.tv_num_of_following)
+    TextView tvNumOfFollowing;
 
     @Override
     public void inject() {
@@ -91,13 +119,13 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
         inject();
         onAttach();
         setAdapter();
+        presenter.getProfile();
     }
 
     private void setAdapter() {
 
         ProfileMenuAdapter profileMenuAdapter = new ProfileMenuAdapter(
-                getProfileMenu(),
-                this::navigateTo
+                getProfileMenu()
         );
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -114,34 +142,70 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                 new ProfileMenu(
                         sRecipeByMe,
                         R.drawable.ic_recipe_red,
-                        null
+                        this::openRecipeByMe
                 ),
                 new ProfileMenu(
                         sLikedRecipes,
                         R.drawable.ic_like_red,
-                        null
+                        this::openLikedRecipe
                 ),
                 new ProfileMenu(
                         sCookedRecipes,
                         R.drawable.ic_cook_red,
-                        null
+                        this::openCookedRecipe
                 ),
                 new ProfileMenu(
                         sMealPlan,
                         R.drawable.ic_meal_plan_red,
-                        MealPlanActivity.class
+                        this::openMealPlan
                 ),
                 new ProfileMenu(
                         sNewsFeed,
                         R.drawable.ic_news_feed_red,
-                        null
+                        this::openNewsFeed
                 ),
                 new ProfileMenu(
                         sOrderHistory,
                         R.drawable.ic_history_red,
-                        OrderHistoryActivity.class
+                        this::openOrderHistory
                 )
         );
+
+    }
+
+    public void openMealPlan() {
+        navigateTo(MealPlanActivity.class);
+    }
+
+    public void openOrderHistory() {
+        navigateTo(OrderHistoryActivity.class);
+    }
+
+    public void openLikedRecipe() {
+        navigateToRecipeList(new ProfileRecipeList(
+                profile.getUserId(),
+                LIKED_RECIPE,
+                sLikedRecipes
+        ));
+    }
+
+    public void openCookedRecipe() {
+        navigateToRecipeList(new ProfileRecipeList(
+                profile.getUserId(),
+                COOKED_RECIPE,
+                sCookedRecipes
+        ));
+    }
+
+    public void openRecipeByMe() {
+        navigateToRecipeList(new ProfileRecipeList(
+                profile.getUserId(),
+                RECIPE_BY_ME,
+                sRecipeByMe
+        ));
+    }
+
+    public void openNewsFeed() {
 
     }
 
@@ -155,6 +219,11 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
     }
 
+    private void navigateToRecipeList(ProfileRecipeList profileRecipeList) {
+
+        navigator.openProfileRecipeList(getActivity(), profileRecipeList);
+    }
+
     private void navigateTo(Class destination) {
 
         navigator.openActivity(getActivity(), destination);
@@ -163,8 +232,41 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     @OnClick(R.id.btn_logout)
     public void logout() {
 
-        deleteAccessToken();
+        deleteAccessTokenAndSlug();
 
         navigator.openActivityWitClearTask(getActivity(), LoginActivity.class);
+    }
+
+    @OnClick(R.id.btn_edit_profile)
+    public void editProfile() {
+
+
+    }
+
+    @Override
+    public void showResponse(ProfileResponse response) {
+
+        profile = new Profile(response);
+
+        Glide.get(civUserPhoto.getContext()).setMemoryCategory(MemoryCategory.HIGH);
+
+        Glide.with(civUserPhoto.getContext())
+                .load(profile.getImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_account)
+                .error(R.mipmap.ic_account)
+                .dontAnimate()
+                .into(civUserPhoto);
+
+        tvName.setText(profile.getUserName());
+
+        tvHeadline.setText(profile.getHeadline());
+
+        tvNumOfRecipe.setText(String.valueOf(profile.getNumOfRecipe()));
+
+        tvNumOfFollowers.setText(String.valueOf(profile.getNumOfFollower()));
+
+        tvNumOfFollowing.setText(String.valueOf(profile.getNumOfFollowing()));
+
     }
 }

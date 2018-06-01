@@ -13,11 +13,10 @@ import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.login.LoginActivity;
-import com.dailiv.view.main.MainActivity;
 
 import javax.inject.Inject;
 
-import static com.dailiv.util.common.Preferences.setAccessToken;
+import static com.dailiv.util.common.Preferences.setAccessTokenAndSlug;
 
 /**
  * Created by aldo on 3/5/18.
@@ -63,7 +62,7 @@ public class RegisterActivity extends AbstractActivity implements RegisterView{
 
     @Override
     public void showResponse(AuthenticationResponse authResponse) {
-        setAccessToken(authResponse.accessToken);
+        setAccessTokenAndSlug(authResponse.accessToken, authResponse.user.slug);
         navigator.openMainActivity(this);
     }
 

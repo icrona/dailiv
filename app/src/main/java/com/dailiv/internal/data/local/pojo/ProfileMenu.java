@@ -2,6 +2,7 @@ package com.dailiv.internal.data.local.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import rx.functions.Action0;
 
 /**
  * Created by aldo on 5/12/18.
@@ -15,5 +16,5 @@ public class ProfileMenu {
 
     private int iconResId;
 
-    private Class destination;
+    private Action0 profileAction;
 }

@@ -9,6 +9,7 @@ public interface IConstants {
     int TIMEOUT = 60;
     String FINIHS_ONBOARD = "finish_onboard";
     String ACCESS_TOKEN = "access_token";
+    String ACCOUNT_SLUG = "account_slug";
 
     String LOCATION_ID = "location_id";
     String LOCATION_NAME = "location_name";
@@ -16,7 +17,11 @@ public interface IConstants {
 
     String CHECKOUT = "checkout";
 
+    String PROFILE_RECIPE_LIST = "profile_recipe_list";
+
     int CHECKOUT_REQUEST_CODE = 1;
+
+    int PROFILE_RECIPE_LIST_REQUEST_CODE = 2;
 
     interface FragmentIndex {
 

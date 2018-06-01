@@ -151,4 +151,10 @@
     <string name="cooked_recipes">Cooked Recipes</string>
     <string name="news_feed">News Feed</string>
     <string name="recipe_by_me">Recipe by Me</string>
+    
+    <string name="recipes">Recipes</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    
+    <string name="edit_profile">Edit Profile</string>
 </resources>

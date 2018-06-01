@@ -77,4 +77,16 @@ public interface IApiConstant {
     String SUBMIT_REVIEW = ACCOUNT + "purchase/review";
 
     String MEAL_PLAN = ACCOUNT + "meal-plan";
+
+    String PROFILE_BY_SLUG = ACCOUNT + "{slug}";
+
+    String PROFILE_BY_ID = ACCOUNT + "{id}";
+
+    String RECIPE_BY_PROFILE_ID = PROFILE_BY_ID + "/{type}";
+
+    String LIKED_RECIPE = "liked-recipe";
+
+    String COOKED_RECIPE = "cooked-recipe";
+
+    String RECIPE_BY_ME = "recipe";
 }

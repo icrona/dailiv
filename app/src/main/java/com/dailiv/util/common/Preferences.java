@@ -23,10 +23,11 @@ public class Preferences {
         return getPrefs().edit();
     }
 
-    public static void setAccessToken(String accessToken) {
+    public static void setAccessTokenAndSlug(String accessToken, String slug) {
         SharedPreferences.Editor editor = getPrefsEditor();
 
         editor.putString(IConstants.ACCESS_TOKEN, accessToken);
+        editor.putString(IConstants.ACCOUNT_SLUG, slug);
         editor.apply();
     }
 
@@ -34,12 +35,17 @@ public class Preferences {
         return getPrefs().getString(IConstants.ACCESS_TOKEN, null);
     }
 
+    public static String getAccountSlug() {
+
+        return getPrefs().getString(IConstants.ACCOUNT_SLUG, null);
+    }
+
     public static boolean isAccessTokenAvailable() {
         return getAccessToken() != null;
     }
 
-    public static void deleteAccessToken(){
-        setAccessToken(null);
+    public static void deleteAccessTokenAndSlug(){
+        setAccessTokenAndSlug(null, null);
     }
 
     public static void setFinishOnboard() {

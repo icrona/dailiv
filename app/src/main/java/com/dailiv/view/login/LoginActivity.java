@@ -33,7 +33,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-import static com.dailiv.util.common.Preferences.setAccessToken;
+import static com.dailiv.util.common.Preferences.setAccessTokenAndSlug;
 
 /**
  * Created by aldo on 3/5/18.
@@ -91,7 +91,7 @@ public class LoginActivity extends AbstractActivity implements LoginView{
     @Override
     public void showResponse(AuthenticationResponse response) {
 
-        setAccessToken(response.accessToken);
+        setAccessTokenAndSlug(response.accessToken, response.user.slug);
         navigator.openMainActivity(this);
     }
 

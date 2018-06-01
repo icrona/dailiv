@@ -14,6 +14,7 @@ import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
 import com.dailiv.view.payment.PaymentActivity;
 import com.dailiv.view.profile.mealplan.MealPlanActivity;
+import com.dailiv.view.profile.recipe.RecipeListActivity;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 import com.dailiv.view.register.RegisterActivity;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
@@ -60,5 +61,7 @@ public interface ActivityComponent {
     void inject(OrderHistoryActivity orderHistoryActivity);
 
     void inject(MealPlanActivity mealPlanActivity);
+
+    void inject(RecipeListActivity recipeListActivity);
 
 }

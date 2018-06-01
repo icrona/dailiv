@@ -29,7 +29,9 @@ import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailRespo
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.internal.data.remote.response.location.LocationResponse;
 import com.dailiv.internal.data.remote.response.mealplan.MealPlanResponse;
+import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
 import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
+import com.dailiv.internal.data.remote.response.recipe.Recipe;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
@@ -67,7 +69,10 @@ import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLAN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
 import static com.dailiv.internal.data.remote.IApiConstant.ORDER_HISTORY;
+import static com.dailiv.internal.data.remote.IApiConstant.PROFILE_BY_ID;
+import static com.dailiv.internal.data.remote.IApiConstant.PROFILE_BY_SLUG;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
+import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_PROFILE_ID;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_CATEGORY;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_DETAIL;
 import static com.dailiv.internal.data.remote.IApiConstant.REGISTER;
@@ -188,4 +193,11 @@ public interface IApi {
 
     @GET(MEAL_PLAN)
     Observable<Response<Map<String, MealPlanResponse>>> getMealPlan();
+
+    @GET(PROFILE_BY_SLUG)
+    Observable<Response<ProfileResponse>> getProfileBySlug(@Path("slug") String slug);
+
+    @GET(RECIPE_BY_PROFILE_ID)
+    Observable<Response<List<Recipe>>> getRecipeByProfileId(@Path("id") int id, @Path("type") String type);
+
 }
