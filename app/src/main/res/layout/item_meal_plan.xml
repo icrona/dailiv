@@ -1,59 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
 
     <TextView
         android:id="@+id/tv_meal_plan_day"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        tools:text="Monday"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_border_bottom"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/breakfast"
-        />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_border_bottom">
 
-    <TextView
-        android:id="@+id/tv_meal_plan_breakfast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/breakfast"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/grey_light"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_meal_plan_breakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="French Toast"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lunch"
-        />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_border_bottom">
 
-    <TextView
-        android:id="@+id/tv_meal_plan_lunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lunch"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/grey_light"
+            />
 
+        <TextView
+            android:id="@+id/tv_meal_plan_lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="French Toast"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dinner"
-        />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_border_bottom">
 
-    <TextView
-        android:id="@+id/tv_meal_plan_dinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dinner"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/grey_light"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_meal_plan_dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="French Toast"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/snack"
-        />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_border_bottom">
 
-    <TextView
-        android:id="@+id/tv_meal_plan_snack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/snack"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/grey_light"
+            />
 
+        <TextView
+            android:id="@+id/tv_meal_plan_snack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="French Toast"/>
 
+    </LinearLayout>
 
 </LinearLayout>

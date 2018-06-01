@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.dailiv.App;
 import com.dailiv.R;
@@ -17,6 +18,8 @@ import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -51,6 +54,9 @@ public class MealPlanActivity extends AbstractActivity implements MealPlanView{
     @BindView(R.id.rv_meal_plan)
     RecyclerView rvMealPlan;
 
+    @BindView(R.id.tv_meal_plan_date)
+    TextView tvDate;
+
     private MealPlanAdapter mealPlanAdapter;
 
     @Override
@@ -69,6 +75,7 @@ public class MealPlanActivity extends AbstractActivity implements MealPlanView{
         onAttach();
         setToolbar();
         setAdapter();
+        tvDate.setText(getCurrentWeek());
         presenter.getMealPlan();
     }
 
