@@ -32,8 +32,51 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_empty_order_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_history_red"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_have_no_order_history"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btn_shop_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_red"
+                android:text="@string/no_order_history_shop_now"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:minHeight="22dp"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visibility="gone"
+        android:id="@+id/ll_order_history"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

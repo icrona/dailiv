@@ -82,4 +82,15 @@ public final class Navigator {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         activity.startActivity(intent);
     }
+
+    public void openMainActivityFragment(final Activity activity, final int fragmentIndex) {
+
+        final Intent intent = new Intent(activity, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("fragmentIndex", fragmentIndex);
+        intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        activity.startActivity(intent);
+
+    }
 }

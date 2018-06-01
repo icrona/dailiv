@@ -207,6 +207,12 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         setSearchAdapter();
 
+        final Bundle bundle = getIntent().getExtras();
+
+        if(bundle!= null && bundle.getInt("fragmentIndex", -1) != -1) {
+            navigateTo(bundle.getInt("fragmentIndex"));
+        }
+
     }
 
     private void setReviewDialog() {
