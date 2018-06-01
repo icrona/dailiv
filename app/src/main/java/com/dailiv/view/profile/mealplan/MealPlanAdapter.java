@@ -4,6 +4,7 @@ import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -100,9 +101,15 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapterViewHol
                             public void onClick(View view) {
                                 navigateToRecipe.call(mealPlanRecipe.getSlug());
                             }
+
+                            @Override
+                            public void updateDrawState(TextPaint ds) {
+                                super.updateDrawState(ds);
+                                ds.setUnderlineText(false);
+                            }
                         };
 
-                        ss.setSpan(span, pairIndex.first, pairIndex.second, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        ss.setSpan(span, pairIndex.first, pairIndex.second + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     });
 
             return ss;

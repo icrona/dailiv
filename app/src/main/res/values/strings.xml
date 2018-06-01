@@ -147,4 +147,8 @@
     <string name="you_have_no_order_history">You have no order history</string>
     <string name="no_order_history_shop_now">Shop Now</string>
 
+    <string name="liked_recipes">Liked Recipes</string>
+    <string name="cooked_recipes">Cooked Recipes</string>
+    <string name="news_feed">News Feed</string>
+    <string name="recipe_by_me">Recipe by Me</string>
 </resources>

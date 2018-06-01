@@ -51,6 +51,15 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     @BindString(R.string.meal_plan)
     String sMealPlan;
 
+    @BindString(R.string.liked_recipes)
+    String sLikedRecipes;
+    @BindString(R.string.cooked_recipes)
+    String sCookedRecipes;
+    @BindString(R.string.news_feed)
+    String sNewsFeed;
+    @BindString(R.string.recipe_by_me)
+    String sRecipeByMe;
+
     @Override
     public void inject() {
 
@@ -103,16 +112,37 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
         return Arrays.asList(
                 new ProfileMenu(
-                        sOrderHistory,
-                        R.mipmap.ic_home,
-                        OrderHistoryActivity.class
+                        sRecipeByMe,
+                        R.drawable.ic_recipe_red,
+                        null
+                ),
+                new ProfileMenu(
+                        sLikedRecipes,
+                        R.drawable.ic_like_red,
+                        null
+                ),
+                new ProfileMenu(
+                        sCookedRecipes,
+                        R.drawable.ic_cook_red,
+                        null
                 ),
                 new ProfileMenu(
                         sMealPlan,
-                        R.mipmap.ic_home,
+                        R.drawable.ic_meal_plan_red,
                         MealPlanActivity.class
+                ),
+                new ProfileMenu(
+                        sNewsFeed,
+                        R.drawable.ic_news_feed_red,
+                        null
+                ),
+                new ProfileMenu(
+                        sOrderHistory,
+                        R.drawable.ic_history_red,
+                        OrderHistoryActivity.class
                 )
         );
+
     }
 
     @Override

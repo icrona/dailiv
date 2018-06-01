@@ -143,48 +143,6 @@ public class MealPlanActivity extends AbstractActivity implements MealPlanView{
     @Override
     public void showResponse(Map<String, MealPlanResponse> response) {
 
-        //todo remove response sample
-
-        MealPlanResponse test = response.get("tuesday");
-
-        MealPlanResponse.MealPlanRecipeResponse recipe1 = new MealPlanResponse.MealPlanRecipeResponse();
-
-        recipe1.id = 28;
-        recipe1.userId = 34;
-        recipe1.recipeId = 14;
-        recipe1.date = "2018-05-29";
-        recipe1.category = "Lunch";
-
-        MealPlanResponse.MealPlanRecipeInfoResponse recipeInfo1 = new MealPlanResponse.MealPlanRecipeInfoResponse();
-        recipeInfo1.id = 14;
-        recipeInfo1.name = "Prof. Madge Mitchell Jr.";
-        recipeInfo1.slug = "1522685237-Prof.-Madge-Mitchell-Jr.";
-
-        recipe1.recipe = recipeInfo1;
-
-        MealPlanResponse.MealPlanRecipeResponse recipe2 = new MealPlanResponse.MealPlanRecipeResponse();
-
-        recipe2.id = 31;
-        recipe2.userId = 34;
-        recipe2.recipeId = 13;
-        recipe2.date = "2018-05-29";
-        recipe2.category = "Lunch";
-
-        MealPlanResponse.MealPlanRecipeInfoResponse recipeInfo2 = new MealPlanResponse.MealPlanRecipeInfoResponse();
-        recipeInfo2.id = 13;
-        recipeInfo2.name = "Susie Mitchell";
-        recipeInfo2.slug = "1522685237-Susie-Mitchell";
-
-        recipe2.recipe = recipeInfo2;
-
-        test.lunch = Arrays.asList(recipe1, recipe2);
-
-        response.remove("tuesday");
-
-        response.put("tuesday", test);
-
-        //todo remove till here later
-
         List<MealPlan> mealPlans = mapToList(response, MealPlan::new);
 
         mealPlanAdapter.setMealPlans(mealPlans);

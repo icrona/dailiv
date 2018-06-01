@@ -2,21 +2,30 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:padding="16dp">
 
-    <android.support.v7.widget.RecyclerView
+    <ScrollView
         android:layout_alignParentTop="true"
-        android:id="@+id/rv_profile_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_profile_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </ScrollView>
 
     <Button
         android:layout_alignParentBottom="true"
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:background="@drawable/btn_white"
+        android:minHeight="24dp"
+        android:textAllCaps="false"
         android:text="@string/log_out"/>
     
 </RelativeLayout>

@@ -32,7 +32,16 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileMenuAdapterV
     @Override
     public void onBindViewHolder(ProfileMenuAdapterViewHolder holder, int position) {
 
-        holder.getLayout().setOnClickListener(v -> navigateTo.call(profileMenus.get(holder.getAdapterPosition()).getDestination()));
+        holder.getLayout().setOnClickListener(v -> {
+
+            Class destination = profileMenus.get(holder.getAdapterPosition()).getDestination();
+
+            if(destination!=null) {
+
+                navigateTo.call(destination);
+            }
+
+        });
 
         holder.getTvName().setText(profileMenus.get(holder.getAdapterPosition()).getName());
 
