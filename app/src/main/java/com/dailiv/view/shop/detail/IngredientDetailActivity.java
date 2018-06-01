@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -62,14 +63,23 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
     @BindView(R.id.tv_ingredient_name)
     TextView tvIngredientName;
 
+    @BindView(R.id.tv_ingredient_price)
+    TextView tvIngredientPrice;
+
+    @BindView(R.id.tv_ingredient_unit)
+    TextView tvIngredientUnit;
+
+    @BindView(R.id.tv_ingredient_category)
+    TextView tvIngredientCategory;
+
     @BindView(R.id.ll_ingredient_qty)
     LinearLayout llQuantity;
 
     @BindView(R.id.qv_ingredient)
     QuantityView qvIngredient;
 
-    @BindView(R.id.ll_add_to_cart)
-    LinearLayout llAddToCart;
+    @BindView(R.id.btn_add_to_cart)
+    Button btnAddToCart;
 
     @BindView(R.id.rv_shop)
     RecyclerView rvShop;
@@ -116,7 +126,10 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         //show detail
 
         ingredient = new IngredientIndex(response.ingredient);
-        tvIngredientName.setText(response.ingredient.name);
+        tvIngredientName.setText(ingredient.getName());
+        tvIngredientPrice.setText(ingredient.getPriceString());
+        tvIngredientUnit.setText(ingredient.getMinUnit());
+        tvIngredientCategory.setText(response.ingredient.category);
 
         Glide.get(ivIngredient.getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
@@ -128,7 +141,7 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
                 .dontAnimate()
                 .into(ivIngredient);
 
-        llAddToCart.setOnClickListener(new View.OnClickListener() {
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.setVisibility(View.GONE);
@@ -149,7 +162,7 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
 
                 if(newQuantity == 0) {
                     llQuantity.setVisibility(View.GONE);
-                    llAddToCart.setVisibility(View.VISIBLE);
+                    btnAddToCart.setVisibility(View.VISIBLE);
                     deleteCart(cartId);
                 }
                 else{
@@ -166,12 +179,12 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         });
 
         if(ingredient.isCarted()){
-            llAddToCart.setVisibility(View.GONE);
+            btnAddToCart.setVisibility(View.GONE);
             llQuantity.setVisibility(View.VISIBLE);
             qvIngredient.setQuantity(ingredient.getCartedAmount());
         }
         else{
-            llAddToCart.setVisibility(View.VISIBLE);
+            btnAddToCart.setVisibility(View.VISIBLE);
             llQuantity.setVisibility(View.GONE);
             qvIngredient.setQuantity(0);
         }
