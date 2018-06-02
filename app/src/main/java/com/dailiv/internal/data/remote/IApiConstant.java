@@ -89,4 +89,9 @@ public interface IApiConstant {
     String COOKED_RECIPE = "cooked-recipe";
 
     String RECIPE_BY_ME = "recipe";
+
+    String EDIT_HEADLINE = ACCOUNT + "edit-headline";
+
+    String CHANGE_PROFILE_PHOTO = ACCOUNT + "change-profile-photo";
+
 }

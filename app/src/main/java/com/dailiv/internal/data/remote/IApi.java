@@ -15,6 +15,7 @@ import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
+import com.dailiv.internal.data.remote.request.profile.EdiHeadlineRequest;
 import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
@@ -23,6 +24,7 @@ import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.authentication.AuthenticationResponse;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.checkout.CouponResponse;
+import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
 import com.dailiv.internal.data.remote.response.home.HomeResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
@@ -34,21 +36,24 @@ import com.dailiv.internal.data.remote.response.recipe.AddThoughtResponse;
 import com.dailiv.internal.data.remote.response.recipe.Recipe;
 import com.dailiv.internal.data.remote.response.recipe.RecipeDetailResponse;
 import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
-import com.dailiv.internal.data.remote.response.history.OrderHistoryResponse;
 import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
 import static com.dailiv.internal.data.remote.IApiConstant.ADD_TO_CART;
+import static com.dailiv.internal.data.remote.IApiConstant.CHANGE_PROFILE_PHOTO;
 import static com.dailiv.internal.data.remote.IApiConstant.CHECKOUT;
 import static com.dailiv.internal.data.remote.IApiConstant.CHOOSE_LOCATION;
 import static com.dailiv.internal.data.remote.IApiConstant.COMMENT;
@@ -56,6 +61,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.COOK;
 import static com.dailiv.internal.data.remote.IApiConstant.DELETE_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.DELIVERY_FEE;
 import static com.dailiv.internal.data.remote.IApiConstant.DISCOUNT_COUPON;
+import static com.dailiv.internal.data.remote.IApiConstant.EDIT_HEADLINE;
 import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
@@ -69,7 +75,6 @@ import static com.dailiv.internal.data.remote.IApiConstant.LOGIN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLAN;
 import static com.dailiv.internal.data.remote.IApiConstant.MEAL_PLANNING;
 import static com.dailiv.internal.data.remote.IApiConstant.ORDER_HISTORY;
-import static com.dailiv.internal.data.remote.IApiConstant.PROFILE_BY_ID;
 import static com.dailiv.internal.data.remote.IApiConstant.PROFILE_BY_SLUG;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPES;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_PROFILE_ID;
@@ -199,5 +204,12 @@ public interface IApi {
 
     @GET(RECIPE_BY_PROFILE_ID)
     Observable<Response<List<Recipe>>> getRecipeByProfileId(@Path("id") int id, @Path("type") String type);
+
+    @Multipart
+    @POST(CHANGE_PROFILE_PHOTO)
+    Observable<Response<Boolean>> changeProfilePhoto(@Part() MultipartBody.Part file);
+
+    @POST(EDIT_HEADLINE)
+    Observable<Response<Boolean>> editHeadline(@Body EdiHeadlineRequest request);
 
 }

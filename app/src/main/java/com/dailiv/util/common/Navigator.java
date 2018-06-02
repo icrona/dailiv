@@ -9,11 +9,13 @@ import android.util.Log;
 
 import com.dailiv.BuildConfig;
 import com.dailiv.internal.data.local.pojo.Checkout;
+import com.dailiv.internal.data.local.pojo.EditProfile;
 import com.dailiv.internal.data.local.pojo.ProfileRecipeList;
 import com.dailiv.util.IConstants;
 import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
+import com.dailiv.view.profile.edit.EditProfileActivity;
 import com.dailiv.view.profile.recipe.RecipeListActivity;
 
 import org.parceler.Parcels;
@@ -77,6 +79,14 @@ public final class Navigator {
         final Intent intent = new Intent(activity, RecipeListActivity.class);
         intent.putExtra(IConstants.PROFILE_RECIPE_LIST, Parcels.wrap(profileRecipeList));
         activity.startActivityForResult(intent, IConstants.PROFILE_RECIPE_LIST_REQUEST_CODE);
+
+    }
+
+    public void openEditProfile(final Activity activity, EditProfile editProfile) {
+
+        final Intent intent = new Intent(activity, EditProfileActivity.class);
+        intent.putExtra(IConstants.EDIT_PROFILE, Parcels.wrap(editProfile));
+        activity.startActivityForResult(intent, IConstants.EDIT_PROFILE_REQUEST_CODE);
 
     }
 

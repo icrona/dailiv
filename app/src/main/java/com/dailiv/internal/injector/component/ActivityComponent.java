@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.internal.injector.scope.ActivityContext;
 import com.dailiv.internal.injector.scope.ActivityScope;
+import com.dailiv.view.profile.edit.EditProfileActivity;
 import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.cart.CartActivity;
 import com.dailiv.view.delivery.DeliveryActivity;
@@ -63,5 +64,7 @@ public interface ActivityComponent {
     void inject(MealPlanActivity mealPlanActivity);
 
     void inject(RecipeListActivity recipeListActivity);
+
+    void inject(EditProfileActivity editProfileActivity);
 
 }

@@ -1,5 +1,6 @@
 package com.dailiv.view.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
+import com.dailiv.internal.data.local.pojo.EditProfile;
 import com.dailiv.internal.data.local.pojo.Profile;
 import com.dailiv.internal.data.local.pojo.ProfileMenu;
 import com.dailiv.internal.data.local.pojo.ProfileRecipeList;
@@ -19,6 +21,7 @@ import com.dailiv.internal.injector.module.FragmentModule;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.login.LoginActivity;
+import com.dailiv.view.profile.edit.EditProfileActivity;
 import com.dailiv.view.profile.history.OrderHistoryActivity;
 import com.dailiv.view.profile.mealplan.MealPlanActivity;
 import com.dailiv.view.profile.menu.ProfileMenuAdapter;
@@ -119,7 +122,6 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
         inject();
         onAttach();
         setAdapter();
-        presenter.getProfile();
     }
 
     private void setAdapter() {
@@ -240,6 +242,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     @OnClick(R.id.btn_edit_profile)
     public void editProfile() {
 
+        navigator.openEditProfile(getActivity(), new EditProfile(profile));
 
     }
 
@@ -268,5 +271,11 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
         tvNumOfFollowing.setText(String.valueOf(profile.getNumOfFollowing()));
 
+    }
+
+    @Override
+    public void onResume() {
+        presenter.getProfile();
+        super.onResume();
     }
 }

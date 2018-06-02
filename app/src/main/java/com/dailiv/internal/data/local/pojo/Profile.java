@@ -23,6 +23,10 @@ public class Profile {
 
     private String headline;
 
+    private String email;
+
+    private String phoneNumber;
+
     private int numOfRecipe;
 
     private int numOfFollower;
@@ -35,6 +39,8 @@ public class Profile {
         this.userName = response.user.getFullname();
         this.userPhoto = response.user.photo;
         this.headline = response.user.headline;
+        this.email = response.user.email;
+        this.phoneNumber = response.user.phone;
         this.numOfRecipe = response.totalRecipeByMe;
         this.numOfFollower = response.totalFollower;
         this.numOfFollowing = response.totalFollowing;

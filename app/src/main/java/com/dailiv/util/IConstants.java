@@ -17,11 +17,15 @@ public interface IConstants {
 
     String CHECKOUT = "checkout";
 
+    String EDIT_PROFILE = "edit-profile";
+
     String PROFILE_RECIPE_LIST = "profile_recipe_list";
 
     int CHECKOUT_REQUEST_CODE = 1;
 
     int PROFILE_RECIPE_LIST_REQUEST_CODE = 2;
+
+    int EDIT_PROFILE_REQUEST_CODE = 3;
 
     interface FragmentIndex {
 
@@ -32,6 +36,9 @@ public interface IConstants {
         int PROFILE = 4;
     }
 
+    int PICK_PHOTO_REQUEST = 4;
+
+    int READ_EXTERNAL_PERMISSION = 5;
 
 
 }
