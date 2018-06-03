@@ -34,12 +34,12 @@
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="16dp"
-        android:layout_below="@+id/abl_meal_plan">
+        android:layout_below="@+id/abl_meal_plan"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_meal_plan_date"
@@ -47,14 +47,35 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="16dp"
-            android:id="@+id/rv_meal_plan"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
 
-        </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/rv_meal_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_below="@id/rv_meal_plan"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="@string/meal_plan_note"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>

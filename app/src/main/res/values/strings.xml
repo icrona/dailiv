@@ -164,4 +164,6 @@
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
 
+    <string name="meal_plan_note">* Perencanaan makanan yang telah dibuat akan direset setiap hari Minggu tukul 19.00 WIB.</string>
+
 </resources>
