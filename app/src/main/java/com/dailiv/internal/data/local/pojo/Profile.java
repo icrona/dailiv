@@ -17,6 +17,10 @@ public class Profile {
 
     private int userId;
 
+    private String firstName;
+
+    private String lastName;
+
     private String userName;
 
     private String userPhoto;
@@ -36,6 +40,8 @@ public class Profile {
     public Profile(ProfileResponse response) {
 
         this.userId = response.user.id;
+        this.firstName =response.user.firstname;
+        this.lastName =response.user.lastname;
         this.userName = response.user.getFullname();
         this.userPhoto = response.user.photo;
         this.headline = response.user.headline;

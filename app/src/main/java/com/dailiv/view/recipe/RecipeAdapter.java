@@ -12,10 +12,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
 import com.dailiv.view.custom.RoundedCornersTransformation;
+import com.dailiv.view.profile.other.OtherProfileActivity;
+import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
 import java.util.List;
 
 import rx.functions.Action1;
+import rx.functions.Action2;
 
 import static com.dailiv.App.getContext;
 
@@ -29,11 +32,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
 
     private Action1<Integer> addToMealPlanning;
 
-    private Action1<String> navigateTo;
+    private Action2<Class, String> navigateTo;
 
     private int radius;
 
-    public RecipeAdapter(List<RecipeIndex> recipes, Action1<Integer> addToMealPlanning, Action1<String> navigateTo) {
+    public RecipeAdapter(List<RecipeIndex> recipes, Action1<Integer> addToMealPlanning, Action2<Class, String> navigateTo) {
         this.recipes = recipes;
         this.addToMealPlanning = addToMealPlanning;
         this.navigateTo = navigateTo;
@@ -76,7 +79,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
             addToMealPlanning.call(recipes.get(holder.getAdapterPosition()).getId());
         });
 
-        holder.getLayout().setOnClickListener(v -> navigateTo.call(recipes.get(holder.getAdapterPosition()).getSlug()));
+        holder.getLayout().setOnClickListener(v -> navigateTo.call(RecipeDetailActivity.class, recipes.get(holder.getAdapterPosition()).getSlug()));
 
         holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
 
@@ -89,6 +92,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
                 .error(R.mipmap.ic_account)
                 .dontAnimate()
                 .into(holder.getCivRecipeUserPhoto());
+
+        holder.getCivRecipeUserPhoto().setOnClickListener(v -> navigateTo.call(OtherProfileActivity.class, recipes.get(holder.getAdapterPosition()).getUserSlug()));
+
 
         holder.getTvRecipeLike().setText(String.valueOf(recipes.get(holder.getAdapterPosition()).getLike()));
 

@@ -45,6 +45,8 @@ public class RecipeIndex {
 
     private int view;
 
+    private String userSlug;
+
     public void addLike() {
         setLike(getLike() + 1);
     }
@@ -63,7 +65,8 @@ public class RecipeIndex {
                 recipe.difficulty,
                 mapListToList(recipe.category, Category::getName),
                 recipe.totalLike,
-                recipe.totalView
+                recipe.totalView,
+                recipe.user.slug
         );
     }
 
@@ -77,7 +80,8 @@ public class RecipeIndex {
                 recipe.difficulty,
                 mapListToList(recipe.category, Category::getName),
                 recipe.totalLike,
-                recipe.totalView
+                recipe.totalView,
+                user.slug
         );
     }
 
@@ -91,7 +95,8 @@ public class RecipeIndex {
                 recipe.difficulty,
                 singletonList(category),
                 recipe.totalLike,
-                recipe.totalView
+                recipe.totalView,
+                recipe.user.slug
         );
     }
 

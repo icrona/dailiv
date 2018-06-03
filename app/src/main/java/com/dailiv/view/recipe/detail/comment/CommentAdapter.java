@@ -10,22 +10,27 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeDetail;
+import com.dailiv.view.profile.other.OtherProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import rx.functions.Action2;
 
 /**
  * Created by aldo on 5/6/18.
  */
 
-@NoArgsConstructor
+@AllArgsConstructor
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapterViewHolder>{
 
     @Setter
-    private List<RecipeDetail.Comment> comments = new ArrayList<>();
+    private List<RecipeDetail.Comment> comments;
+
+    private Action2<Class, String> navigateTo;
 
     @Override
     public CommentAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,6 +58,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapterViewHolde
                 .error(R.mipmap.ic_home)
                 .dontAnimate()
                 .into(holder.getUserPhoto());
+
+        holder.getUserPhoto().setOnClickListener(v -> navigateTo.call(OtherProfileActivity.class, comments.get(holder.getAdapterPosition()).getUserSlug()));
+
     }
 
     @Override

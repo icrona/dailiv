@@ -118,6 +118,8 @@ public class RecipeDetail extends RecipeIndex{
 
         private String commentTime;
 
+        private String userSlug;
+
         public String getImageUrl() {
 
             return getUserImageUrl(getUserPhoto());
@@ -128,12 +130,12 @@ public class RecipeDetail extends RecipeIndex{
 
             this(
                     response.thoughtId,
-                    //todo
-                    0,
+                    response.userId,
                     response.name,
                     response.thought,
                     response.photo,
-                    response.date
+                    response.date,
+                    response.slug
             );
         }
     }

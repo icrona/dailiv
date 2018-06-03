@@ -153,14 +153,14 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         setFilterSpinner();
     }
 
-    private void navigateToDetail(String identifier) {
+    private void navigateTo(Class className, String identifier) {
 
-        navigator.openDetails(getActivity(), RecipeDetailActivity.class, identifier);
+        navigator.openDetails(getActivity(), className, identifier);
     }
 
     private void setAdapter() {
 
-        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning, this::navigateToDetail);
+        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning, this::navigateTo);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 

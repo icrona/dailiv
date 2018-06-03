@@ -1,10 +1,13 @@
-package com.dailiv.view.profile;
+package com.dailiv.view.profile.other;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,18 +15,14 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
-import com.dailiv.internal.data.local.pojo.EditProfile;
 import com.dailiv.internal.data.local.pojo.Profile;
 import com.dailiv.internal.data.local.pojo.ProfileMenu;
 import com.dailiv.internal.data.local.pojo.ProfileRecipeList;
 import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
-import com.dailiv.internal.injector.component.DaggerFragmentComponent;
-import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.internal.injector.component.DaggerActivityComponent;
+import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Navigator;
-import com.dailiv.view.base.AbstractFragment;
-import com.dailiv.view.login.LoginActivity;
-import com.dailiv.view.profile.history.OrderHistoryActivity;
-import com.dailiv.view.profile.mealplan.MealPlanActivity;
+import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.profile.menu.ProfileMenuAdapter;
 
 import java.util.Arrays;
@@ -39,39 +38,35 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.dailiv.internal.data.remote.IApiConstant.COOKED_RECIPE;
 import static com.dailiv.internal.data.remote.IApiConstant.LIKED_RECIPE;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_ME;
-import static com.dailiv.util.common.Preferences.deleteAccessTokenAndSlug;
+import static com.dailiv.util.IConstants.FragmentIndex.PROFILE;
+import static com.dailiv.util.common.Preferences.getAccountSlug;
 
 /**
- * Created by aldo on 4/1/18.
+ * Created by aldo on 6/3/18.
  */
 
-public class ProfileFragment extends AbstractFragment implements ProfileView {
+public class OtherProfileActivity extends AbstractActivity implements OtherProfileView {
 
     @Inject
-    ProfilePresenter presenter;
+    OtherProfilePresenter presenter;
 
     @Inject
     Navigator navigator;
 
-    @BindView(R.id.rv_profile_menu)
-    RecyclerView rvProfileMenu;
-
-    @BindString(R.string.order_history)
-    String sOrderHistory;
-
-    @BindString(R.string.meal_plan)
-    String sMealPlan;
+    @BindView(R.id.toolbar_profile)
+    Toolbar toolbar;
 
     @BindString(R.string.liked_recipes)
     String sLikedRecipes;
     @BindString(R.string.cooked_recipes)
     String sCookedRecipes;
-    @BindString(R.string.news_feed)
-    String sNewsFeed;
-    @BindString(R.string.recipe_by_me)
-    String sRecipeByMe;
+    @BindString(R.string.recipe_by_user)
+    String sRecipeByUser;
 
     private Profile profile;
+
+    @BindView(R.id.rv_profile_menu)
+    RecyclerView rvProfileMenu;
 
     @BindView(R.id.civ_user_photo)
     CircleImageView civUserPhoto;
@@ -91,15 +86,24 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     @BindView(R.id.tv_num_of_following)
     TextView tvNumOfFollowing;
 
-    @BindView(R.id.btn_edit_profile)
-    Button btnEdit;
+    @BindView(R.id.ll_follow)
+    LinearLayout llFollow;
+
+    @Override
+    public void onDetach() {
+        presenter.onDetach();
+    }
+
+    @Override
+    public void onShowProgressBar() {
+
+    }
 
     @Override
     public void inject() {
-
-        DaggerFragmentComponent.builder()
+        DaggerActivityComponent.builder()
                 .applicationComponent(App.getComponent())
-                .fragmentModule(new FragmentModule(this))
+                .activityModule(new ActivityModule(this))
                 .build()
                 .inject(this);
     }
@@ -110,22 +114,32 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        presenter.onDetach();
+    public void onHideProgressBar() {
+
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.fragment_profile;
+        return R.layout.activity_other_profile;
     }
 
     @Override
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
-        setAdapter();
-        btnEdit.setVisibility(View.VISIBLE);
+        setToolbar();
+
+        final Bundle bundle = getIntent().getExtras();
+
+        String userSlug = bundle.getString("identifier");
+        if(userSlug.equals(getAccountSlug())){
+
+            navigator.openMainActivityFragment(this, PROFILE);
+        }
+        else{
+            presenter.getProfile(userSlug);
+            llFollow.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setAdapter() {
@@ -134,7 +148,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                 getProfileMenu()
         );
 
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         rvProfileMenu.setLayoutManager(linearLayoutManager);
 
@@ -146,7 +160,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
         return Arrays.asList(
                 new ProfileMenu(
-                        sRecipeByMe,
+                        getRecipeByUserString(),
                         R.drawable.ic_recipe_red,
                         this::openRecipeByMe
                 ),
@@ -159,32 +173,14 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                         sCookedRecipes,
                         R.drawable.ic_cook_red,
                         this::openCookedRecipe
-                ),
-                new ProfileMenu(
-                        sMealPlan,
-                        R.drawable.ic_meal_plan_red,
-                        this::openMealPlan
-                ),
-                new ProfileMenu(
-                        sNewsFeed,
-                        R.drawable.ic_news_feed_red,
-                        this::openNewsFeed
-                ),
-                new ProfileMenu(
-                        sOrderHistory,
-                        R.drawable.ic_history_red,
-                        this::openOrderHistory
                 )
         );
 
     }
 
-    public void openMealPlan() {
-        navigateTo(MealPlanActivity.class);
-    }
+    private String getRecipeByUserString() {
 
-    public void openOrderHistory() {
-        navigateTo(OrderHistoryActivity.class);
+       return String.format(sRecipeByUser, profile.getFirstName());
     }
 
     public void openLikedRecipe() {
@@ -207,47 +203,13 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
         navigateToRecipeList(new ProfileRecipeList(
                 profile.getUserId(),
                 RECIPE_BY_ME,
-                sRecipeByMe
+                getRecipeByUserString()
         ));
-    }
-
-    public void openNewsFeed() {
-
-    }
-
-    @Override
-    public void onShowProgressBar() {
-
-    }
-
-    @Override
-    public void onHideProgressBar() {
-
     }
 
     private void navigateToRecipeList(ProfileRecipeList profileRecipeList) {
 
-        navigator.openProfileRecipeList(getActivity(), profileRecipeList);
-    }
-
-    private void navigateTo(Class destination) {
-
-        navigator.openActivity(getActivity(), destination);
-    }
-
-    @OnClick(R.id.btn_logout)
-    public void logout() {
-
-        deleteAccessTokenAndSlug();
-
-        navigator.openActivityWitClearTask(getActivity(), LoginActivity.class);
-    }
-
-    @OnClick(R.id.btn_edit_profile)
-    public void editProfile() {
-
-        navigator.openEditProfile(getActivity(), new EditProfile(profile));
-
+        navigator.openProfileRecipeList(this, profileRecipeList);
     }
 
     @Override
@@ -275,11 +237,36 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
         tvNumOfFollowing.setText(String.valueOf(profile.getNumOfFollowing()));
 
+        setAdapter();
+    }
+
+    private void setToolbar() {
+        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbar.setNavigationIcon(
+                ContextCompat.getDrawable(this, R.drawable.ic_back));
+        toolbar.hideOverflowMenu();
+        setSupportActionBar(toolbar);
     }
 
     @Override
-    public void onResume() {
-        presenter.getProfile();
-        super.onResume();
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
+
+    @OnClick(R.id.btn_follow)
+    public void follow() {
+        presenter.follow(profile.getUserId());
+    }
+
+    @OnClick(R.id.btn_unfollow)
+    public void unfollow() {
+        presenter.unfollow(profile.getUserId());
+    }
+
 }

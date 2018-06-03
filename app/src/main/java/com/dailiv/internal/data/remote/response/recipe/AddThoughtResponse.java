@@ -23,13 +23,17 @@ public class AddThoughtResponse {
     @JsonProperty(value = "thought_id")
     public int thoughtId;
 
+    @JsonProperty(value = "user_id")
+    public int userId;
+
 
 //    {
-//        "name": "osel",
+//        "name": "Osel Wang",
 //            "date": "1 second ago",
-//            "thought": "love this recipe a",
-//            "photo": "profile-photo/default-avatar.png",
+//            "thought": "love this recipe",
+//            "photo": "profile-photo/34/IMG-20170811-WA0000-osel-wang-123121212.jpg",
 //            "slug": "osel-wang-123121212",
-//            "thought_id": 3
+//            "thought_id": 18,
+//            "user_id": 34
 //    }
 }

@@ -10,12 +10,14 @@ import com.bumptech.glide.MemoryCategory;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeDetail;
+import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import rx.functions.Action1;
+import rx.functions.Action2;
 
 /**
  * Created by aldo on 5/6/18.
@@ -27,7 +29,7 @@ public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeView
     @Setter
     private List<RecipeDetail.RelatedRecipe> relatedRecipes;
 
-    private Action1<String> navigateTo;
+    private Action2<Class, String> navigateTo;
 
     @Override
     public RelatedRecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,7 +46,7 @@ public class RelatedRecipeAdapter extends RecyclerView.Adapter<RelatedRecipeView
 
         holder.getLayout().setBackgroundResource(getBackgroundId(holder.getAdapterPosition()));
 
-        holder.getSeeRecipe().setOnClickListener(v -> navigateTo.call(String.valueOf(relatedRecipes.get(holder.getAdapterPosition()).getSlug())));
+        holder.getSeeRecipe().setOnClickListener(v -> navigateTo.call(RecipeDetailActivity.class, String.valueOf(relatedRecipes.get(holder.getAdapterPosition()).getSlug())));
 
         Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
 

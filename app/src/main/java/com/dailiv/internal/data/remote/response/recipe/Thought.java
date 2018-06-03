@@ -37,7 +37,8 @@ public class Thought extends BaseResponse {
                 user.getFullname(),
                 body,
                 user.photo,
-                diffForHuman
+                diffForHuman,
+                user.slug
         );
     }
 }

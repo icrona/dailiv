@@ -16,6 +16,7 @@ import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.request.location.AddLocationRequest;
 import com.dailiv.internal.data.remote.request.location.ChooseLocationRequest;
 import com.dailiv.internal.data.remote.request.profile.EdiHeadlineRequest;
+import com.dailiv.internal.data.remote.request.profile.FollowRequest;
 import com.dailiv.internal.data.remote.request.recipe.MealPlanningRequest;
 import com.dailiv.internal.data.remote.request.recipe.RecipeBaseRequest;
 import com.dailiv.internal.data.remote.request.recipe.ThoughtRequest;
@@ -63,6 +64,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.DELIVERY_FEE;
 import static com.dailiv.internal.data.remote.IApiConstant.DISCOUNT_COUPON;
 import static com.dailiv.internal.data.remote.IApiConstant.EDIT_HEADLINE;
 import static com.dailiv.internal.data.remote.IApiConstant.FB_AUTH;
+import static com.dailiv.internal.data.remote.IApiConstant.FOLLOW;
 import static com.dailiv.internal.data.remote.IApiConstant.GET_CART;
 import static com.dailiv.internal.data.remote.IApiConstant.GOOGLE_AUTH;
 import static com.dailiv.internal.data.remote.IApiConstant.HOME;
@@ -85,6 +87,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.REVIEW_NEEDED;
 import static com.dailiv.internal.data.remote.IApiConstant.SEARCH;
 import static com.dailiv.internal.data.remote.IApiConstant.SUBMIT_REVIEW;
 import static com.dailiv.internal.data.remote.IApiConstant.UNCOOK;
+import static com.dailiv.internal.data.remote.IApiConstant.UNFOLLOW;
 import static com.dailiv.internal.data.remote.IApiConstant.UNLIKE;
 import static com.dailiv.internal.data.remote.IApiConstant.UPDATE_CART;
 
@@ -211,5 +214,11 @@ public interface IApi {
 
     @POST(EDIT_HEADLINE)
     Observable<Response<Boolean>> editHeadline(@Body EdiHeadlineRequest request);
+
+    @POST(FOLLOW)
+    Observable<Response<Boolean>> followUser(@Body FollowRequest request);
+
+    @POST(UNFOLLOW)
+    Observable<Response<Boolean>> unfollowUser(@Body FollowRequest request);
 
 }

@@ -1,7 +1,6 @@
 package com.dailiv.view.home;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,11 +27,10 @@ import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.RoundedCornersTransformation;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.main.MainActivity;
+import com.dailiv.view.profile.other.OtherProfileActivity;
 import com.dailiv.view.recipe.RecipeAdapter;
-import com.dailiv.view.recipe.RecipeFragment;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 import com.dailiv.view.shop.ShopAdapter;
-import com.dailiv.view.shop.ShopFragment;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,10 +45,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.annimon.stream.Collectors.toList;
-import static com.dailiv.App.getContext;
 import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
 import static com.dailiv.util.IConstants.FragmentIndex.SHOP;
-import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static com.dailiv.util.common.Preferences.getLocation;
 
 /**
@@ -148,7 +144,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     private void setAdapter() {
 
-        recipeAdapter = new RecipeAdapter(new ArrayList<>(), null, this::navigateToRecipeDetail);
+        recipeAdapter = new RecipeAdapter(new ArrayList<>(), null, this::navigateTo);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
@@ -175,9 +171,9 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     }
 
-    private void navigateToRecipeDetail(String identifier) {
+    private void navigateTo(Class className, String identifier) {
 
-        navigator.openDetails(getActivity(), RecipeDetailActivity.class, identifier);
+        navigator.openDetails(getActivity(), className, identifier);
     }
 
     private void navigateToIngredientDetail(String identifier) {
@@ -202,7 +198,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
     public void showRecipeOfTheDay(RecipeOfTheDay recipeOfTheDay) {
 
-        llRecipeOfTheDay.setOnClickListener(v -> navigateToRecipeDetail(recipeOfTheDay.getSlug()));
+        llRecipeOfTheDay.setOnClickListener(v -> navigateTo(RecipeDetailActivity.class, recipeOfTheDay.getSlug()));
 
         Glide.get(ivRecipeOfTheDay.getContext()).setMemoryCategory(MemoryCategory.HIGH);
 
@@ -240,6 +236,8 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 .error(R.mipmap.ic_account)
                 .dontAnimate()
                 .into(civRecipeOfTheDayUser);
+
+        civRecipeOfTheDayUser.setOnClickListener(v -> navigateTo(OtherProfileActivity.class, recipeOfTheDay.getUserSlug()));
 
         tvRecipeOfTheDayLike.setText(String.valueOf(recipeOfTheDay.getLike()));
 

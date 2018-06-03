@@ -121,7 +121,7 @@ public class RecipeListActivity extends AbstractActivity implements RecipeListVi
 
     private void setAdapter() {
 
-        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning, this::navigateToDetail);
+        recipeAdapter = new RecipeAdapter(new ArrayList<>(), this::addToMealPlanning, this::navigateTo);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
@@ -171,9 +171,9 @@ public class RecipeListActivity extends AbstractActivity implements RecipeListVi
         mealPlanningDialog.show(recipeId);
     }
 
-    private void navigateToDetail(String identifier) {
+    private void navigateTo(Class className, String identifier) {
 
-        navigator.openDetails(this, RecipeDetailActivity.class, identifier);
+        navigator.openDetails(this, className, identifier);
     }
 
 

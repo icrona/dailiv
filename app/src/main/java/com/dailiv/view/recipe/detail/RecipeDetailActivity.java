@@ -32,6 +32,7 @@ import com.dailiv.view.custom.ExpandableListAdapter;
 import com.dailiv.view.custom.MealPlanningDialog;
 import com.dailiv.view.custom.NonScrollExpandableListView;
 import com.dailiv.view.custom.RecyclerViewDecorator;
+import com.dailiv.view.profile.other.OtherProfileActivity;
 import com.dailiv.view.recipe.detail.comment.CommentAdapter;
 import com.dailiv.view.recipe.detail.related.RelatedRecipeAdapter;
 
@@ -52,7 +53,6 @@ import me.grantland.widget.AutofitTextView;
 import rx.functions.Action1;
 
 import static com.annimon.stream.Collectors.toList;
-import static java.util.Collections.singletonList;
 
 /**
  * Created by aldo on 4/29/18.
@@ -198,6 +198,8 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
                 .dontAnimate()
                 .into(civUserPhoto);
 
+        civUserPhoto.setOnClickListener(v -> navigateTo(OtherProfileActivity.class, recipeDetail.getUserSlug()));
+
         tvRecipeUser.setText(recipeDetail.getUsername());
 
         Glide.get(ivRecipe.getContext()).setMemoryCategory(MemoryCategory.HIGH);
@@ -301,7 +303,7 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
         relatedRecipeAdapter = new RelatedRecipeAdapter(
                 new ArrayList<>(),
-                this::navigateToDetail
+                this::navigateTo
         );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -309,7 +311,7 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
         rvRelatedRecipe.setAdapter(relatedRecipeAdapter);
 
-        commentAdapter = new CommentAdapter();
+        commentAdapter = new CommentAdapter(new ArrayList<>(), this::navigateTo);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
@@ -340,9 +342,9 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         return super.onOptionsItemSelected(item);
     }
 
-    private void navigateToDetail(String identifier) {
+    private void navigateTo(Class className, String identifier) {
 
-        navigator.openDetails(this, RecipeDetailActivity.class, identifier);
+        navigator.openDetails(this, className, identifier);
     }
 
     @OnClick(R.id.btn_add_comment)

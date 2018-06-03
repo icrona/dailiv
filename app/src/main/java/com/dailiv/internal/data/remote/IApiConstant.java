@@ -94,4 +94,8 @@ public interface IApiConstant {
 
     String CHANGE_PROFILE_PHOTO = ACCOUNT + "change-profile-photo";
 
+    String FOLLOW = ACCOUNT + "follow-user";
+
+    String UNFOLLOW = ACCOUNT + "unfollow-user";
+
 }
