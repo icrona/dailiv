@@ -64,6 +64,7 @@
                 android:visibility="gone">
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btn_follow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
                     />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btn_unfollow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

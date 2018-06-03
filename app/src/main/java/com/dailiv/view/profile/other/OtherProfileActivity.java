@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -88,6 +89,12 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
 
     @BindView(R.id.ll_follow)
     LinearLayout llFollow;
+
+    @BindView(R.id.btn_follow)
+    Button btnFollow;
+
+    @BindView(R.id.btn_unfollow)
+    Button btnUnfollow;
 
     @Override
     public void onDetach() {
@@ -237,6 +244,15 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
 
         tvNumOfFollowing.setText(String.valueOf(profile.getNumOfFollowing()));
 
+        if(profile.isFollowed()){
+
+            btnUnfollow.setVisibility(View.VISIBLE);
+        }
+
+        else{
+            btnFollow.setVisibility(View.VISIBLE);
+        }
+
         setAdapter();
     }
 
@@ -262,11 +278,15 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
     @OnClick(R.id.btn_follow)
     public void follow() {
         presenter.follow(profile.getUserId());
+        btnFollow.setVisibility(View.GONE);
+        btnUnfollow.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.btn_unfollow)
     public void unfollow() {
         presenter.unfollow(profile.getUserId());
+        btnUnfollow.setVisibility(View.GONE);
+        btnFollow.setVisibility(View.VISIBLE);
     }
 
 }

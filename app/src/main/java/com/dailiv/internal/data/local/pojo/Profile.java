@@ -37,6 +37,8 @@ public class Profile {
 
     private int numOfFollowing;
 
+    private boolean followed;
+
     public Profile(ProfileResponse response) {
 
         this.userId = response.user.id;
@@ -50,6 +52,7 @@ public class Profile {
         this.numOfRecipe = response.totalRecipeByMe;
         this.numOfFollower = response.totalFollower;
         this.numOfFollowing = response.totalFollowing;
+        this.followed = response.followed;
 
     }
 

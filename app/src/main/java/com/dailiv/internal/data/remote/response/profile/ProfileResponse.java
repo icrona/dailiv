@@ -22,4 +22,6 @@ public class ProfileResponse {
     @JsonProperty(value = "total_following")
     public int totalFollowing;
 
+    public boolean followed;
+
 }
