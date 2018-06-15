@@ -5,20 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeDetail;
 import com.dailiv.view.profile.other.OtherProfileActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import rx.functions.Action2;
+
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 5/6/18.
@@ -49,15 +46,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapterViewHolde
 
         holder.getCommentTime().setText(comments.get(holder.getAdapterPosition()).getCommentTime());
 
-        Glide.get(holder.getUserPhoto().getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(holder.getUserPhoto().getContext())
-                .load(comments.get(holder.getAdapterPosition()).getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .into(holder.getUserPhoto());
+        glide(holder.getUserPhoto(), comments.get(holder.getAdapterPosition()).getImageUrl());
 
         holder.getUserPhoto().setOnClickListener(v -> navigateTo.call(OtherProfileActivity.class, comments.get(holder.getAdapterPosition()).getUserSlug()));
 

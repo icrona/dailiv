@@ -3,7 +3,6 @@ package com.dailiv.view.main;
 import com.dailiv.internal.data.local.pojo.SearchResult;
 import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 import com.dailiv.view.base.IBaseView;
-import com.dailiv.view.base.IView;
 
 import java.util.List;
 

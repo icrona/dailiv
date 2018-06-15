@@ -90,6 +90,7 @@
                 app:qv_removeButtonTextColor="@color/black"
                 app:qv_quantityBackground="@android:color/transparent"
                 app:qv_quantityTextColor="@color/black"
+                app:qv_quantityDialog="false"
                 >
             </me.himanshusoni.quantityview.QuantityView>
         </RelativeLayout>

@@ -21,7 +21,6 @@ import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.MealPlanningDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.recipe.RecipeAdapter;
-import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
 import org.parceler.Parcels;
 

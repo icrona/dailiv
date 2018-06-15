@@ -6,9 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.dailiv.util.common.Common;
-import com.dailiv.util.common.Navigator;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

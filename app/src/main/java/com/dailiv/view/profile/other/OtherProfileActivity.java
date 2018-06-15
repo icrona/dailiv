@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Profile;
@@ -40,6 +37,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.COOKED_RECIPE;
 import static com.dailiv.internal.data.remote.IApiConstant.LIKED_RECIPE;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_ME;
 import static com.dailiv.util.IConstants.FragmentIndex.PROFILE;
+import static com.dailiv.util.common.GlideUtil.glide;
 import static com.dailiv.util.common.Preferences.getAccountSlug;
 
 /**
@@ -224,15 +222,7 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
 
         profile = new Profile(response);
 
-        Glide.get(civUserPhoto.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(civUserPhoto.getContext())
-                .load(profile.getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(civUserPhoto);
+        glide(civUserPhoto, profile.getImageUrl());
 
         tvName.setText(profile.getUserName());
 

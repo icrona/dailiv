@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dailiv.util.common.Common;
-import com.dailiv.util.common.Navigator;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

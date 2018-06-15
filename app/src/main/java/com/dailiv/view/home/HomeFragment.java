@@ -10,9 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
@@ -24,7 +21,6 @@ import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.custom.RecyclerViewDecorator;
-import com.dailiv.view.custom.RoundedCornersTransformation;
 import com.dailiv.view.location.LocationActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.profile.other.OtherProfileActivity;
@@ -47,6 +43,8 @@ import butterknife.OnClick;
 import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.IConstants.FragmentIndex.RECIPE;
 import static com.dailiv.util.IConstants.FragmentIndex.SHOP;
+import static com.dailiv.util.common.GlideUtil.glide;
+import static com.dailiv.util.common.GlideUtil.glideRounded;
 import static com.dailiv.util.common.Preferences.getLocation;
 
 /**
@@ -200,16 +198,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
         llRecipeOfTheDay.setOnClickListener(v -> navigateTo(RecipeDetailActivity.class, recipeOfTheDay.getSlug()));
 
-        Glide.get(ivRecipeOfTheDay.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(ivRecipeOfTheDay.getContext())
-                .load(recipeOfTheDay.getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .bitmapTransform(new RoundedCornersTransformation(getContext(), getContext().getResources().getDimensionPixelOffset(R.dimen.xs), 0, RoundedCornersTransformation.CornerType.TOP))
-                .dontAnimate()
-                .into(ivRecipeOfTheDay);
+        glideRounded(ivRecipeOfTheDay, recipeOfTheDay.getImageUrl());
 
         tvRecipeOfTheDayName.setText(recipeOfTheDay.getRecipeName());
 
@@ -227,15 +216,7 @@ public class HomeFragment extends AbstractFragment implements HomeView{
 
         tvRecipeOfTheDayUser.setText(recipeOfTheDay.getUsername());
 
-        Glide.get(civRecipeOfTheDayUser.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(civRecipeOfTheDayUser.getContext())
-                .load(recipeOfTheDay.getUserPhotoUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(civRecipeOfTheDayUser);
+        glide(civRecipeOfTheDayUser, recipeOfTheDay.getUserPhotoUrl());
 
         civRecipeOfTheDayUser.setOnClickListener(v -> navigateTo(OtherProfileActivity.class, recipeOfTheDay.getUserSlug()));
 

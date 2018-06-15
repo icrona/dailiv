@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.annimon.stream.Stream;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Cart;
 
@@ -20,6 +17,8 @@ import lombok.Setter;
 import me.himanshusoni.quantityview.QuantityView;
 import rx.functions.Action1;
 import rx.functions.Action2;
+
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 4/28/18.
@@ -55,15 +54,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapterViewHolder>{
 
         holder.getTvUnit().setText(cartList.get(holder.getAdapterPosition()).getMinUnit());
 
-        Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(holder.getImage().getContext())
-                .load(cartList.get(holder.getAdapterPosition()).getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .into(holder.getImage());
+        glide(holder.getImage(), cartList.get(holder.getAdapterPosition()).getImageUrl());
 
         holder.getQvCart().setQuantity(cartList.get(holder.getAdapterPosition()).getAmount());
 

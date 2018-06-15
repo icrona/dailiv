@@ -19,10 +19,7 @@ import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

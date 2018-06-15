@@ -20,9 +20,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.EditProfile;
@@ -44,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.dailiv.util.IConstants.PICK_PHOTO_REQUEST;
 import static com.dailiv.util.IConstants.READ_EXTERNAL_PERMISSION;
 import static com.dailiv.util.common.FileUtil.getFile;
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 6/2/18.
@@ -156,15 +154,7 @@ public class EditProfileActivity extends AbstractActivity implements EditProfile
 
         editProfile = Parcels.unwrap(getIntent().getParcelableExtra(IConstants.EDIT_PROFILE));
 
-        Glide.get(civUserPhoto.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(civUserPhoto.getContext())
-                .load(editProfile.getPhotoUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(civUserPhoto);
+        glide(civUserPhoto, editProfile.getPhotoUrl());
 
         tvUsername.setText(editProfile.getFullName());
 

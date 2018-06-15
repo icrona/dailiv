@@ -12,8 +12,6 @@ import javax.inject.Named;
 import rx.functions.Action0;
 import rx.functions.Action1;
 
-import static com.dailiv.util.common.Preferences.getAccountSlug;
-
 /**
  * Created by aldo on 6/3/18.
  */

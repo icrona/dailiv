@@ -11,7 +11,6 @@ import com.dailiv.internal.data.local.pojo.ProfileMenu;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import rx.functions.Action1;
 
 /**
  * Created by aldo on 5/12/18.

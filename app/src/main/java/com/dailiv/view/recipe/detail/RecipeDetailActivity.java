@@ -14,9 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.MealPlanning;
@@ -53,6 +50,7 @@ import me.grantland.widget.AutofitTextView;
 import rx.functions.Action1;
 
 import static com.annimon.stream.Collectors.toList;
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 4/29/18.
@@ -188,30 +186,13 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
         tvRecipeInfo.setText(Html.fromHtml(info));
         tvRecipeDescription.setText(recipeDetail.getDescription());
 
-        Glide.get(civUserPhoto.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(civUserPhoto.getContext())
-                .load(recipeDetail.getUserPhotoUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(civUserPhoto);
+        glide(civUserPhoto, recipeDetail.getUserPhotoUrl());
 
         civUserPhoto.setOnClickListener(v -> navigateTo(OtherProfileActivity.class, recipeDetail.getUserSlug()));
 
         tvRecipeUser.setText(recipeDetail.getUsername());
 
-        Glide.get(ivRecipe.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(ivRecipe.getContext())
-                .load(recipeDetail.getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .into(ivRecipe);
-
+        glide(ivRecipe, recipeDetail.getImageUrl());
 
         updateLikeButton();
         updateCookButton();

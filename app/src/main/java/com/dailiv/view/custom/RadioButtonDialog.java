@@ -1,12 +1,8 @@
 package com.dailiv.view.custom;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Difficulty;

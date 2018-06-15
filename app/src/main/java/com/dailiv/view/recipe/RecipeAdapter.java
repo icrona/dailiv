@@ -1,17 +1,12 @@
 package com.dailiv.view.recipe;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.RecipeIndex;
-import com.dailiv.view.custom.RoundedCornersTransformation;
 import com.dailiv.view.profile.other.OtherProfileActivity;
 import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
@@ -21,6 +16,8 @@ import rx.functions.Action1;
 import rx.functions.Action2;
 
 import static com.dailiv.App.getContext;
+import static com.dailiv.util.common.GlideUtil.glide;
+import static com.dailiv.util.common.GlideUtil.glideRounded;
 
 /**
  * Created by aldo on 4/21/18.
@@ -54,17 +51,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
     @Override
     public void onBindViewHolder(RecipeAdapterViewHolder holder, int position) {
 
-        Glide.get(holder.getIvRecipe().getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(holder.getIvRecipe().getContext())
-                .load(recipes.get(holder.getAdapterPosition()).getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .bitmapTransform(new RoundedCornersTransformation(getContext(), radius, 0))
-
-                .into(holder.getIvRecipe());
+        glideRounded(holder.getIvRecipe(), recipes.get(holder.getAdapterPosition()).getImageUrl());
 
         if(addToMealPlanning == null) {
 
@@ -83,15 +70,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapterViewHolder>
 
         holder.getTvRecipeName().setText(recipes.get(holder.getAdapterPosition()).getRecipeName());
 
-        Glide.get(holder.getCivRecipeUserPhoto().getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(holder.getCivRecipeUserPhoto().getContext())
-                .load(recipes.get(holder.getAdapterPosition()).getUserPhotoUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(holder.getCivRecipeUserPhoto());
+        glide(holder.getCivRecipeUserPhoto(), recipes.get(holder.getAdapterPosition()).getUserPhotoUrl());
 
         holder.getCivRecipeUserPhoto().setOnClickListener(v -> navigateTo.call(OtherProfileActivity.class, recipes.get(holder.getAdapterPosition()).getUserSlug()));
 

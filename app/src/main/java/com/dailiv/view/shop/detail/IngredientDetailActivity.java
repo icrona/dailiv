@@ -11,22 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.annimon.stream.Stream;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
-import com.dailiv.internal.data.remote.response.ingredient.Ingredient;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
-import com.dailiv.view.custom.EndlessScrollListener;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.shop.ShopAdapter;
 
@@ -40,6 +34,7 @@ import me.himanshusoni.quantityview.QuantityView;
 
 import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 4/29/18.
@@ -131,15 +126,7 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         tvIngredientUnit.setText(ingredient.getMinUnit());
         tvIngredientCategory.setText(response.ingredient.category);
 
-        Glide.get(ivIngredient.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(ivIngredient.getContext())
-                .load(ingredient.getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .into(ivIngredient);
+        glide(ivIngredient, ingredient.getImageUrl());
 
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override

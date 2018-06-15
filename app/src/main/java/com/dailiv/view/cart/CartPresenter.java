@@ -1,9 +1,7 @@
 package com.dailiv.view.cart;
 
-import com.dailiv.internal.data.local.pojo.Checkout;
 import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.data.remote.IApi;
-import com.dailiv.internal.data.remote.request.cart.CheckoutRequest;
 import com.dailiv.internal.data.remote.request.cart.DeleteCartRequest;
 import com.dailiv.internal.data.remote.request.cart.UpdateCartRequest;
 import com.dailiv.internal.data.remote.response.cart.CartResponse;

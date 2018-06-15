@@ -1,10 +1,7 @@
 package com.dailiv.view.profile;
 
 import com.dailiv.internal.data.remote.IApi;
-import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
-import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.AbstractSinglePresenter;
-import com.dailiv.view.base.IPresenter;
 
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import static com.dailiv.util.common.AssetUtil.getIngredientImageUrl;
-import static com.dailiv.util.common.MoneyUtil.getMoney;
 import static com.dailiv.util.common.MoneyUtil.getMoneyString;
 
 /**

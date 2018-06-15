@@ -3,7 +3,6 @@ package com.dailiv.view.shop;
 import com.dailiv.internal.data.remote.response.Category;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientsResponse;
 import com.dailiv.view.base.IBaseView;
-import com.dailiv.view.base.IView;
 
 import java.util.List;
 

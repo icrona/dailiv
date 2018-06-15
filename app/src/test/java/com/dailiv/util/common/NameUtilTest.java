@@ -3,7 +3,7 @@ package com.dailiv.util.common;
 import org.junit.Test;
 
 import static com.dailiv.util.common.NameUtil.splitName;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by aldo on 3/16/18.

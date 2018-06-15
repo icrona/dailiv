@@ -35,7 +35,6 @@ import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.ReselectSpinner;
 import com.dailiv.view.custom.SortByAdapter;
-import com.dailiv.view.recipe.detail.RecipeDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -7,15 +7,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Review;
 import com.dailiv.internal.data.remote.request.review.SubmitReviewRequest;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import rx.functions.Action1;
+
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 5/19/18.
@@ -36,15 +35,7 @@ public abstract class ReviewDialog extends BaseDialog{
 
         CircleImageView civDriver = mView.findViewById(R.id.civ_driver);
 
-        Glide.get(civDriver.getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(civDriver.getContext())
-                .load(review.getDriverPhotoUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_account)
-                .error(R.mipmap.ic_account)
-                .dontAnimate()
-                .into(civDriver);
+        glide(civDriver, review.getDriverPhotoUrl());
 
         EditText etReview = mView.findViewById(R.id.et_review);
 

@@ -5,9 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.IngredientIndex;
 
@@ -17,6 +14,8 @@ import lombok.AllArgsConstructor;
 import me.himanshusoni.quantityview.QuantityView;
 import rx.functions.Action1;
 import rx.functions.Action2;
+
+import static com.dailiv.util.common.GlideUtil.glide;
 
 /**
  * Created by aldo on 4/7/18.
@@ -57,16 +56,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
 
         holder.getLayout().setOnClickListener(v -> navigateTo.call(String.valueOf(ingredients.get(holder.getAdapterPosition()).getId())));
 
-        Glide.get(holder.getImage().getContext()).setMemoryCategory(MemoryCategory.HIGH);
-
-        Glide.with(holder.getImage().getContext())
-                .load(ingredients.get(holder.getAdapterPosition()).getImageUrl())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_home)
-                .error(R.mipmap.ic_home)
-                .dontAnimate()
-                .into(holder.getImage());
-
+        glide(holder.getImage(), ingredients.get(holder.getAdapterPosition()).getImageUrl());
 
         holder.getAddToCartLayout().setOnClickListener(new View.OnClickListener() {
             @Override

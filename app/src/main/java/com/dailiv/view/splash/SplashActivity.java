@@ -1,6 +1,7 @@
 package com.dailiv.view.splash;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,8 +10,6 @@ import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
-import com.dailiv.view.location.LocationActivity;
-import com.dailiv.view.register.RegisterActivity;
 
 import javax.inject.Inject;
 
@@ -37,6 +36,11 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         super.onCreate(savedInstanceState);
         inject();
         onAttach();
+
+        (new Handler()).postDelayed(this::navigateFromSplashScreen, 3000);
+    }
+
+    private void navigateFromSplashScreen() {
 
         if(isFinishOnboard()){
             if(isAccessTokenAvailable()) {

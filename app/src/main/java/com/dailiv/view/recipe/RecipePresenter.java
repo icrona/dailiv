@@ -9,9 +9,6 @@ import com.dailiv.internal.data.remote.response.recipe.RecipesResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import java.util.List;
 
 import javax.inject.Inject;

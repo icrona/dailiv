@@ -1,17 +1,7 @@
 package com.dailiv.internal.data.local.pojo;
 
-import android.support.v4.util.Pair;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.style.ClickableSpan;
-import android.view.View;
-
-import com.annimon.stream.IntStream;
-import com.annimon.stream.function.Function;
 import com.dailiv.internal.data.remote.response.mealplan.MealPlanResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

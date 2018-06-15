@@ -5,15 +5,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dailiv.R;
-import com.dailiv.internal.data.local.pojo.CheckboxItem;
-
-import java.util.List;
-
-import rx.functions.Action1;
 
 /**
  * Created by aldo on 4/22/18.

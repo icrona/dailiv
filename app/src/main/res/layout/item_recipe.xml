@@ -3,16 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/rl_recipe"
-    android:background="@drawable/bg_border_radius">
+    android:background="@drawable/bg_border_radius"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:padding="1dp"
-        android:id="@+id/iv_recipe"
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_height="150dp"
-        />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            app:layout_widthPercent="100%"
+            app:layout_aspectRatio="180%"
+            android:id="@+id/iv_recipe"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+
+    </android.support.percent.PercentRelativeLayout>
 
     <ImageView
         android:layout_margin="8dp"
