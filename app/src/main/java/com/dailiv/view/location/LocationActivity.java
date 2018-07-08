@@ -11,7 +11,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dailiv.App;
@@ -75,6 +77,9 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
 
     @BindView(R.id.rb_location)
     RadioButton rbLocation;
+
+    @BindView(R.id.tv_or_use_this_location)
+    TextView tvOrUseThisLocation;
 
     @Inject
     LocationPresenter presenter;
@@ -312,6 +317,10 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
         if(rbLocation.isChecked() && getSuggestedLocation() != null) {
             presenter.chooseLocation(getSuggestedLocation().id);
         }
+
+        else if(getAddLocationRequest() == null) {
+            Toast.makeText(this, R.string.please_choose_location, Toast.LENGTH_SHORT).show();
+        }
         else{
             presenter.addLocation(getAddLocationRequest());
         }
@@ -352,6 +361,19 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
         setSuggestedLocation(locationResponse);
         rbLocation.setVisibility(View.VISIBLE);
         rbLocation.setText(locationResponse.address);
+
+        rbLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    tvOrUseThisLocation.setVisibility(View.VISIBLE);
+                }
+
+                else {
+                    tvOrUseThisLocation.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
 
     }
 }

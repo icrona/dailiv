@@ -166,4 +166,6 @@
 
     <string name="meal_plan_note">* Perencanaan makanan yang telah dibuat akan direset setiap hari Minggu tukul 19.00 WIB.</string>
 
+    <string name="please_choose_location">Please choose your location</string>
+
 </resources>
