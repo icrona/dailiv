@@ -11,6 +11,7 @@ import com.dailiv.internal.data.local.pojo.IngredientIndex;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import me.himanshusoni.quantityview.QuantityView;
 import rx.functions.Action1;
 import rx.functions.Action2;
@@ -33,6 +34,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
     private Action2<Integer, Integer> updateCart;
 
     private Action1<String> navigateTo;
+
+    private Action1<Integer> setCountChanges;
 
     @Override
     public ShopAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,8 +70,11 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
 
                 IngredientIndex ingredientIndex = ingredients.get(holder.getAdapterPosition());
                 ingredientIndex.setCartedAmount(1);
+                ingredients.set(holder.getAdapterPosition(), ingredientIndex);
 
                 addToCart.call(ingredients.get(holder.getAdapterPosition()).getStoreIngredientId());
+
+                setCountChanges.call(1);
             }
         });
 
@@ -77,6 +83,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
             public void onQuantityChanged(int oldQuantity, int newQuantity, boolean programmatically) {
 
                 Integer cartId = ingredients.get(holder.getAdapterPosition()).getCartId();
+
+                IngredientIndex ingredientIndex = ingredients.get(holder.getAdapterPosition());
+                ingredientIndex.setCartedAmount(newQuantity);
+                ingredients.set(holder.getAdapterPosition(), ingredientIndex);
 
                 if(newQuantity == 0) {
                     holder.getQuantityLayout().setVisibility(View.GONE);
@@ -88,9 +98,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapterViewHolder>{
                     updateCart.call(cartId, newQuantity);
                 }
 
-                IngredientIndex ingredientIndex = ingredients.get(holder.getAdapterPosition());
-                ingredientIndex.setCartedAmount(newQuantity);
-                ingredients.set(holder.getAdapterPosition(), ingredientIndex);
+                setCountChanges.call(newQuantity - oldQuantity);
+
             }
 
             @Override

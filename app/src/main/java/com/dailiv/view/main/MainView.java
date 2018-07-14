@@ -15,4 +15,6 @@ public interface MainView extends IBaseView{
     void onGetSearchResult(List<SearchResult> list);
 
     void onGetReviewNeeded(ReviewNeededResponse reviewNeededResponse);
+
+    void onGetCartCount(int cartCount);
 }

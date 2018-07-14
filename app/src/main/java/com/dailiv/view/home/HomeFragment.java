@@ -157,7 +157,8 @@ public class HomeFragment extends AbstractFragment implements HomeView{
                 this::addToCart,
                 this::deleteCart,
                 this::updateCart,
-                this::navigateToIngredientDetail
+                this::navigateToIngredientDetail,
+                this::setCountChanges
         );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -177,6 +178,14 @@ public class HomeFragment extends AbstractFragment implements HomeView{
     private void navigateToIngredientDetail(String identifier) {
 
         navigator.openDetails(getActivity(), IngredientDetailActivity.class, identifier);
+    }
+
+    private void setCountChanges(int countChanges) {
+        System.out.println(countChanges);
+
+        if(getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity)getActivity()).updateCartBadge(countChanges);
+        }
     }
 
     @Override

@@ -90,6 +90,8 @@ public class MainActivity extends AbstractActivity implements MainView{
     @BindView(R.id.rv_search_results)
     RecyclerView rvSearchResults;
 
+    private int cartCount;
+
     private LayerDrawable cartIcon;
 
     private LayerDrawable notifIcon;
@@ -172,7 +174,7 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         cartIcon = (LayerDrawable) cart.getIcon();
 
-        updateCartBadge();
+        setCartCount(this.cartCount);
 
         super.onPrepareOptionsMenu(menu);
 
@@ -302,6 +304,7 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     @Override
     protected void onResume() {
+        presenter.getCartCount();
         invalidateOptionsMenu();
         updateNotifBadge();
         getChosenLocation();
@@ -337,28 +340,22 @@ public class MainActivity extends AbstractActivity implements MainView{
 
     }
 
+    @Override
+    public void onGetCartCount(int cartCount) {
 
-    private void setBadgeCount(LayerDrawable icon, int count) {
+        this.cartCount = cartCount;
+        invalidateOptionsMenu();
 
-        BadgeDrawable badge;
-
-        // Reuse drawable if possible
-        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
-        if (reuse != null && reuse instanceof BadgeDrawable) {
-            badge = (BadgeDrawable) reuse;
-        } else {
-            badge = new BadgeDrawable(this);
-        }
-
-        badge.setCount(count);
-        icon.mutate();
-        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
-    private void updateCartBadge() {
+    public void setCartCount(int cartCount) {
 
-        //todo
-//        setBadgeCount(cartIcon, 1);
+        common.setBadgeCount(this, cartIcon, cartCount);
+    }
+    public void updateCartBadge(int changes) {
+
+        cartCount += changes;
+        setCartCount(cartCount);
     }
 
     private void updateNotifBadge() {

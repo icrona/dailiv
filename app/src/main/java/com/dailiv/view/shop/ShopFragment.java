@@ -29,6 +29,7 @@ import com.dailiv.view.custom.FilterByAdapter;
 import com.dailiv.view.custom.RangeDialog;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.custom.ReselectSpinner;
+import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.shop.detail.IngredientDetailActivity;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ import butterknife.BindView;
 import rx.functions.Action1;
 import rx.functions.Action2;
 
+import static com.annimon.stream.Collectors.summingInt;
 import static com.annimon.stream.Collectors.toList;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static com.dailiv.util.common.MoneyUtil.getMoney;
@@ -156,6 +158,14 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         navigator.openDetails(getActivity(), IngredientDetailActivity.class, identifier);
     }
 
+    private void setCountChanges(int countChanges) {
+        System.out.println(countChanges);
+
+        if(getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity)getActivity()).updateCartBadge(countChanges);
+        }
+    }
+
     private void setAdapter() {
 
         shopAdapter = new ShopAdapter(
@@ -163,7 +173,8 @@ public class ShopFragment extends AbstractFragment implements ShopView{
                 this::addToCart,
                 this::deleteCart,
                 this::updateCart,
-                this::navigateToDetail
+                this::navigateToDetail,
+                this::setCountChanges
         );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -179,6 +190,15 @@ public class ShopFragment extends AbstractFragment implements ShopView{
 
                 ingredientFilter.setPage(page);
                 presenter.getIngredients(ingredientFilter);
+            }
+        });
+
+        shopAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+
+                System.out.println("changed");
+                super.onChanged();
             }
         });
     }

@@ -163,11 +163,11 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                         R.drawable.ic_meal_plan_red,
                         this::openMealPlan
                 ),
-                new ProfileMenu(
-                        sNewsFeed,
-                        R.drawable.ic_news_feed_red,
-                        this::openNewsFeed
-                ),
+//                new ProfileMenu(
+//                        sNewsFeed,
+//                        R.drawable.ic_news_feed_red,
+//                        this::openNewsFeed
+//                ),
                 new ProfileMenu(
                         sOrderHistory,
                         R.drawable.ic_history_red,

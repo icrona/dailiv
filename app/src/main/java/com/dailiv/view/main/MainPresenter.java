@@ -1,8 +1,11 @@
 package com.dailiv.view.main;
 
+import com.annimon.stream.Stream;
+import com.dailiv.internal.data.local.pojo.Location;
 import com.dailiv.internal.data.local.pojo.SearchResult;
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.request.review.SubmitReviewRequest;
+import com.dailiv.internal.data.remote.response.cart.CartResponse;
 import com.dailiv.internal.data.remote.response.home.SearchResponse;
 import com.dailiv.internal.data.remote.response.review.ReviewNeededResponse;
 import com.dailiv.util.network.NetworkView;
@@ -17,6 +20,7 @@ import javax.inject.Named;
 import rx.functions.Action0;
 import rx.functions.Action1;
 
+import static com.annimon.stream.Collectors.summingInt;
 import static com.dailiv.util.common.CollectionUtil.mapListToList;
 import static com.dailiv.util.common.Preferences.getLocation;
 
@@ -34,6 +38,8 @@ public class MainPresenter implements IPresenter<MainView> {
     public MainPresenter() {
 
     }
+
+    private NetworkView<List<CartResponse>> cartListNetworkView;
 
     private NetworkView<SearchResponse> searchNetworkView;
 
@@ -67,6 +73,28 @@ public class MainPresenter implements IPresenter<MainView> {
                 getOnShowError(),
                 getOnSubmitReview()
         );
+
+        cartListNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                getCartListResponse()
+        );
+
+
+    }
+
+    private Action1<List<CartResponse>> getCartListResponse() {
+
+        return response -> view.onGetCartCount(Stream.of(response)
+                .collect(summingInt(CartResponse::getAmount)));
+    }
+
+    public void getCartCount() {
+
+        Location location = getLocation();
+
+        cartListNetworkView.callApi(() -> api.getCart(location.getLocationId()));
 
     }
 

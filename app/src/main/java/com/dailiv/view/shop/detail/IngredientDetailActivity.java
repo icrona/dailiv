@@ -1,10 +1,13 @@
 package com.dailiv.view.shop.detail;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +22,11 @@ import com.dailiv.internal.data.local.pojo.IngredientIndex;
 import com.dailiv.internal.data.remote.response.ingredient.IngredientDetailResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
+import com.dailiv.util.common.Common;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractActivity;
+import com.dailiv.view.cart.CartActivity;
+import com.dailiv.view.custom.BadgeDrawable;
 import com.dailiv.view.custom.RecyclerViewDecorator;
 import com.dailiv.view.shop.ShopAdapter;
 
@@ -45,6 +51,9 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
 
     @Inject
     IngredientDetailPresenter presenter;
+
+    @Inject
+    Common common;
 
     @Inject
     Navigator navigator;
@@ -79,11 +88,15 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
     @BindView(R.id.rv_shop)
     RecyclerView rvShop;
 
+    private int cartCount;
+
     private ShopAdapter shopAdapter;
 
     private IngredientIndex ingredient;
 
     private List<IngredientIndex> similarIngredients = new ArrayList<>();
+
+    private LayerDrawable cartIcon;
 
     @Override
     public void onDetach() {
@@ -138,6 +151,8 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
                 ingredient.setCartedAmount(1);
 
                 addToCart(ingredient.getStoreIngredientId());
+
+                setCountChanges(1);
             }
         });
 
@@ -157,6 +172,8 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
                 }
 
                 ingredient.setCartedAmount(newQuantity);
+
+                setCountChanges(newQuantity - oldQuantity);
             }
 
             @Override
@@ -201,6 +218,28 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         presenter.getIngredientDetail(bundle.getString("identifier"));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem cart = menu.findItem(R.id.cart);
+
+        cartIcon = (LayerDrawable) cart.getIcon();
+
+        setCartCount(this.cartCount);
+
+        super.onPrepareOptionsMenu(menu);
+
+        return true;
+    }
+
     private void setToolbar() {
         toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         toolbar.setNavigationIcon(
@@ -216,7 +255,8 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
                 this::addToCart,
                 this::deleteCart,
                 this::updateCart,
-                this::navigateToDetail
+                this::navigateToDetail,
+                this::setCountChanges
         );
 
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -230,6 +270,20 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
     private void navigateToDetail(String identifier) {
 
         navigator.openDetails(this, IngredientDetailActivity.class, identifier);
+    }
+
+    private void setCountChanges(int countChanges) {
+        System.out.println(countChanges);
+
+        cartCount += countChanges;
+        setCartCount(cartCount);
+
+    }
+
+
+    public void setCartCount(int cartCount) {
+
+        common.setBadgeCount(this, cartIcon, cartCount);
     }
 
     public void addToCart(int storeIngredientId) {
@@ -261,6 +315,11 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
                 finish();
                 break;
             }
+
+            case R.id.cart:{
+                navigator.openActivity(this, CartActivity.class);
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -285,5 +344,21 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
             shopAdapter.updateIngredients(list);
             shopAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    protected void onResume() {
+
+        presenter.getCartCount();
+
+        super.onResume();
+    }
+
+    @Override
+    public void onGetCartCount(int cartCount) {
+
+
+        this.cartCount = cartCount;
+        invalidateOptionsMenu();
     }
 }

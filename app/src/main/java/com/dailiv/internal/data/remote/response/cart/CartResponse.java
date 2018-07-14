@@ -6,6 +6,8 @@ import com.dailiv.internal.data.remote.response.ingredient.StoreIngredient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Getter;
+
 /**
  * Created by aldo on 4/14/18.
  */
@@ -20,6 +22,7 @@ public class CartResponse extends BaseResponse{
     @JsonProperty(value = "user_id")
     public int userId;
 
+    @Getter
     public int amount;
 
     public String status;
