@@ -42,7 +42,7 @@ public class Review {
     public Review(ReviewNeededResponse response) {
 
         this(
-                response.id,
+                response.driverAssignPurchase.get(0).pivot.id,
                 response.driverAssignPurchase.get(0).getFullname(),
                 response.driverAssignPurchase.get(0).photo,
                 "",

@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dailiv.App;
 import com.dailiv.R;
 import com.dailiv.internal.data.local.pojo.Checkout;
 import com.dailiv.internal.data.remote.response.checkout.CouponResponse;
+import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
 import com.dailiv.internal.injector.component.DaggerActivityComponent;
 import com.dailiv.internal.injector.module.ActivityModule;
 import com.dailiv.util.IConstants;
@@ -51,6 +53,9 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
 
     @BindView(R.id.et_coupon)
     EditText etCoupon;
+
+    @BindView(R.id.et_phone)
+    EditText etPhone;
 
     @BindView(R.id.tv_subtotal)
     TextView tvSubtotal;
@@ -98,6 +103,12 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
         checkout.setDiscountRate(discountRate);
 
         updateAmount();
+    }
+
+    @Override
+    public void onGetProfile(ProfileResponse profileResponse) {
+
+        etPhone.setText(profileResponse.user.phone);
     }
 
     @Override
@@ -164,6 +175,10 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
                 presenter.checkCoupon(code);
             }
         });
+
+        if(checkout.getPhoneNumber() == null || checkout.getPhoneNumber().equals("")) {
+            presenter.getProfile();
+        }
     }
 
     private void updateAmount() {
@@ -179,6 +194,14 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
         String noteFormat = "Notes : %s , AddressDetail : %s";
 
         String notes = String.format(noteFormat, etNotes.getText().toString(), etAddressDetail. getText().toString());
+
+        String phone = etPhone.getText().toString();
+
+        if(phone.equals("")){
+            Toast.makeText(this, R.string.please_enter_phone_number, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        checkout.setPhoneNumber(phone);
 
         checkout.setNote(notes);
 

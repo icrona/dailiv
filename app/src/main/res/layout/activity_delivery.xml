@@ -90,6 +90,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/phone"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:gravity="top"
+                    android:background="@drawable/bg_border_radius"
+                    android:textCursorDrawable="@null"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/notes_for_driver"
                     android:layout_marginBottom="4dp"/>
 

@@ -2,6 +2,7 @@ package com.dailiv.view.delivery;
 
 import com.dailiv.internal.data.remote.IApi;
 import com.dailiv.internal.data.remote.response.checkout.CouponResponse;
+import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
 import com.dailiv.util.network.NetworkView;
 import com.dailiv.view.base.IPresenter;
 
@@ -10,6 +11,8 @@ import javax.inject.Named;
 
 import rx.functions.Action0;
 import rx.functions.Action1;
+
+import static com.dailiv.util.common.Preferences.getAccountSlug;
 
 /**
  * Created by aldo on 5/10/18.
@@ -28,6 +31,8 @@ public class DeliveryPresenter implements IPresenter<DeliveryView>{
 
     private NetworkView<CouponResponse> couponNetworkView;
 
+    private NetworkView<ProfileResponse> profileNetworkView;
+
     @Override
     public void onAttach(DeliveryView view) {
 
@@ -39,12 +44,20 @@ public class DeliveryPresenter implements IPresenter<DeliveryView>{
                 getOnShowError(),
                 getOnCouponResponse()
         );
+
+        profileNetworkView = new NetworkView<>(
+                getOnStart(),
+                getOnComplete(),
+                getOnShowError(),
+                view::onGetProfile
+        );
     }
 
     @Override
     public void onDetach() {
 
         couponNetworkView.safeUnsubscribe();
+        profileNetworkView.safeUnsubscribe();
         this.view = null;
     }
 
@@ -66,5 +79,10 @@ public class DeliveryPresenter implements IPresenter<DeliveryView>{
 
     public void checkCoupon(String code) {
         couponNetworkView.callApi(() -> api.discountCoupon(code));
+    }
+
+    public void getProfile() {
+
+        profileNetworkView.callApi(() -> api.getProfileBySlug(getAccountSlug()));
     }
 }

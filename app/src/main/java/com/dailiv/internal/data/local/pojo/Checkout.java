@@ -39,6 +39,8 @@ public class Checkout {
 
     private String note;
 
+    private String phoneNumber;
+
     public int getTotal() {
         return getDeliveryFee() + getSubtotal() - getDiscount();
     }

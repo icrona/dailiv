@@ -28,6 +28,9 @@ public class CheckoutRequest {
     @JsonProperty(value = "discount_coupon")
     public String discountCoupon;
 
+    @JsonProperty(value = "phone_number")
+    public String phoneNumber;
+
     public CheckoutRequest(Checkout checkout) {
         this.grossAmount = checkout.getSubtotal();
         this.locationId = checkout.getLocationId();
@@ -35,5 +38,6 @@ public class CheckoutRequest {
         this.note = checkout.getNote();
         this.storeId = checkout.getStoreId();
         this.discountCoupon = checkout.getCouponCode();
+        this.phoneNumber = checkout.getPhoneNumber();
     }
 }

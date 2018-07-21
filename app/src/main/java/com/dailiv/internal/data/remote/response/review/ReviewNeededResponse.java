@@ -1,5 +1,6 @@
 package com.dailiv.internal.data.remote.response.review;
 
+import com.dailiv.internal.data.local.pojo.Review;
 import com.dailiv.internal.data.remote.response.BaseResponse;
 import com.dailiv.internal.data.remote.response.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,7 +34,28 @@ public class ReviewNeededResponse extends BaseResponse{
     public String note;
 
     @JsonProperty(value = "driver_assign_purchase")
-    public List<User> driverAssignPurchase;
+    public List<ReviewUser> driverAssignPurchase;
+
+    public static class ReviewUser extends User {
+
+        public ReviewPivot pivot;
+    }
+
+    public static class ReviewPivot extends BaseResponse{
+
+        @JsonProperty(value = "purchase_ingredient_id")
+        public int purchaseIngredientId;
+
+        @JsonProperty(value = "user_id")
+        public int userId;
+
+        public String rating;
+
+        public String review;
+
+        public int status;
+
+    }
 
     //"pivot": {
 //        "purchase_ingredient_id": 16,
