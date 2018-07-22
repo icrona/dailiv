@@ -28,7 +28,7 @@ public class CheckoutRequest {
     @JsonProperty(value = "discount_coupon")
     public String discountCoupon;
 
-    @JsonProperty(value = "phone_number")
+    @JsonProperty(value = "phone")
     public String phoneNumber;
 
     public CheckoutRequest(Checkout checkout) {

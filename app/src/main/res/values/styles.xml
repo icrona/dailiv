@@ -11,7 +11,7 @@
 
     <!-- Splash application theme -->
     <style name="AppTheme.Splash" parent="AppTheme">
-        <item name="android:windowBackground">@mipmap/bg_splash</item>
+        <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
     <!-- Login application theme -->
