@@ -15,7 +15,7 @@ android {
         applicationId "com.dailiv"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 5
+        versionCode 7
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -78,10 +78,10 @@ android {
         }
         production {
             //todo
-            buildConfigField 'String', 'PRIVACY_POLICY', '"http://dev.dailiv.co/privacy-policy"'
-            buildConfigField 'String', 'TERMS', '"http://dev.dailiv.co/terms"'
-            buildConfigField 'String', 'HOST', '"dev.dailiv.co"'
-            buildConfigField 'String', 'ENDPOINT', '"http://dev.dailiv.co/api/v1/"'
+            buildConfigField 'String', 'PRIVACY_POLICY', '"https://dailiv.co/privacy-policy"'
+            buildConfigField 'String', 'TERMS', '"https://dailiv.co/terms"'
+            buildConfigField 'String', 'HOST', '"dailiv.co"'
+            buildConfigField 'String', 'ENDPOINT', '"https://dailiv.co/api/v1/"'
             buildConfigField 'String', 'CLIENT_ID', DEV_CLIENT_ID
             buildConfigField 'String', 'CLIENT_SECRET', DEV_CLIENT_SECRET
 
