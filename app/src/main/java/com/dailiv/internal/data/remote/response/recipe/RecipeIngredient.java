@@ -13,7 +13,7 @@ public class RecipeIngredient {
 
     public String unit;
 
-    public int amount;
+    public String amount;
 
     public String stringify() {
 
