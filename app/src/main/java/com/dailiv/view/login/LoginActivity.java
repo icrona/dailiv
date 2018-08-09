@@ -16,6 +16,7 @@ import com.dailiv.util.common.Navigator;
 import com.dailiv.util.validator.ValidatorFactory;
 import com.dailiv.view.base.AbstractActivity;
 import com.dailiv.view.register.RegisterActivity;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -124,7 +125,13 @@ public class LoginActivity extends AbstractActivity implements LoginView{
 
     @Override
     public void doLoginFb() {
-        fbLoginBtn.performClick();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if(accessToken != null) {
+            presenter.doFacebookLogin(accessToken.getToken());
+        }
+        else{
+            fbLoginBtn.performClick();
+        }
     }
 
     private void setUpGoogleLogin() {
