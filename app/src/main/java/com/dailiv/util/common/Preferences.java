@@ -48,6 +48,10 @@ public class Preferences {
         setAccessTokenAndSlug(null, null);
     }
 
+    public static void deleteLocation() {
+        setLocation(0, null, 0);
+    }
+
     public static void setFinishOnboard() {
         SharedPreferences.Editor editor = getPrefsEditor();
 
@@ -61,11 +65,16 @@ public class Preferences {
 
     public static void setLocation(LocationResponse location) {
 
+        setLocation(location.id, location.address, location.storeId);
+    }
+
+    private static void setLocation(int id, String address, int storeId) {
+
         SharedPreferences.Editor editor = getPrefsEditor();
 
-        editor.putInt(IConstants.LOCATION_ID, location.id);
-        editor.putString(IConstants.LOCATION_NAME, location.address);
-        editor.putInt(IConstants.STORE_ID, location.storeId);
+        editor.putInt(IConstants.LOCATION_ID, id);
+        editor.putString(IConstants.LOCATION_NAME, address);
+        editor.putInt(IConstants.STORE_ID, storeId);
 
         editor.apply();
     }

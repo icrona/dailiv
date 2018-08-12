@@ -38,6 +38,7 @@ import static com.dailiv.internal.data.remote.IApiConstant.LIKED_RECIPE;
 import static com.dailiv.internal.data.remote.IApiConstant.RECIPE_BY_ME;
 import static com.dailiv.util.common.GlideUtil.glide;
 import static com.dailiv.util.common.Preferences.deleteAccessTokenAndSlug;
+import static com.dailiv.util.common.Preferences.deleteLocation;
 
 /**
  * Created by aldo on 4/1/18.
@@ -237,6 +238,8 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     public void logout() {
 
         deleteAccessTokenAndSlug();
+
+        deleteLocation();
 
         navigator.openActivityWitClearTask(getActivity(), LoginActivity.class);
     }

@@ -197,6 +197,8 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
 
         String phone = etPhone.getText().toString();
 
+        String coupon = etCoupon.getText().toString();
+
         if(phone.equals("")){
             Toast.makeText(this, R.string.please_enter_phone_number, Toast.LENGTH_SHORT).show();
             return;
@@ -204,6 +206,10 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
         checkout.setPhoneNumber(phone);
 
         checkout.setNote(notes);
+
+        if(!coupon.equals("")) {
+            checkout.setCouponCode(coupon);
+        }
 
         navigator.openCheckoutActivity(this, PaymentActivity.class, checkout);
     }
