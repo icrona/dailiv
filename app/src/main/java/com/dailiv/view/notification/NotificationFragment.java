@@ -59,4 +59,9 @@ public class NotificationFragment extends AbstractFragment implements Notificati
     public void onHideProgressBar() {
 
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Notification";
+    }
 }

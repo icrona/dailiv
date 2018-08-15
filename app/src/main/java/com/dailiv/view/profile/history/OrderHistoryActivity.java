@@ -152,4 +152,9 @@ public class OrderHistoryActivity extends AbstractActivity implements OrderHisto
         navigator.openMainActivityFragment(this, SHOP);
 
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Order History";
+    }
 }

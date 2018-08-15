@@ -8,8 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dailiv.App;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.dailiv.App.getContext;
 
 /**
  * Created by aldo on 3/1/18.
@@ -25,6 +31,9 @@ public abstract class AbstractFragment extends Fragment implements IDetachView{
 
     protected abstract void initComponents(final Bundle savedInstanceState);
 
+    protected abstract String getScreenName();
+
+    private Tracker mTracker;
 
     //todo
 
@@ -41,7 +50,9 @@ public abstract class AbstractFragment extends Fragment implements IDetachView{
         view = inflater.inflate(getContentView(), container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        mTracker = ((App)App.getContext()).getDefaultTracker();
         return view;
+
     }
 
     @Override
@@ -55,5 +66,12 @@ public abstract class AbstractFragment extends Fragment implements IDetachView{
     public void onShowError(final String message) {
         //TODO
         System.out.println(message);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName(getScreenName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

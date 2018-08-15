@@ -252,4 +252,9 @@ public class CartActivity extends AbstractActivity implements CartView {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Cart";
+    }
 }

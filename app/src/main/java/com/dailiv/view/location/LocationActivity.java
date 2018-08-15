@@ -376,4 +376,9 @@ public class LocationActivity extends AbstractActivity implements OnMapReadyCall
         });
 
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Location";
+    }
 }

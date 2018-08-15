@@ -391,4 +391,9 @@ public class RecipeDetailActivity extends AbstractActivity implements RecipeDeta
 
         updateNumOfComments();
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Recipe Detail";
+    }
 }

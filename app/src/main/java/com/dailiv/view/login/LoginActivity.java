@@ -215,4 +215,9 @@ public class LoginActivity extends AbstractActivity implements LoginView{
 
         return true;
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Login";
+    }
 }

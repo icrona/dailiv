@@ -165,4 +165,8 @@ public class MealPlanActivity extends AbstractActivity implements MealPlanView{
         return "Date: " + dateFormat.format(startWeek) + " - " + dateFormat.format(endWeek);
     }
 
+    @Override
+    protected String getScreenName() {
+        return "Meal Planning";
+    }
 }

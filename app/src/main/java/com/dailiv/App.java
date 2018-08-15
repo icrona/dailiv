@@ -9,12 +9,17 @@ import com.dailiv.internal.injector.component.DaggerApplicationComponent;
 import com.dailiv.internal.injector.module.ApplicationModule;
 import com.dailiv.internal.injector.module.NetworkModule;
 import com.dailiv.internal.injector.module.UtilityModule;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by aldo on 3/1/18.
  */
 
 public class App extends Application {
+
+    private static GoogleAnalytics sAnalytics;
+    private static Tracker sTracker;
 
     private static volatile ApplicationComponent component;
 
@@ -46,6 +51,7 @@ public class App extends Application {
 //                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
 //                .init();
 
+        sAnalytics = GoogleAnalytics.getInstance(this);
 
     }
 
@@ -58,5 +64,18 @@ public class App extends Application {
     protected void attachBaseContext(final Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    /**
+     * Gets the default {@link Tracker} for this {@link Application}.
+     * @return tracker
+     */
+    synchronized public Tracker getDefaultTracker() {
+        // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+        if (sTracker == null) {
+            sTracker = sAnalytics.newTracker(R.xml.global_tracker);
+        }
+
+        return sTracker;
     }
 }

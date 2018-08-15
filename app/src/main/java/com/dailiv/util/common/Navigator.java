@@ -14,6 +14,7 @@ import com.dailiv.view.login.LoginActivity;
 import com.dailiv.view.main.MainActivity;
 import com.dailiv.view.onboard.OnboardActivty;
 import com.dailiv.view.profile.edit.EditProfileActivity;
+import com.dailiv.view.profile.other.OtherProfileActivity;
 import com.dailiv.view.profile.recipe.RecipeListActivity;
 
 import org.parceler.Parcels;
@@ -68,14 +69,17 @@ public final class Navigator {
         activity.startActivityForResult(intent, IConstants.CHECKOUT_REQUEST_CODE);
     }
 
-    public void openProfileRecipeList(final Activity activity, ProfileRecipeList profileRecipeList) {
+    public void openProfileRecipeList(final Activity activity, ProfileRecipeList profileRecipeList, String recipeType) {
 
         if(profileRecipeList.getUserId() == null) {
             return;
         }
 
+        String screenName = recipeType + " " + (activity instanceof OtherProfileActivity ? " By Other User" : "By Me");
+
         final Intent intent = new Intent(activity, RecipeListActivity.class);
         intent.putExtra(IConstants.PROFILE_RECIPE_LIST, Parcels.wrap(profileRecipeList));
+        intent.putExtra(IConstants.RECIPE_SCREEN_NAME, screenName);
         activity.startActivityForResult(intent, IConstants.PROFILE_RECIPE_LIST_REQUEST_CODE);
 
     }

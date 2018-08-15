@@ -266,4 +266,9 @@ public class EditProfileActivity extends AbstractActivity implements EditProfile
 
         presenter.changeProfilePhoto(file);
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Edit User Profile";
+    }
 }

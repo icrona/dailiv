@@ -103,6 +103,7 @@ public class RecipeListActivity extends AbstractActivity implements RecipeListVi
     protected void initComponents(Bundle savedInstanceState) {
         inject();
         onAttach();
+
         setAdapter();
         setMealPlanningDialog();
         setRecipeList();
@@ -192,5 +193,11 @@ public class RecipeListActivity extends AbstractActivity implements RecipeListVi
         toolbar.hideOverflowMenu();
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected String getScreenName() {
+
+        return getIntent().getStringExtra(IConstants.RECIPE_SCREEN_NAME);
     }
 }

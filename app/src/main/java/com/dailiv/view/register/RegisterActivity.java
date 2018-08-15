@@ -98,4 +98,9 @@ public class RegisterActivity extends AbstractActivity implements RegisterView{
     public void goToPrivacyPolicy() {
         navigator.openPrivacyPolicy(this);
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Register";
+    }
 }

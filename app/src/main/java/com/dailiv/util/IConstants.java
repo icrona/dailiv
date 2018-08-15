@@ -21,6 +21,8 @@ public interface IConstants {
 
     String PROFILE_RECIPE_LIST = "profile_recipe_list";
 
+    String RECIPE_SCREEN_NAME = "recipe_screen_name";
+
     int CHECKOUT_REQUEST_CODE = 1;
 
     int PROFILE_RECIPE_LIST_REQUEST_CODE = 2;

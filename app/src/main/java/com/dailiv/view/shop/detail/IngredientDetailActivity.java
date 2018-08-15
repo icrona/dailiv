@@ -361,4 +361,9 @@ public class IngredientDetailActivity extends AbstractActivity implements Ingred
         this.cartCount = cartCount;
         invalidateOptionsMenu();
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Product/Ingredient Detail";
+    }
 }

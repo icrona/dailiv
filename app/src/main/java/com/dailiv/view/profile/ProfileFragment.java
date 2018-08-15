@@ -16,6 +16,7 @@ import com.dailiv.internal.data.local.pojo.ProfileRecipeList;
 import com.dailiv.internal.data.remote.response.profile.ProfileResponse;
 import com.dailiv.internal.injector.component.DaggerFragmentComponent;
 import com.dailiv.internal.injector.module.FragmentModule;
+import com.dailiv.util.IConstants;
 import com.dailiv.util.common.Navigator;
 import com.dailiv.view.base.AbstractFragment;
 import com.dailiv.view.login.LoginActivity;
@@ -191,7 +192,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                 profile.getUserId(),
                 LIKED_RECIPE,
                 sLikedRecipes
-        ));
+        ), "Liked Recipes");
     }
 
     public void openCookedRecipe() {
@@ -199,7 +200,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                 profile.getUserId(),
                 COOKED_RECIPE,
                 sCookedRecipes
-        ));
+        ), "Cooked Recipes");
     }
 
     public void openRecipeByMe() {
@@ -207,7 +208,7 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
                 profile.getUserId(),
                 RECIPE_BY_ME,
                 sRecipeByMe
-        ));
+        ), "Recipe List");
     }
 
     public void openNewsFeed() {
@@ -224,9 +225,9 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
 
     }
 
-    private void navigateToRecipeList(ProfileRecipeList profileRecipeList) {
+    private void navigateToRecipeList(ProfileRecipeList profileRecipeList, String recipesType) {
 
-        navigator.openProfileRecipeList(getActivity(), profileRecipeList);
+        navigator.openProfileRecipeList(getActivity(), profileRecipeList, recipesType);
     }
 
     private void navigateTo(Class destination) {
@@ -274,5 +275,10 @@ public class ProfileFragment extends AbstractFragment implements ProfileView {
     public void onResume() {
         presenter.getProfile();
         super.onResume();
+    }
+
+    @Override
+    protected String getScreenName() {
+        return "My Profile";
     }
 }

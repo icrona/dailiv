@@ -402,4 +402,9 @@ public class MainActivity extends AbstractActivity implements MainView{
 
         navigator.openDetails(this, searchResult.getSearchType().getActivityClass(), searchResult.getIdentifier());
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Main Screen";
+    }
 }

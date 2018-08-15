@@ -225,4 +225,9 @@ public class DeliveryActivity extends AbstractActivity implements DeliveryView{
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Checkout Delivery Detail";
+    }
 }

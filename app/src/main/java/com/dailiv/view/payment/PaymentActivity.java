@@ -241,5 +241,8 @@ public class PaymentActivity extends AbstractActivity implements PaymentView{
         presenter.checkout(checkout);
     }
 
-
+    @Override
+    protected String getScreenName() {
+        return "Payment Method";
+    }
 }

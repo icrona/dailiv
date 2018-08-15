@@ -321,4 +321,9 @@ public class HomeFragment extends AbstractFragment implements HomeView{
         System.out.println("update cart with cart id " + cartId + " and quantity " + quantity);
 
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Home";
+    }
 }

@@ -442,4 +442,9 @@ public class ShopFragment extends AbstractFragment implements ShopView{
         setCheckboxDialog();
 
     }
+
+    @Override
+    protected String getScreenName() {
+        return "Product/Ingredient Menu";
+    }
 }

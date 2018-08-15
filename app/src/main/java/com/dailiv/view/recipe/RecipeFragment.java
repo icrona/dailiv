@@ -480,5 +480,8 @@ public class RecipeFragment extends AbstractFragment implements RecipeView{
         updateSpinnerItem(position, filterBy);
     }
 
-
+    @Override
+    protected String getScreenName() {
+        return "Recipes Menu";
+    }
 }

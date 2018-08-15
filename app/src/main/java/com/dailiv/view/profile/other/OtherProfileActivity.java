@@ -193,7 +193,7 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
                 profile.getUserId(),
                 LIKED_RECIPE,
                 sLikedRecipes
-        ));
+        ), "Liked Recipes");
     }
 
     public void openCookedRecipe() {
@@ -201,7 +201,7 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
                 profile.getUserId(),
                 COOKED_RECIPE,
                 sCookedRecipes
-        ));
+        ), "Cooked Recipes");
     }
 
     public void openRecipeByMe() {
@@ -209,12 +209,12 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
                 profile.getUserId(),
                 RECIPE_BY_ME,
                 getRecipeByUserString()
-        ));
+        ), "Recipe List");
     }
 
-    private void navigateToRecipeList(ProfileRecipeList profileRecipeList) {
+    private void navigateToRecipeList(ProfileRecipeList profileRecipeList, String recipesType) {
 
-        navigator.openProfileRecipeList(this, profileRecipeList);
+        navigator.openProfileRecipeList(this, profileRecipeList, recipesType);
     }
 
     @Override
@@ -279,4 +279,8 @@ public class OtherProfileActivity extends AbstractActivity implements OtherProfi
         btnFollow.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    protected String getScreenName() {
+        return "Other User Profile";
+    }
 }
